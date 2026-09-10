@@ -1,0 +1,16 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Segredos
+.env
+
+# Arquivos temporários do Office e do sistema
+~$*
+Thumbs.db
+.DS_Store
+
+# Editor
+.vscode/
+.idea/

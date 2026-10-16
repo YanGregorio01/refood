@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa de doações | Refood Parcerias</title>
+  <meta name="description" content="Doações de alimentos abertas nos estabelecimentos parceiros perto da sua ONG.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.10 do Figma: Mapa de doações (no celular, tela 4.1).
+       Duas colunas: lista de doações à esquerda e mapa ocupando o resto. */
+    .doacoes {
+      padding: 0; gap: 0; align-content: stretch;
+      grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "topo mapa" "lista mapa";
+    }
+    .doacoes-topo, .doacoes-lista { background: var(--branco); border-right: 1px solid var(--linha); }
+    .doacoes-topo { grid-area: topo; padding: 28px 24px 16px; display: grid; gap: 18px; }
+    .doacoes-lista { grid-area: lista; padding: 0 24px 32px; display: grid; gap: 16px; align-content: start; }
+    .doacoes h1 { font-size: 24px; }
+    .doacoes .painel-cabecalho p { font-size: 14px; margin-top: 4px; }
+
+    .filtros { display: grid; gap: 12px; }
+    .filtros-linha { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .contagem { font-size: 13px; font-weight: 700; color: var(--verde); min-height: 20px; }
+
+    /* card de uma oferta de doação */
+    .oferta { padding: 14px; display: grid; gap: 12px; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+    .oferta:hover { box-shadow: var(--sombra); }
+    .oferta.selecionada { border-color: var(--coral); box-shadow: var(--sombra); }
+    .oferta-foto { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; border-radius: var(--raio); background: var(--creme-2); }
+    .oferta-topo { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .oferta .badge .minusculo { text-transform: none; letter-spacing: 0; }
+    .oferta-nota { font-size: 13px; color: var(--texto-2); white-space: nowrap; }
+    .oferta-nota b { color: var(--dourado); font-weight: 400; }
+    .oferta h3 { font-size: 19px; }
+    .oferta-endereco { font-size: 13px; color: var(--texto-2); margin-top: 4px; }
+    .oferta-qtd { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border-radius: var(--raio);
+      background: var(--verde-fundo); color: var(--verde-escuro); }
+    .oferta-qtd svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+    .oferta-qtd strong { font-family: var(--fonte-titulo); font-size: 14px; display: block; }
+    .oferta-qtd small { font-size: 12px; color: var(--texto-2); }
+    .oferta-obs { font-size: 13px; color: var(--texto-2); }
+
+    /* coluna do mapa: fica parada enquanto a lista rola */
+    .doacoes-mapa { grid-area: mapa; position: sticky; top: 0; height: 100vh; }
+    .doacoes-mapa .mapa { height: 100%; border-radius: 0; }
+    .leaflet-container { font-family: var(--fonte-texto); }
+    .mapa-aviso { padding: 24px; color: var(--texto-2); }
+
+    .legenda { position: absolute; left: 16px; bottom: 24px; z-index: 2; margin: 0; padding: 8px 14px; list-style: none;
+      display: flex; flex-wrap: wrap; gap: 14px; background: var(--branco); border-radius: 99px; box-shadow: var(--sombra);
+      font-size: 12px; color: var(--texto-2); }
+    .legenda li { display: flex; align-items: center; gap: 6px; }
+    .legenda .ponto { width: 10px; height: 10px; border-radius: 50%; background: var(--verde-escuro); }
+    .legenda .ponto.selecionado { background: var(--coral); }
+    .legenda .ponto.ong { background: var(--branco); border: 2px solid var(--verde); border-radius: 3px; }
+
+    /* pinos (L.divIcon) */
+    .pino { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; box-shadow: var(--sombra);
+      background: var(--verde-escuro); color: var(--branco); border: 3px solid var(--branco); transition: transform .15s; }
+    .pino svg { width: 18px; height: 18px; }
+    .pino.selecionado { background: var(--coral); transform: scale(1.25); }
+    .pino-ong { background: var(--branco); color: var(--verde); border-color: var(--verde); border-radius: var(--raio); }
+
+    /* balão que abre ao clicar no pino */
+    .leaflet-container .balao { display: grid; gap: 2px; padding-right: 22px; position: relative; color: var(--texto); text-decoration: none; }
+    .balao strong { font-family: var(--fonte-titulo); font-size: 14px; }
+    .balao span { font-size: 12px; color: var(--verde); }
+    .balao::after { content: "›"; position: absolute; right: 0; top: 50%; transform: translateY(-55%); font-size: 22px; color: var(--texto); }
+
+    @media (max-width: 960px) {
+      .doacoes { grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "topo" "mapa" "lista"; }
+      .doacoes-topo, .doacoes-lista { border-right: 0; padding-inline: 16px; }
+      .doacoes-lista { padding-top: 16px; }
+      .doacoes-mapa { position: relative; height: 340px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo doacoes">
+      <div class="doacoes-topo">
+        <div class="painel-cabecalho">
+          <div>
+            <h1>Doações disponíveis</h1>
+            <p>Somente estabelecimentos parceiros com doações ativas.</p>
+          </div>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+
+        <form class="filtros" id="filtros" role="search" aria-label="Filtrar doações">
+          <div class="campo">
+            <label for="busca">Buscar</label>
+            <input class="entrada" id="busca" name="busca" type="search" maxlength="60"
+                   placeholder="Parceiro, bairro ou alimento" autocomplete="off">
+          </div>
+          <div class="filtros-linha">
+            <div class="campo">
+              <label for="tipo">Tipo de loja</label>
+              <select class="entrada" id="tipo" name="tipo">
+                <option value="">Todos</option>
+                <option value="MERCADO">Mercados</option>
+                <option value="PADARIA">Padarias</option>
+                <option value="RESTAURANTE">Restaurantes</option>
+                <option value="HORTIFRUTI">Hortifruti</option>
+                <option value="CAFE">Cafés</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="raio">Distância</label>
+              <select class="entrada" id="raio" name="raio_km">
+                <option value="">Qualquer</option>
+                <option value="1">Até 1 km</option>
+                <option value="3">Até 3 km</option>
+                <option value="5">Até 5 km</option>
+                <option value="10">Até 10 km</option>
+              </select>
+            </div>
+          </div>
+        </form>
+
+        <p class="contagem" id="contagem" aria-live="polite"></p>
+      </div>
+
+      <div class="doacoes-mapa">
+        <div class="mapa" id="mapa" role="region" aria-label="Mapa das doações"></div>
+        <ul class="legenda" aria-label="Legenda do mapa">
+          <li><span class="ponto"></span>Doação</li>
+          <li><span class="ponto selecionado"></span>Selecionada</li>
+          <li><span class="ponto ong"></span>Sua ONG</li>
+        </ul>
+      </div>
+
+      <section class="doacoes-lista" id="lista" aria-label="Lista de doações"></section>
+    </main>
+  </div>
+
+  <!-- Leaflet (biblioteca do mapa): cria a variável global L usada no módulo da página. -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="/js/paginas/ong-mapa.js"></script>
+</body>
+</html>

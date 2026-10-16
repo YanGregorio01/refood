@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Histórico de recebimentos | Refood Parcerias</title>
+  <meta name="description" content="Doações recebidas pela sua ONG e o impacto gerado, mês a mês.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.12 do Figma: Histórico de recebimentos (no celular, tela 4.3).
+       Os números dos KPIs ficam todos em verde (o Figma usava verde-claro e
+       laranja, que não têm contraste suficiente sobre o branco). */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 10px; }
+    .kpi small.sobe { color: var(--verde); font-weight: 600; }
+    .kpi small.desce { color: var(--coral); font-weight: 600; }
+
+    .filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px; }
+    .busca { position: relative; flex: 1 1 260px; }
+    .busca svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px;
+      color: var(--texto-3); pointer-events: none; }
+    .busca .entrada { padding-left: 40px; }
+    .filtro { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--texto-2); }
+    .filtro .entrada { width: auto; min-width: 150px; background: var(--branco); }
+
+    .grupos { display: grid; gap: 28px; }
+    .grupo { display: grid; gap: 12px; }
+    .grupo-topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .grupo-topo h2 { font-size: 20px; }
+    .grupo-topo span { font-size: 13px; color: var(--texto-2); }
+
+    .recebimento { display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.3fr); align-items: center; gap: 16px; padding: 14px 18px; }
+    .recebimento-foto { width: 64px; height: 64px; border-radius: var(--raio-p); object-fit: cover; background: var(--creme-2);
+      display: grid; place-items: center; font-family: var(--fonte-titulo); font-size: 22px; font-weight: 800; color: var(--verde); }
+    .recebimento-loja { display: grid; gap: 4px; min-width: 0; }
+    .recebimento-nome { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+    .recebimento-nome h3 { font-size: 16px; }
+    .recebimento-dados { margin: 0; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; }
+    .recebimento-dados dt { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--texto-3); }
+    .recebimento-dados dd { margin: 2px 0 0; font-size: 14px; font-weight: 600; }
+    .recebimento-dados .quilos { font-family: var(--fonte-titulo); font-size: 17px; font-weight: 800; color: var(--verde); }
+    .recebimento-dados .impacto { color: var(--verde); }
+
+    @media (max-width: 860px) {
+      .recebimento { grid-template-columns: 56px minmax(0, 1fr); }
+      .recebimento-foto { width: 56px; height: 56px; }
+      .recebimento-dados { grid-column: 1 / -1; }
+      .filtro { flex: 1 1 140px; }
+      .filtro .entrada { flex: 1; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <div class="painel-cabecalho">
+        <div>
+          <h1>Histórico de recebimentos</h1>
+          <p>Acompanhe as doações recebidas e o impacto gerado pela sua organização.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <button class="btn btn-contorno" id="exportar" type="button" disabled>Exportar relatório</button>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </div>
+
+      <section class="kpis" aria-label="Números do mês">
+        <div class="kpi">
+          <span id="kpi-kg-rotulo">Recebido este mês</span>
+          <strong id="kpi-kg">…</strong>
+          <small id="kpi-variacao" hidden></small>
+        </div>
+        <div class="kpi">
+          <span>Doações concluídas</span>
+          <strong id="kpi-doacoes">…</strong>
+          <small id="kpi-parceiros"></small>
+        </div>
+        <div class="kpi">
+          <span>Refeições estimadas</span>
+          <strong id="kpi-refeicoes">…</strong>
+          <small id="kpi-impacto"></small>
+        </div>
+      </section>
+
+      <form class="card filtros" id="filtros" role="search" aria-label="Filtrar recebimentos">
+        <div class="busca">
+          <label class="sr-only" for="busca">Buscar estabelecimento</label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input class="entrada" id="busca" name="busca" type="search" maxlength="60"
+                 placeholder="Buscar estabelecimento..." autocomplete="off">
+        </div>
+        <label class="filtro">Período
+          <select class="entrada" id="mes" name="mes"></select>
+        </label>
+        <label class="filtro">Status
+          <select class="entrada" id="status" name="status">
+            <option value="RECEBIDA" selected>Recebido</option>
+            <option value="">Todos</option>
+          </select>
+        </label>
+        <button class="btn btn-claro" id="limpar" type="button">Limpar</button>
+      </form>
+
+      <div class="grupos" id="lista">
+        <div class="esqueleto" style="height:96px"></div>
+        <div class="esqueleto" style="height:96px"></div>
+        <div class="esqueleto" style="height:96px"></div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/paginas/ong-recebimentos.js"></script>
+</body>
+</html>

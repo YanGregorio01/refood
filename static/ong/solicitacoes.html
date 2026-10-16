@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitações | Refood Parcerias</title>
+  <meta name="description" content="Pedidos de doação da sua ONG: em andamento, recusados e cancelados.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Item "Solicitações" do menu da ONG. No Figma (6.10 a 6.12) esse item levava
+       ao formulário; aqui ele lista os pedidos já feitos, no mesmo visual das telas. */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 10px; }
+    .secao-pedidos { display: grid; gap: 14px; }
+    .secao-topo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .secao-topo h2 { font-size: 20px; }
+    .secao-topo h2:focus { outline: none; }
+
+    .pedidos { display: grid; gap: 14px; }
+    .pedido { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 18px; padding: 18px; align-items: start; }
+    .pedido.destaque { border-color: var(--verde-claro); box-shadow: 0 0 0 3px var(--verde-fundo), var(--sombra); }
+    .pedido-foto { width: 88px; height: 88px; border-radius: var(--raio); object-fit: cover; background: var(--creme-2); }
+    .pedido-corpo { display: grid; gap: 10px; }
+    .pedido-topo { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+    .pedido-topo h3 { font-size: 18px; }
+    .pedido-status { font-size: 14px; color: var(--texto-2); }
+    .pedido-dados { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px 20px; }
+    .pedido-dados dt { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--texto-3); }
+    .pedido-dados dd { margin: 2px 0 0; font-size: 14px; font-weight: 600; }
+    .pedido-endereco { font-size: 13px; color: var(--texto-2); }
+    .pedido-endereco a { font-weight: 700; }
+    .pedido-obs { font-size: 13px; color: var(--texto-2); background: var(--creme); border-radius: var(--raio-p); padding: 8px 12px; }
+
+    .item .badge { flex: none; }
+    .modal h2 { font-size: 20px; }
+    .modal-acoes { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+
+    @media (max-width: 700px) {
+      .pedido { grid-template-columns: 56px minmax(0, 1fr); gap: 14px; }
+      .pedido-foto { width: 56px; height: 56px; }
+      .pedido-acoes { grid-column: 1 / -1; }
+      .cabecalho-acoes .btn-primario { display: none; } /* no celular, o atalho fica no estado vazio e no menu */
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <div class="painel-cabecalho">
+        <div>
+          <h1>Solicitações</h1>
+          <p>Acompanhe os pedidos de doação enviados às lojas parceiras.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <a class="btn btn-primario" href="/ong/mapa.html">Ver doações no mapa</a>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </div>
+
+      <section class="secao-pedidos" aria-labelledby="t-andamento">
+        <div class="secao-topo">
+          <h2 id="t-andamento" tabindex="-1">Em andamento</h2>
+          <span class="sutil" id="n-andamento"></span>
+        </div>
+        <div class="pedidos" id="andamento">
+          <div class="esqueleto" style="height:180px"></div>
+          <div class="esqueleto" style="height:180px"></div>
+        </div>
+      </section>
+
+      <section class="secao-pedidos" aria-labelledby="t-encerrados">
+        <div class="secao-topo">
+          <h2 id="t-encerrados">Recusadas e canceladas recentemente</h2>
+          <span class="sutil">Últimos 30 dias</span>
+        </div>
+        <div class="lista" id="encerrados">
+          <div class="esqueleto" style="height:84px"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal de confirmação do cancelamento (no lugar do confirm() do navegador). -->
+  <div class="modal-fundo" id="modal-cancelar" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-describedby="modal-texto">
+      <h2 id="modal-titulo">Cancelar este pedido?</h2>
+      <p id="modal-texto"></p>
+      <div id="modal-erro" role="alert"></div>
+      <div class="modal-acoes">
+        <button class="btn btn-contorno" type="button" data-fechar>Voltar</button>
+        <button class="btn btn-perigo" type="button" id="confirmar-cancelamento">Cancelar pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/js/paginas/ong-solicitacoes.js"></script>
+</body>
+</html>

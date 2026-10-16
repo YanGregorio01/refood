@@ -14,3 +14,10 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Testes e ferramentas
+.pytest_cache/
+.playwright-mcp/
+# Saída do Understand Anything que não precisa ir para o git
+.ua/intermediate/
+.ua/diff-overlay.json

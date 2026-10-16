@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Refood: comida boa não deveria ir para o lixo</title>
+  <meta name="description" content="Sacolas surpresa com até 70% de desconto, direto dos comércios do seu bairro. Doações para ONGs.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 5.1 do Figma: Landing Page */
+    .hero { padding-block: 64px 72px; }
+    .hero .container { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+    .selo { display: inline-flex; align-items: center; gap: 8px; background: var(--bege); padding: 6px 14px; border-radius: 99px;
+      font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+    .selo::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--laranja); }
+    .hero h1 { font-size: clamp(36px, 5vw, 56px); }
+    .hero p.lead { font-size: 18px; color: var(--texto-2); margin-top: 18px; max-width: 54ch; }
+    .perfis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 32px; }
+    .perfil { display: grid; gap: 8px; padding: 18px; border-radius: var(--raio-g); border: 2px solid var(--verde);
+      text-decoration: none; color: var(--verde); background: var(--branco); transition: transform .15s, box-shadow .15s; }
+    .perfil:hover { transform: translateY(-2px); box-shadow: var(--sombra); }
+    .perfil strong { font-family: var(--fonte-titulo); font-size: 17px; }
+    .perfil span { font-size: 13px; color: var(--texto-2); }
+    .perfil.destaque { background: var(--verde); color: var(--branco); }
+    .perfil.destaque span { color: #d6e9de; }
+    .hero-foto { border-radius: var(--raio-xg); overflow: hidden; aspect-ratio: 4 / 3; box-shadow: var(--sombra); }
+    .hero-foto img { width: 100%; height: 100%; object-fit: cover; }
+
+    .secao { padding-block: 72px; }
+    .secao-branca { background: var(--branco); border-block: 1px solid var(--linha); }
+    .secao-titulo { text-align: center; display: grid; gap: 10px; margin-bottom: 40px; }
+    .numeros { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .numero-card { display: flex; gap: 16px; align-items: center; padding: 22px; border-radius: var(--raio-g);
+      background: var(--creme); border: 1px solid var(--linha); }
+    .numero-card .ic { width: 48px; height: 48px; border-radius: 50%; background: var(--creme-2); display: grid; place-items: center;
+      color: var(--verde); flex: none; }
+    .numero-card .ic svg { width: 22px; height: 22px; }
+    .numero-card strong { font-family: var(--fonte-titulo); font-size: 28px; font-weight: 800; color: var(--verde); display: block; }
+    .numero-card span { color: var(--texto-2); font-size: 14px; }
+
+    .passos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .passo { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio-g); padding: 24px; display: grid; gap: 10px; }
+    .passo .n { width: 36px; height: 36px; border-radius: 50%; background: var(--verde); color: var(--branco);
+      display: grid; place-items: center; font-weight: 800; font-family: var(--fonte-titulo); }
+    .passo p { color: var(--texto-2); font-size: 14px; }
+
+    .parceiros { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+    .parceiro { background: var(--creme); border: 1px solid var(--linha); border-radius: var(--raio-g); overflow: hidden;
+      text-decoration: none; color: var(--texto); transition: box-shadow .15s; }
+    .parceiro:hover { box-shadow: var(--sombra); }
+    .parceiro img { aspect-ratio: 16 / 7; width: 100%; object-fit: cover; }
+    .parceiro div { padding: 14px 16px 18px; display: grid; gap: 2px; }
+    .parceiro strong { font-family: var(--fonte-titulo); }
+    .parceiro span { font-size: 13px; color: var(--texto-2); }
+
+    @media (max-width: 960px) {
+      .hero .container { grid-template-columns: 1fr; }
+      .perfis, .numeros, .passos { grid-template-columns: 1fr; }
+      .parceiros { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div>
+          <span class="selo">Evite o desperdício de alimentos hoje</span>
+          <h1>Comida boa não deveria ir para o lixo</h1>
+          <p class="lead">Conectamos negócios de alimentação com excedente de produção a consumidores conscientes em busca de descontos imperdíveis e ONGs que apoiam famílias vulneráveis.</p>
+          <div class="perfis">
+            <a class="perfil destaque" href="/login.html?criar=COMUM"><strong>Sou consumidor</strong><span>Economize até 70% em sacolas surpresas deliciosas.</span></a>
+            <a class="perfil" href="/login.html?criar=ESTABELECIMENTO"><strong>Sou comerciante</strong><span>Venda seu excedente diário e recupere custos.</span></a>
+            <a class="perfil" href="/login.html?criar=ONG"><strong>Sou ONG</strong><span>Receba doações e auxilie quem mais precisa.</span></a>
+          </div>
+        </div>
+        <div class="hero-foto"><img src="/img/hero.jpg" alt="Voluntários e comerciantes separando frutas e legumes em uma despensa comunitária"></div>
+      </div>
+    </section>
+
+    <section class="secao secao-branca" aria-labelledby="t-impacto">
+      <div class="container">
+        <div class="secao-titulo"><span class="rotulo">Nosso impacto coletivo</span><h2 id="t-impacto">A revolução sustentável já começou</h2></div>
+        <div class="numeros">
+          <div class="numero-card">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span>
+            <div><strong id="n-kg" class="num">…</strong><span>de alimentos de qualidade salvos do lixo</span></div>
+          </div>
+          <div class="numero-card">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
+            <div><strong id="n-refeicoes" class="num">…</strong><span>refeições doadas a ONGs parceiras</span></div>
+          </div>
+          <div class="numero-card">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c-.5-1-1.6-1.5-3-1.5-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.2-3 2.2-1.4 0-2.6-.6-3.1-1.6M12 6v2M12 16v2"/></svg></span>
+            <div><strong id="n-economia" class="num">…</strong><span>economizados diretamente pelos consumidores</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="como-funciona" aria-labelledby="t-como">
+      <div class="container">
+        <div class="secao-titulo"><span class="rotulo">Simples e rápido</span><h2 id="t-como">Como funciona a nossa rede?</h2></div>
+        <div class="passos">
+          <div class="passo"><span class="n">1</span><h3>Cadastre excedentes</h3><p>Comerciantes listam lotes de comida fresca não vendida por uma fração do preço original.</p></div>
+          <div class="passo"><span class="n">2</span><h3>Reserve com desconto</h3><p>Consumidores encontram ofertas de até 70% off e garantem a sacola pelo site, sem pagar nada a mais.</p></div>
+          <div class="passo"><span class="n">3</span><h3>Retire no local</h3><p>Retire o pacote direto no estabelecimento parceiro durante o horário agendado, mostrando o código da reserva.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao secao-branca" aria-labelledby="t-parceiros">
+      <div class="container">
+        <div class="secao-titulo"><span class="rotulo">Comunidade ativa</span><h2 id="t-parceiros">Parceiros de destaque</h2></div>
+        <div class="parceiros" id="parceiros">
+          <div class="esqueleto" style="height:190px"></div><div class="esqueleto" style="height:190px"></div>
+          <div class="esqueleto" style="height:190px"></div><div class="esqueleto" style="height:190px"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script type="module" src="/js/paginas/index.js"></script>
+</body>
+</html>

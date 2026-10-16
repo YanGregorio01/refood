@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja parceira | Refood</title>
+  <meta name="description" content="Sacolas surpresa disponíveis, avaliações e localização de uma loja parceira do Refood.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 5.7 do Figma: Página do Estabelecimento (no celular, tela 1.4) */
+    .capa { height: 240px; background: var(--creme-2); overflow: hidden; }
+    .capa img { width: 100%; height: 100%; object-fit: cover; }
+
+    .cabecalho-loja { display: flex; align-items: flex-start; gap: 24px; padding-top: 20px; position: relative; }
+    /* o quadrado com a inicial sobe por cima da capa, como no Figma */
+    .logo-loja { width: 120px; height: 120px; margin-top: -60px; border-radius: var(--raio-xg); background: var(--branco); box-shadow: var(--sombra);
+      display: grid; place-items: center; flex: none; font-family: var(--fonte-titulo); font-size: 48px; font-weight: 800; color: var(--cor, var(--verde)); }
+    .cabecalho-texto { flex: 1; min-width: 0; display: grid; gap: 6px; }
+    .loja-tipo { color: var(--coral); font-size: 13px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
+    .loja-detalhes { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; font-size: 14px; color: var(--texto-2); }
+    .loja-detalhes span { display: inline-flex; align-items: center; gap: 6px; }
+    .loja-detalhes svg { width: 15px; height: 15px; flex: none; }
+    .loja-nota { font-weight: 700; color: var(--texto-2); white-space: nowrap; padding-top: 10px; }
+    .loja-nota .estrelas { letter-spacing: 0; }
+
+    .cor-mercado { --cor: var(--verde-escuro); }
+    .cor-padaria { --cor: var(--laranja); }
+    .cor-restaurante { --cor: var(--coral); }
+    .cor-hortifruti { --cor: var(--verde-claro); }
+    .cor-cafe { --cor: var(--dourado); }
+    .cor-outro { --cor: var(--texto-2); }
+
+    .loja-grade { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 28px; margin-top: 36px; align-items: start; }
+    .secao-sacolas { display: grid; gap: 18px; }
+    .secao-sacolas h2, .loja-lateral h2 { font-size: 20px; }
+    .loja-lateral { display: grid; gap: 20px; }
+
+    .avaliacoes { list-style: none; margin: 0; padding: 0; display: grid; }
+    .avaliacao { display: grid; gap: 8px; padding-block: 14px; border-top: 1px solid var(--linha); }
+    .avaliacao:first-child { border-top: 0; padding-top: 4px; }
+    .avaliacao-topo { display: flex; align-items: center; gap: 10px; }
+    .avaliacao-topo .avatar { width: 34px; height: 34px; font-size: 14px; }
+    .avaliacao-topo div { flex: 1; display: grid; }
+    .avaliacao-topo strong { font-size: 14px; }
+    .avaliacao-topo small { font-size: 12px; color: var(--texto-3); }
+    .avaliacao p { font-size: 14px; color: var(--texto-2); }
+
+    .mapa-loja { height: 220px; min-height: 0; margin-top: 14px; }
+    .pino-loja { display: block; width: 26px; height: 26px; border-radius: 50%; background: var(--verde); border: 4px solid var(--branco);
+      box-shadow: 0 0 0 8px var(--verde-fundo), var(--sombra); }
+    .local-texto { margin-top: 12px; font-size: 14px; color: var(--texto-2); display: grid; gap: 4px; }
+    .local-links { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 8px; font-weight: 600; font-size: 14px; }
+
+    @media (max-width: 960px) {
+      .loja-grade { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .capa { height: 180px; }
+      /* no celular: quadrado e nota lado a lado; nome e detalhes embaixo */
+      .cabecalho-loja { flex-wrap: wrap; gap: 12px 16px; padding-top: 12px; }
+      .logo-loja { width: 84px; height: 84px; margin-top: -54px; font-size: 34px; }
+      .loja-nota { align-self: center; padding-top: 0; }
+      .cabecalho-texto { order: 1; flex-basis: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main id="pagina-loja">
+    <div class="capa" id="capa"></div>
+
+    <div class="container">
+      <section class="cabecalho-loja" aria-labelledby="loja-nome">
+        <div class="logo-loja" id="logo-loja" aria-hidden="true"></div>
+        <div class="cabecalho-texto">
+          <h1 id="loja-nome"><span class="esqueleto" style="display:block; height:40px; width:320px; max-width:100%"></span></h1>
+          <p class="loja-tipo" id="loja-tipo"></p>
+          <p class="loja-detalhes">
+            <span id="loja-endereco"></span>
+            <span id="loja-horario"></span>
+          </p>
+        </div>
+        <p class="loja-nota" id="loja-nota"></p>
+      </section>
+
+      <div class="loja-grade">
+        <section class="secao-sacolas" aria-labelledby="t-sacolas">
+          <h2 id="t-sacolas">Sacolas disponíveis agora</h2>
+          <div class="grade-sacolas" id="sacolas">
+            <div class="esqueleto" style="height:320px"></div>
+            <div class="esqueleto" style="height:320px"></div>
+          </div>
+        </section>
+
+        <aside class="loja-lateral">
+          <section class="card card-pad" aria-labelledby="t-avaliacoes">
+            <div class="card-titulo">
+              <h2 id="t-avaliacoes">O que dizem por aqui</h2>
+              <span class="sutil" id="total-avaliacoes"></span>
+            </div>
+            <ul class="avaliacoes" id="avaliacoes">
+              <li class="esqueleto" style="height:70px"></li>
+            </ul>
+          </section>
+
+          <section class="card card-pad" aria-labelledby="t-local">
+            <h2 id="t-local">Localização no mapa</h2>
+            <div id="mapa-loja" class="mapa mapa-loja" aria-label="Mapa com a localização da loja"></div>
+            <div class="local-texto" id="local-texto"></div>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="/js/paginas/estabelecimento.js"></script>
+</body>
+</html>

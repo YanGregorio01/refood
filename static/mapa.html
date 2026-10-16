@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa de lojas parceiras | Refood</title>
+  <meta name="description" content="Veja no mapa as padarias, mercados e restaurantes perto de você com sacolas surpresa disponíveis.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 5.3 do Figma: Mapa Interativo (no celular, tela 1.2) */
+    .explorar { display: grid; grid-template-columns: 380px minmax(0, 1fr); height: calc(100vh - 72px); min-height: 560px; }
+
+    /* Coluna da esquerda: estabelecimento selecionado */
+    .selecionado { background: var(--branco); border-right: 1px solid var(--linha); padding: 28px 24px; overflow-y: auto;
+      display: grid; gap: 18px; align-content: start; }
+    .selecionado h2 { font-size: 20px; }
+    .loja-info { display: grid; gap: 14px; }
+    .loja-info-foto { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; border-radius: var(--raio); background: var(--creme-2); }
+    .loja-info-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--texto-2); }
+    .loja-info h3 { font-size: 22px; }
+    .caixa-sacolas { background: var(--creme); border-radius: var(--raio); padding: 14px 16px; display: grid; gap: 2px; font-size: 13px; color: var(--texto-2); }
+    .caixa-sacolas strong { font-family: var(--fonte-titulo); font-size: 15px; color: var(--verde); }
+
+    /* Coluna da direita: busca, filtros e mapa ou lista */
+    .explorar-direita { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+    .ferramentas { background: var(--branco); border-bottom: 1px solid var(--linha); padding: 14px 20px; display: grid; gap: 12px; }
+    .ferramentas-linha { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+    .busca-mapa { flex: 1 1 320px; display: flex; align-items: center; gap: 10px; background: var(--creme); border: 1px solid var(--linha);
+      border-radius: var(--raio); padding: 4px 4px 4px 14px; }
+    .busca-mapa:focus-within { border-color: var(--verde); background: var(--branco); }
+    .busca-mapa svg { width: 18px; height: 18px; color: var(--verde); flex: none; }
+    .busca-mapa input { flex: 1; min-width: 0; border: 0; background: none; min-height: 38px; outline: none; }
+    .chips-raio .chip { min-height: 32px; padding: 0 12px; font-size: 13px; }
+    .alternar-modo { margin-left: auto; }
+    .alternar-modo button { padding: 8px 16px; }
+
+    .chips-tipo .chip { min-height: 32px; padding: 0 12px; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+    .legenda-extra { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--texto-2); }
+
+    /* Cores por tipo de loja: a variável --cor é usada pelo pino e pelo pontinho da legenda */
+    .cor-mercado { --cor: var(--verde-escuro); }
+    .cor-padaria { --cor: var(--laranja); }
+    .cor-restaurante { --cor: var(--coral); }
+    .cor-hortifruti { --cor: var(--verde-claro); }
+    .cor-cafe { --cor: var(--dourado); }
+    .cor-outro { --cor: var(--texto-2); }
+    .ponto { width: 9px; height: 9px; border-radius: 50%; background: var(--cor, var(--texto-3)); flex: none; }
+    .chip[aria-pressed="true"] .ponto { box-shadow: 0 0 0 2px var(--branco); }
+    .ponto-apagado { background: var(--texto-3); opacity: .5; }
+    .ponto-voce { background: var(--verde); box-shadow: 0 0 0 3px var(--verde-fundo); }
+
+    .area-conteudo { flex: 1; min-height: 0; position: relative; }
+    #painel-mapa, #painel-lista { height: 100%; }
+    .explorar .mapa { border-radius: 0; min-height: 0; height: 100%; }
+    #painel-lista { overflow-y: auto; padding: 24px; }
+
+    /* Pinos do mapa (L.divIcon) */
+    .pino { width: 34px; height: 34px; border-radius: 50%; background: var(--cor); color: var(--branco); border: 3px solid var(--branco);
+      box-shadow: var(--sombra); display: grid; place-items: center; transition: transform .15s; }
+    .pino svg { width: 16px; height: 16px; }
+    .pino-apagado { opacity: .5; filter: grayscale(.6); }
+    .pino-ativo { transform: scale(1.25); box-shadow: 0 0 0 6px var(--laranja-fundo), var(--sombra); opacity: 1; filter: none; }
+    .leaflet-marker-icon:focus-visible { outline: none; }
+    .leaflet-marker-icon:focus-visible .pino { outline: 3px solid var(--texto); outline-offset: 2px; }
+    .voce { display: block; width: 18px; height: 18px; border-radius: 50%; background: var(--verde); border: 3px solid var(--branco);
+      box-shadow: 0 0 0 6px var(--verde-fundo); }
+    .mapa-raio { stroke: var(--verde); stroke-width: 1.5; stroke-dasharray: 6 6; fill: var(--verde-claro); fill-opacity: .08; }
+
+    /* Modo lista */
+    .grade-lojas { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+    .loja-card { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio-g); overflow: hidden; display: flex; flex-direction: column; }
+    .loja-card img { width: 100%; aspect-ratio: 16 / 7; object-fit: cover; background: var(--creme-2); }
+    .loja-card-corpo { padding: 16px; display: grid; gap: 8px; flex: 1; align-content: start; }
+    .loja-card h3 { font-size: 17px; }
+    .loja-card h3 a { color: var(--texto); text-decoration: none; }
+    .loja-card h3 a:hover { color: var(--verde); }
+    .loja-card-sacolas { font-weight: 600; color: var(--verde); font-size: 14px; }
+    .loja-card-sacolas.sem { color: var(--texto-3); font-weight: 500; }
+    .loja-card-acoes { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
+
+    @media (max-width: 860px) {
+      .explorar { grid-template-columns: 1fr; height: auto; min-height: 0; }
+      .explorar-direita { order: 1; }
+      .selecionado { order: 2; border-right: 0; border-top: 1px solid var(--linha); padding: 24px 16px; overflow: visible; }
+      .ferramentas { padding: 12px 16px; }
+      .alternar-modo { margin-left: 0; }
+      #painel-mapa { height: 58vh; min-height: 340px; }
+      #painel-lista { height: auto; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="explorar">
+    <h1 class="sr-only">Mapa de lojas parceiras do Refood</h1>
+
+    <aside class="selecionado" id="selecionado" aria-labelledby="t-selecionado">
+      <h2 id="t-selecionado">Estabelecimento selecionado</h2>
+      <div id="loja-selecionada" aria-live="polite">
+        <div class="esqueleto" style="height: 170px"></div>
+        <div class="esqueleto" style="height: 22px; width: 60%; margin-top: 16px"></div>
+        <div class="esqueleto" style="height: 16px; width: 85%; margin-top: 10px"></div>
+        <div class="esqueleto" style="height: 70px; margin-top: 16px"></div>
+      </div>
+    </aside>
+
+    <section class="explorar-direita" aria-label="Busca e mapa">
+      <div class="ferramentas">
+        <div class="ferramentas-linha">
+          <form class="busca-mapa" id="form-busca" role="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <label for="busca" class="sr-only">Buscar por bairro ou nome da loja</label>
+            <input type="search" id="busca" name="busca" placeholder="Buscar bairro, mercado, padaria..." maxlength="60" autocomplete="off">
+            <button class="btn btn-primario btn-pequeno" type="submit">Buscar</button>
+          </form>
+          <div class="chips chips-raio" role="group" aria-label="Distância máxima">
+            <button class="chip" type="button" data-raio="0.5" aria-pressed="false">500 m</button>
+            <button class="chip" type="button" data-raio="1" aria-pressed="false">1 km</button>
+            <button class="chip" type="button" data-raio="5" aria-pressed="false">5 km</button>
+          </div>
+          <div class="abas alternar-modo" role="tablist" aria-label="Modo de exibição">
+            <button type="button" role="tab" id="aba-mapa" aria-controls="painel-mapa" aria-selected="true">Mapa</button>
+            <button type="button" role="tab" id="aba-lista" aria-controls="painel-lista" aria-selected="false" tabindex="-1">Lista</button>
+          </div>
+        </div>
+        <!-- Os chips de tipo também servem de legenda das cores dos pinos -->
+        <div class="ferramentas-linha">
+          <div class="chips chips-tipo" id="chips-tipo" role="group" aria-label="Tipo de estabelecimento"></div>
+          <span class="legenda-extra"><span class="ponto ponto-apagado"></span>Sem sacolas agora</span>
+          <span class="legenda-extra"><span class="ponto ponto-voce"></span>Você está aqui</span>
+        </div>
+      </div>
+
+      <div class="area-conteudo">
+        <div id="painel-mapa" role="tabpanel" aria-labelledby="aba-mapa">
+          <div id="mapa" class="mapa" aria-label="Mapa com as lojas parceiras"></div>
+        </div>
+        <div id="painel-lista" role="tabpanel" aria-labelledby="aba-lista" hidden>
+          <div id="lista-lojas" class="grade-lojas"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="/js/paginas/mapa.js"></script>
+</body>
+</html>

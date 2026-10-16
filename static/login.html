@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar ou criar conta | Refood</title>
+  <meta name="description" content="Entre na sua conta do Refood ou crie uma como consumidor, comerciante ou ONG.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 5.2 do Figma: Login / Cadastro (no celular, tela 1.5) */
+    .acesso { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 72px); background: var(--branco); }
+
+    /* Lado esquerdo: foto com o título por cima */
+    .acesso-foto { position: relative; overflow: hidden; }
+    .acesso-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .acesso-foto::after { content: ""; position: absolute; inset: 0;
+      /* o mesmo --verde-escuro, com transparência, para o texto branco ficar legível */
+      background: linear-gradient(180deg, rgba(28, 71, 49, .6) 0%, rgba(28, 71, 49, .15) 55%); }
+    .acesso-foto-texto { position: relative; z-index: 1; padding: 64px 60px; color: var(--branco); display: grid; gap: 16px; }
+    .acesso-frase { font-family: var(--fonte-titulo); font-weight: 800; line-height: 1.15; letter-spacing: -.02em;
+      font-size: clamp(32px, 3.4vw, 46px); }
+    .acesso-foto-texto p:last-child { font-size: 18px; max-width: 46ch; }
+
+    /* Lado direito: abas e formulários */
+    .acesso-lado { display: flex; justify-content: center; padding: 56px 24px 64px; }
+    .acesso-caixa { width: 100%; max-width: 520px; display: grid; gap: 28px; align-content: start; }
+    .abas-largas { display: grid; grid-template-columns: 1fr 1fr; width: 100%; border: 1px solid var(--linha); }
+    .painel-acesso { display: grid; gap: 24px; }
+    .painel-acesso h1 { font-size: clamp(26px, 3vw, 30px); }
+    .painel-acesso header p { color: var(--texto-2); margin-top: 8px; }
+    .form-acesso { display: grid; gap: 18px; }
+
+    /* Escolha do perfil: rádios escondidos, os rótulos viram cartões */
+    .perfil-opcoes { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+      border: 0; padding: 0; margin: 0; min-width: 0; }
+    .perfil-opcoes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .perfil-opcoes label { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--linha);
+      border-radius: var(--raio); cursor: pointer; background: var(--branco); }
+    .perfil-opcoes label:hover { border-color: var(--verde-claro); }
+    .perfil-opcoes input:checked + label { border-color: var(--verde); box-shadow: 0 0 0 1px var(--verde); }
+    .perfil-opcoes input:focus-visible + label { outline: 2px solid var(--verde); outline-offset: 2px; }
+    .perfil-icone { width: 34px; height: 34px; border-radius: var(--raio-p); background: var(--creme-2); color: var(--texto-2);
+      display: grid; place-items: center; flex: none; }
+    .perfil-icone svg { width: 18px; height: 18px; }
+    .perfil-opcoes input:checked + label .perfil-icone { background: var(--verde-fundo); color: var(--verde); }
+    .perfil-opcoes strong { font-family: var(--fonte-titulo); font-size: 15px; display: block; }
+    .perfil-opcoes small { display: none; color: var(--texto-2); font-size: 13px; }
+
+    /* Campo de senha com o botão de mostrar/ocultar dentro */
+    .senha { position: relative; }
+    .senha .entrada { padding-right: 52px; }
+    .senha-ver { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); width: 40px; height: 36px; border: 0;
+      background: none; border-radius: var(--raio-p); color: var(--texto-2); cursor: pointer; display: grid; place-items: center; }
+    .senha-ver:hover { color: var(--verde); background: var(--verde-fundo); }
+    .senha-ver svg { width: 20px; height: 20px; }
+
+    .ou { display: flex; align-items: center; gap: 12px; color: var(--texto-3); font-size: 13px; }
+    .ou::before, .ou::after { content: ""; flex: 1; height: 1px; background: var(--linha); }
+    .trocar-aba { text-align: center; color: var(--texto-2); font-size: 14px; }
+    .link-botao { background: none; border: 0; padding: 0; color: var(--verde); font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+    .ja-logado { display: grid; gap: 16px; }
+    .ja-logado .acoes { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    @media (max-width: 860px) {
+      .acesso { grid-template-columns: 1fr; min-height: 0; background: var(--creme); }
+      .acesso-foto { display: none; }
+      .acesso-lado { padding: 32px 16px 48px; }
+      .abas-largas { background: var(--branco); }
+      .perfil-opcoes { grid-template-columns: 1fr; }
+      .perfil-opcoes label { padding: 16px; }
+      .perfil-opcoes small { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="acesso">
+    <section class="acesso-foto">
+      <img src="/img/login.jpg" alt="Mesa de madeira com verduras, legumes, tomates e temperos frescos">
+      <div class="acesso-foto-texto">
+        <p class="acesso-frase">Salvar comida é um ato de amor</p>
+        <p>Faça parte de uma comunidade que transforma desperdício em oportunidade e sustento.</p>
+      </div>
+    </section>
+
+    <section class="acesso-lado">
+      <div class="acesso-caixa">
+
+        <!-- Aparece no lugar dos formulários quando a pessoa já está logada -->
+        <div id="ja-logado" class="card card-pad ja-logado" hidden>
+          <h1>Você já está conectado</h1>
+          <p>Você entrou como <strong id="logado-nome"></strong> (<span id="logado-email"></span>).</p>
+          <div class="acoes">
+            <a class="btn btn-primario" id="logado-ir" href="/index.html">Ir para minha área</a>
+            <button class="btn btn-contorno" type="button" id="logado-sair">Sair</button>
+          </div>
+        </div>
+
+        <div id="formularios" class="acesso-caixa">
+          <div class="abas abas-largas" role="tablist" aria-label="Acesso à conta">
+            <button type="button" role="tab" id="aba-entrar" aria-controls="painel-entrar" aria-selected="true">Entrar</button>
+            <button type="button" role="tab" id="aba-criar" aria-controls="painel-criar" aria-selected="false" tabindex="-1">Criar conta</button>
+          </div>
+
+          <!-- Aba "Entrar" -->
+          <section id="painel-entrar" class="painel-acesso" role="tabpanel" aria-labelledby="aba-entrar">
+            <header>
+              <h1>Que bom ver você de novo</h1>
+              <p>Entre com seu e-mail e senha para reservar sacolas e acompanhar seus pedidos.</p>
+            </header>
+            <form id="form-entrar" class="form-acesso">
+              <div class="alerta alerta-erro" role="alert" hidden></div>
+              <div class="campo">
+                <label for="entrar-email">E-mail</label>
+                <input class="entrada" type="email" id="entrar-email" name="email" placeholder="exemplo@email.com"
+                  autocomplete="email" maxlength="150" required>
+              </div>
+              <div class="campo">
+                <label for="entrar-senha">Senha</label>
+                <div class="senha">
+                  <input class="entrada" type="password" id="entrar-senha" name="senha" placeholder="Sua senha"
+                    autocomplete="current-password" maxlength="72" required>
+                  <button class="senha-ver" type="button" data-ver-senha="entrar-senha" aria-label="Mostrar senha" aria-pressed="false"></button>
+                </div>
+              </div>
+              <button class="btn btn-primario btn-bloco" type="submit">Entrar</button>
+            </form>
+            <p class="trocar-aba">Ainda não tem conta? <button class="link-botao" type="button" data-ir-para="criar">Criar conta</button></p>
+          </section>
+
+          <!-- Aba "Criar conta" -->
+          <section id="painel-criar" class="painel-acesso" role="tabpanel" aria-labelledby="aba-criar" hidden>
+            <header>
+              <h1>Seja bem-vindo ao Refood</h1>
+              <p>Escolha seu perfil e junte-se ao combate ao desperdício.</p>
+            </header>
+            <form id="form-criar" class="form-acesso">
+              <div class="alerta alerta-erro" role="alert" hidden></div>
+
+              <fieldset class="campo perfil-opcoes">
+                <legend class="sr-only">Tipo de conta</legend>
+                <input type="radio" name="tipo" id="tipo-comum" value="COMUM" checked>
+                <label for="tipo-comum">
+                  <span class="perfil-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span>
+                  <span><strong>Consumidor</strong><small>Encontre ofertas perto de você</small></span>
+                </label>
+                <input type="radio" name="tipo" id="tipo-comerciante" value="ESTABELECIMENTO">
+                <label for="tipo-comerciante">
+                  <span class="perfil-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l1.5-5h13L20 10"/><path d="M4 10a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-4h4v4"/></svg></span>
+                  <span><strong>Comerciante</strong><small>Reduza o desperdício e gere receita</small></span>
+                </label>
+                <input type="radio" name="tipo" id="tipo-ong" value="ONG">
+                <label for="tipo-ong">
+                  <span class="perfil-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
+                  <span><strong>ONG</strong><small>Receba doações de alimentos</small></span>
+                </label>
+              </fieldset>
+
+              <div class="campo">
+                <label for="criar-nome">Nome completo</label>
+                <input class="entrada" type="text" id="criar-nome" name="nome" placeholder="Digite seu nome completo"
+                  autocomplete="name" minlength="3" maxlength="100" required>
+              </div>
+              <div class="campo">
+                <label for="criar-email">E-mail</label>
+                <input class="entrada" type="email" id="criar-email" name="email" placeholder="exemplo@email.com"
+                  autocomplete="email" maxlength="150" required>
+              </div>
+              <div class="campo">
+                <label for="criar-senha">Senha</label>
+                <div class="senha">
+                  <input class="entrada" type="password" id="criar-senha" name="senha" placeholder="Crie uma senha forte"
+                    autocomplete="new-password" minlength="6" maxlength="72" aria-describedby="ajuda-senha" required>
+                  <button class="senha-ver" type="button" data-ver-senha="criar-senha" aria-label="Mostrar senha" aria-pressed="false"></button>
+                </div>
+                <p class="ajuda" id="ajuda-senha">Use de 6 a 72 caracteres.</p>
+              </div>
+              <div class="campo">
+                <label for="criar-telefone">Telefone <span class="sutil">(opcional)</span></label>
+                <input class="entrada" type="tel" id="criar-telefone" name="telefone" placeholder="(11) 90000-0000"
+                  autocomplete="tel" maxlength="20">
+              </div>
+
+              <button class="btn btn-primario btn-bloco" type="submit">Criar conta</button>
+              <div class="ou">ou</div>
+              <button class="btn btn-contorno btn-bloco" type="button" disabled>
+                Continuar com Google <span class="badge badge-cinza">Em breve</span>
+              </button>
+            </form>
+            <p class="trocar-aba">Já tem conta? <button class="link-botao" type="button" data-ir-para="entrar">Entrar</button></p>
+          </section>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script type="module" src="/js/paginas/login.js"></script>
+</body>
+</html>

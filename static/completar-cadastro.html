@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complete seu cadastro | Refood</title>
+  <meta name="description" content="Cadastre os dados da sua loja ou ONG para usar o Refood.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela nova (não existe no Figma): completar o cadastro da loja ou da ONG.
+       Segue o visual das telas 5.x: fundo creme, cartões brancos e campos .entrada. */
+    .completar { max-width: 880px; padding-block: 48px 24px; display: grid; gap: 28px; }
+    .completar-topo { display: grid; gap: 10px; }
+    .completar-topo p { color: var(--texto-2); max-width: 64ch; }
+    .form-cadastro { display: grid; gap: 20px; }
+    .bloco { display: grid; gap: 18px; }
+    .bloco h2 { font-size: 18px; }
+    .grade-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .grade-endereco { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    .grade-cidade { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
+
+    /* Mapa para posicionar o pino */
+    .por-que { display: flex; gap: 10px; align-items: flex-start; }
+    .mapa-cadastro { height: 340px; min-height: 0; cursor: crosshair; }
+    .mapa-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+    .mapa-acoes .sutil { margin-left: auto; }
+    .pino-cadastro { display: block; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+      background: var(--verde); border: 3px solid var(--branco); box-shadow: var(--sombra); }
+
+    .botoes { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
+
+    @media (max-width: 700px) {
+      .completar { padding-block: 28px 8px; padding-inline: 16px; }
+      .grade-2, .grade-endereco, .grade-cidade { grid-template-columns: 1fr; }
+      .card-pad { padding: 18px; }
+      .mapa-acoes .sutil { margin-left: 0; }
+      .botoes .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container completar">
+    <div class="completar-topo">
+      <span class="rotulo" id="rotulo-etapa">Último passo</span>
+      <h1 id="titulo">Complete o seu cadastro</h1>
+      <p id="subtitulo">Só falta contar um pouco sobre você para começar a usar o Refood.</p>
+    </div>
+
+    <div id="carregando" class="esqueleto" style="height: 520px" aria-label="Carregando"></div>
+    <div id="erro-inicio" class="alerta alerta-erro" role="alert" hidden>
+      <span id="erro-inicio-texto"></span>
+      <button class="btn btn-contorno btn-pequeno" type="button" id="tentar-de-novo">Tentar de novo</button>
+    </div>
+
+    <form id="form-cadastro" class="form-cadastro" hidden>
+      <div class="alerta alerta-erro" role="alert" hidden></div>
+
+      <!-- Dados principais. Os campos com data-so só aparecem para aquele tipo de conta. -->
+      <section class="card card-pad bloco" aria-labelledby="t-dados">
+        <h2 id="t-dados">Dados principais</h2>
+        <div class="campo">
+          <label for="nome" id="rotulo-nome">Nome</label>
+          <input class="entrada" type="text" id="nome" name="nome" minlength="3" maxlength="150" required>
+        </div>
+        <div class="grade-2">
+          <div class="campo" data-so="ESTABELECIMENTO">
+            <label for="tipo">Tipo de estabelecimento</label>
+            <select class="entrada" id="tipo" name="tipo"></select>
+          </div>
+          <div class="campo">
+            <label for="cnpj">CNPJ <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" inputmode="numeric" maxlength="18">
+          </div>
+          <div class="campo">
+            <label for="telefone">Telefone <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="tel" id="telefone" name="telefone" placeholder="(11) 3000-0000" autocomplete="tel" maxlength="20">
+          </div>
+          <div class="campo" data-so="ONG">
+            <label for="responsavel">Responsável pelas retiradas <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="text" id="responsavel" name="responsavel" placeholder="Quem vai buscar as doações" maxlength="100">
+          </div>
+        </div>
+        <div class="campo" data-so="ESTABELECIMENTO">
+          <label for="descricao">Descrição curta <span class="sutil">(opcional)</span></label>
+          <input class="entrada" type="text" id="descricao" name="descricao" placeholder="Ex.: Pães artesanais, doces e salgados do dia"
+            maxlength="255" aria-describedby="ajuda-descricao">
+          <p class="ajuda" id="ajuda-descricao">Aparece embaixo do nome da loja no mapa e na página da loja.</p>
+        </div>
+      </section>
+
+      <section class="card card-pad bloco" data-so="ESTABELECIMENTO" aria-labelledby="t-horario">
+        <h2 id="t-horario">Horário de funcionamento</h2>
+        <div class="grade-2">
+          <div class="campo">
+            <label for="horario_abertura">Abre às <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="time" id="horario_abertura" name="horario_abertura">
+          </div>
+          <div class="campo">
+            <label for="horario_fechamento">Fecha às <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="time" id="horario_fechamento" name="horario_fechamento">
+          </div>
+        </div>
+      </section>
+
+      <section class="card card-pad bloco" aria-labelledby="t-endereco">
+        <h2 id="t-endereco">Endereço</h2>
+        <div class="grade-endereco">
+          <div class="campo">
+            <label for="endereco">Endereço (rua e número)</label>
+            <input class="entrada" type="text" id="endereco" name="endereco" placeholder="Rua dos Pinheiros, 450"
+              autocomplete="street-address" minlength="5" maxlength="200" required>
+          </div>
+          <div class="campo">
+            <label for="bairro">Bairro <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="text" id="bairro" name="bairro" placeholder="Pinheiros" maxlength="100">
+          </div>
+        </div>
+        <div class="grade-cidade">
+          <div class="campo">
+            <label for="cidade">Cidade</label>
+            <input class="entrada" type="text" id="cidade" name="cidade" placeholder="São Paulo"
+              autocomplete="address-level2" minlength="2" maxlength="100" required>
+          </div>
+          <div class="campo">
+            <label for="uf">UF <span class="sutil">(opcional)</span></label>
+            <select class="entrada" id="uf" name="uf"></select>
+          </div>
+          <div class="campo">
+            <label for="cep">CEP <span class="sutil">(opcional)</span></label>
+            <input class="entrada" type="text" id="cep" name="cep" placeholder="00000-000" inputmode="numeric"
+              autocomplete="postal-code" maxlength="10">
+          </div>
+        </div>
+
+        <!-- Localização: latitude e longitude vêm do pino que a pessoa coloca no mapa -->
+        <div class="campo" id="campo-mapa">
+          <span class="label" id="rotulo-mapa">Localização no mapa</span>
+          <p class="alerta alerta-info por-que" id="por-que"></p>
+          <p class="ajuda" id="ajuda-mapa">Clique no mapa (ou arraste o pino) para marcar a porta de entrada.
+            Pelo teclado: mova o mapa com as setas e use o botão "Marcar o centro do mapa".</p>
+          <div id="mapa" class="mapa mapa-cadastro" aria-labelledby="rotulo-mapa" aria-describedby="ajuda-mapa"></div>
+          <div class="mapa-acoes">
+            <button class="btn btn-claro btn-pequeno" type="button" id="usar-localizacao">Usar minha localização</button>
+            <button class="btn btn-contorno btn-pequeno" type="button" id="marcar-centro">Marcar o centro do mapa</button>
+            <span class="sutil" id="coordenadas" aria-live="polite">Nenhum ponto marcado ainda.</span>
+          </div>
+          <input type="hidden" name="latitude" id="latitude">
+          <input type="hidden" name="longitude" id="longitude">
+        </div>
+      </section>
+
+      <div class="botoes">
+        <a class="btn btn-contorno" id="cancelar" href="/index.html" hidden>Cancelar</a>
+        <button class="btn btn-primario" type="submit" id="salvar">Concluir cadastro</button>
+      </div>
+    </form>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="/js/paginas/completar-cadastro.js"></script>
+</body>
+</html>

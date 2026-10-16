@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sacola surpresa | Refood</title>
+  <meta name="description" content="Detalhes da sacola surpresa: preço, conteúdo, horário e local de retirada.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.2 do Figma: Detalhe da Sacola */
+    .detalhe { padding-block: 28px 16px; display: grid; gap: 20px; }
+
+    .trilha ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; color: var(--texto-2); }
+    .trilha li + li::before { content: "/"; margin-right: 8px; color: var(--texto-3); }
+    .trilha a { text-decoration: none; }
+    .trilha a:hover { text-decoration: underline; }
+
+    .detalhe-grade { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+    .detalhe-foto { position: relative; border-radius: var(--raio-xg); overflow: hidden; aspect-ratio: 3 / 2; background: var(--creme-2); }
+    .detalhe-foto img { width: 100%; height: 100%; object-fit: cover; }
+    .detalhe-foto .badge { position: absolute; top: 16px; left: 16px; font-size: 12px; }
+    .detalhe-foto.esgotada img { filter: grayscale(.7); opacity: .8; }
+
+    .detalhe-info { padding: 28px 32px; display: grid; gap: 20px; box-shadow: var(--sombra); }
+    .parceiro { display: flex; align-items: center; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid var(--linha); }
+    .parceiro img { width: 48px; height: 48px; border-radius: var(--raio); object-fit: cover; flex: none; }
+    .parceiro div { flex: 1; min-width: 0; display: grid; gap: 2px; }
+    .parceiro .rotulo { color: var(--texto-3); font-size: 10px; }
+    .parceiro a { font-family: var(--fonte-titulo); font-weight: 700; text-decoration: none; }
+    .parceiro a:hover { text-decoration: underline; }
+    .parceiro-nota { font-size: 14px; color: var(--texto-2); white-space: nowrap; }
+
+    .detalhe-info h1 { font-size: clamp(26px, 3vw, 32px); }
+    .detalhe-info .descricao { color: var(--texto-2); margin-top: 10px; }
+    .precos { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+    .preco-grande { font-family: var(--fonte-titulo); font-weight: 800; font-size: 36px; color: var(--verde); line-height: 1; }
+    .precos .preco-de { font-size: 16px; }
+
+    .infos { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .infos li { display: flex; align-items: center; gap: 14px; }
+    .info-icone { width: 38px; height: 38px; border-radius: var(--raio-p); background: var(--verde-fundo); color: var(--verde);
+      display: grid; place-items: center; flex: none; }
+    .info-icone svg { width: 18px; height: 18px; }
+    .infos small { display: block; font-size: 12px; color: var(--texto-3); }
+    .infos strong { font-weight: 600; }
+
+    .reservar { display: grid; gap: 10px; }
+    .reservar .btn { min-height: 48px; }
+    .reservar .sutil { text-align: center; }
+
+    @media (max-width: 900px) {
+      .detalhe-grade { grid-template-columns: 1fr; gap: 20px; }
+      .detalhe-info { padding: 22px 18px; }
+    }
+    @media (max-width: 640px) {
+      .detalhe { padding-inline: 16px; padding-top: 20px; }
+      .detalhe-foto { aspect-ratio: 4 / 3; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container detalhe" id="pagina-sacola">
+    <nav class="trilha" aria-label="Você está em">
+      <ol>
+        <li><a href="/catalogo.html">Catálogo</a></li>
+        <li aria-current="page" id="trilha-nome">Sacola</li>
+      </ol>
+    </nav>
+
+    <div class="detalhe-grade" id="detalhe">
+      <div class="esqueleto" style="aspect-ratio: 3 / 2"></div>
+      <div class="card detalhe-info">
+        <div class="esqueleto" style="height:48px"></div>
+        <div class="esqueleto" style="height:36px; width:80%"></div>
+        <div class="esqueleto" style="height:60px"></div>
+        <div class="esqueleto" style="height:150px"></div>
+        <div class="esqueleto" style="height:48px"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script type="module" src="/js/paginas/sacola.js"></script>
+</body>
+</html>

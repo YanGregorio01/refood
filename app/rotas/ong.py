@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from app.database import buscar_todos, buscar_um, executar, get_db, inserir
 from app.esquemas import DadosOng, NovaSolicitacao
 from app.seguranca import exigir
-from app.util import atualizar_vencidos, distancia_sql, refeicoes
+from app.util import atualizar_vencidos, distancia_sql, kg_texto, refeicoes
 
 router = APIRouter(prefix="/api/ong", tags=["ONG"])
 usuario_ong = exigir("ONG")
@@ -123,7 +123,7 @@ def solicitar_doacao(dados: NovaSolicitacao, ong=Depends(minha_ong), conn=Depend
         raise HTTPException(422, "Escolha um horário de retirada entre agora e o limite da oferta.")
     if dados.quantidade_kg > oferta["quantidade_kg"]:
         conn.rollback()
-        raise HTTPException(409, f"Esta oferta tem só {oferta['quantidade_kg']} kg disponíveis.")
+        raise HTTPException(409, f"Esta oferta tem só {kg_texto(oferta['quantidade_kg'])} disponíveis.")
 
     executar(conn, "UPDATE ofertas_doacao SET quantidade_kg = quantidade_kg - %s WHERE id_oferta = %s",
              (dados.quantidade_kg, dados.id_oferta))
@@ -139,7 +139,7 @@ CAMPOS_SOLICITACAO = """
     d.id_doacao, d.status, d.quantidade_kg, d.data_retirada, d.observacoes, d.data_solicitacao,
     d.data_resposta, d.data_recebimento, o.id_oferta, o.tipo_alimento,
     e.id_estabelecimento, e.nome AS estabelecimento, e.tipo AS tipo_estabelecimento, e.endereco, e.bairro,
-    e.telefone, e.foto
+    e.cidade, e.uf, e.latitude, e.longitude, e.telefone, e.foto
 """
 JUNCAO_SOLICITACAO = """
     FROM doacoes d
@@ -186,7 +186,8 @@ def minhas_solicitacoes(
         params.append(status_doacao)
     if mes:
         inicio, fim = _intervalo_do_mes(mes)
-        filtro += " AND d.data_retirada >= %s AND d.data_retirada < %s"
+        filtro += (" AND COALESCE(d.data_recebimento, d.data_retirada) >= %s"
+                   " AND COALESCE(d.data_recebimento, d.data_retirada) < %s")
         params += [inicio, fim]
     if busca:
         filtro += " AND (e.nome LIKE %s OR o.tipo_alimento LIKE %s)"

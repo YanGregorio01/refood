@@ -36,7 +36,13 @@ def nome_curto_sql(coluna):
 
 
 def refeicoes(kg):
-    return math.floor(float(kg or 0) / KG_POR_REFEICAO)
+    # round() antes do floor: 1.2 / 0.4 dá 2.9999999999999996 em ponto flutuante
+    return math.floor(round(float(kg or 0) / KG_POR_REFEICAO, 6))
+
+
+def kg_texto(kg):
+    """10.0 -> "10,0 kg" (para mensagens de erro)."""
+    return f"{float(kg):.1f}".replace(".", ",") + " kg"
 
 
 def nivel(kg):

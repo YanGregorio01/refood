@@ -26,6 +26,12 @@ export function distancia(metros) {
 /** "2026-10-16T18:30:00" vira Date (horário local, sem conversão de fuso). */
 export function data(iso) {
   if (!iso) return null;
+  if (/^\d{1,2}:\d{2}/.test(iso)) {
+    // horário solto, como "06:30": vira hoje nesse horário
+    const [h, m] = String(iso).split(":").map(Number);
+    const hoje = new Date();
+    return new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate(), h, m);
+  }
   const [d, t = "00:00:00"] = String(iso).split("T");
   const [ano, mes, dia] = d.split("-").map(Number);
   const [h, m, s] = t.split(":").map(Number);
@@ -77,11 +83,12 @@ export function relativo(iso) {
 
 export function estrelas(nota) {
   const n = Math.round(Number(nota || 0));
-  return `<span class="estrelas" aria-label="${n} de 5 estrelas">${"★".repeat(n)}${"☆".repeat(5 - n)}</span>`;
+  return `<span class="estrelas" role="img" aria-label="${n} de 5 estrelas">${"★".repeat(n)}${"☆".repeat(5 - n)}</span>`;
 }
 
 /** Caminhos de imagem da API são relativos ("img/..."): aqui viram absolutos. */
-export const imagem = (caminho) => (!caminho ? "/img/hero.jpg" : /^(https?:)?\//.test(caminho) ? caminho : `/${caminho}`);
+/** Já sai escapado: pode ir direto num atributo src="...". */
+export const imagem = (caminho) => esc(!caminho ? "/img/hero.jpg" : /^(https?:)?\//.test(caminho) ? caminho : `/${caminho}`);
 
 export const parametros = () => new URLSearchParams(location.search);
 
@@ -169,9 +176,13 @@ export function localizacao() {
       resolve(p);
     };
     if (!navigator.geolocation) return guardar(PADRAO);
+    // Se a pessoa não responder ao pedido de permissão, o navegador nunca
+    // chama de volta; depois de 5 s seguimos com Pinheiros (sem guardar,
+    // para tentar de novo na próxima página).
+    const desistir = setTimeout(() => resolve(PADRAO), 5000);
     navigator.geolocation.getCurrentPosition(
-      (pos) => guardar({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => guardar(PADRAO),
+      (pos) => { clearTimeout(desistir); guardar({ lat: pos.coords.latitude, lng: pos.coords.longitude }); },
+      () => { clearTimeout(desistir); guardar(PADRAO); },
       { timeout: 4000, maximumAge: 600000 },
     );
   });
@@ -251,6 +262,12 @@ export function montarTopo(ativo = "") {
   document.addEventListener("click", (e) => {
     if (lista && !e.target.closest(".menu-conta")) lista.hidden = true;
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lista && !lista.hidden) {
+      lista.hidden = true;
+      botao.focus();
+    }
+  });
   el.querySelector("[data-sair]")?.addEventListener("click", () => sair());
 }
 
@@ -313,7 +330,9 @@ export function montarPainel(conta, ativo, subtitulo = "") {
   document.querySelectorAll("[data-abrir-menu]").forEach((b) => {
     b.innerHTML = ICONES.menu;
     b.setAttribute("aria-label", "Abrir menu");
-    b.addEventListener("click", () => el.classList.toggle("aberta"));
+    if (b.dataset.ligado) return; // já tinha o clique de uma chamada anterior
+    b.dataset.ligado = "1";
+    b.addEventListener("click", () => document.getElementById("lateral").classList.toggle("aberta"));
   });
 }
 
@@ -339,7 +358,7 @@ export function cardSacola(s, { textoBotao = "Reservar" } = {}) {
   const link = `/sacola.html?id=${s.id_alimento}`;
   return `
     <article class="sacola">
-      <a class="sacola-foto" href="${link}" tabindex="-1">
+      <a class="sacola-foto" href="${link}" tabindex="-1" aria-hidden="true">
         <img src="${imagem(s.foto)}" alt="" loading="lazy">
         ${etiquetaSacola(s)}
       </a>

@@ -71,8 +71,19 @@ def inicio(lat: Optional[float] = None, lng: Optional[float] = None,
            usuario=Depends(consumidor), conn=Depends(get_db)):
     """Tela 5.5: ofertas perto de você, seu impacto e lojas onde você já comprou."""
     lat, lng = _ponto(lat, lng)
-    perto = buscar_todos(conn, f"SELECT {CAMPOS_SACOLA} {JUNCAO_SACOLA} WHERE {SACOLA_DISPONIVEL} "
-                               "ORDER BY distancia_m, a.fim_retirada LIMIT 3", (lng, lat))
+    # Uma sacola por loja (a que termina primeiro), dando preferência às de hoje.
+    # ROW_NUMBER() numera as sacolas dentro de cada loja; ficamos com a número 1.
+    perto = buscar_todos(conn, f"""
+        SELECT * FROM (
+            SELECT {CAMPOS_SACOLA},
+                   ROW_NUMBER() OVER (PARTITION BY a.id_estabelecimento
+                                      ORDER BY DATE(a.fim_retirada) > CURDATE(), a.fim_retirada) AS ordem_na_loja
+            {JUNCAO_SACOLA} WHERE {SACOLA_DISPONIVEL}
+        ) sacolas
+        WHERE ordem_na_loja = 1
+        ORDER BY DATE(fim_retirada) > CURDATE(), distancia_m
+        LIMIT 3
+    """, (lng, lat))
     lojas = buscar_todos(conn, f"""
         SELECT e.id_estabelecimento, e.nome, e.descricao, e.foto, e.bairro, COUNT(*) AS compras,
                (SELECT COUNT(*) FROM alimentos a WHERE a.id_estabelecimento = e.id_estabelecimento
@@ -162,12 +173,14 @@ def minhas_reservas(status_reserva: Optional[Literal["PENDENTE", "RETIRADA", "CA
 @router.get("/reservas/{id_reserva}")
 def ver_reserva(id_reserva: int, usuario=Depends(consumidor), conn=Depends(get_db)):
     """Tela 6.4 (Reserva confirmada): o código que o consumidor mostra na loja."""
+    atualizar_vencidos(conn)
     return _reserva_do_usuario(conn, id_reserva, usuario["id_usuario"])
 
 
 @router.post("/reservas/{id_reserva}/cancelar")
 def cancelar_reserva(id_reserva: int, usuario=Depends(consumidor), conn=Depends(get_db)):
     """Cancela e devolve as sacolas para o estoque."""
+    atualizar_vencidos(conn)
     conn.begin()
     reserva = buscar_um(conn, "SELECT id_reserva, id_alimento, quantidade, status FROM reservas "
                               "WHERE id_reserva = %s AND id_usuario = %s FOR UPDATE",

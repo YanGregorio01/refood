@@ -150,7 +150,8 @@ A `conta` (também em `GET /api/auth/eu`):
   "id_usuario": 8, "nome": "Flora Mendes", "email": "padaria@refood.test", "telefone": "...",
   "tipo": "ESTABELECIMENTO", "data_cadastro": "2025-02-01T08:00:00",
   "perfil_completo": true, "id_estabelecimento": 1, "id_ong": null,
-  "organizacao": "Padaria Dona Flor", "pagina_inicial": "/painel/dashboard.html"
+  "organizacao": "Padaria Dona Flor", "bairro": "Pinheiros", "cidade": "São Paulo", "uf": "SP",
+  "pagina_inicial": "/painel/dashboard.html"
 }
 ```
 Depois do login, o front vai para `pagina_inicial`. Comerciante e ONG que ainda
@@ -169,7 +170,7 @@ Aceita `lat`, `lng`.
 ```json
 {
   "nome": "Camila",
-  "perto": ["3 sacolas no formato do catálogo"],
+  "perto": ["até 3 sacolas no formato do catálogo: uma por loja, as de hoje primeiro, da mais perto para a mais longe"],
   "impacto": {
     "kg_salvos": 27.5, "refeicoes": 68, "economia": 446.3, "reservas_concluidas": 12,
     "kg_este_mes": 8.2, "desconto_medio": 64,
@@ -271,8 +272,8 @@ Lê e edita a loja (mesmo corpo do POST).
 }
 ```
 `rascunho: true` = botão "Salvar como rascunho". Opcionais: `validade` (data e
-hora; padrão 23:59 do dia da retirada) e `foto` (caminho; padrão é a foto da
-categoria). Regras: preço Refood ≤ preço original; fim depois do início; para
+hora; padrão 23:59 do dia da retirada) e `foto` (padrão é a foto da categoria;
+se vier, precisa ser uma imagem do site, como `img/categorias/doces.jpg`). Regras: preço Refood ≤ preço original; fim depois do início; para
 publicar, o fim precisa estar no futuro. Desconto recomendado na tela: 50% a 70%.
 
 ### `PUT /api/painel/sacolas/{id}` — editar
@@ -376,12 +377,13 @@ Parâmetros: `raio_km`, `tipo` (tipo da loja), `busca`. A distância é medida a
 tem tantos kg. Resposta 201: a solicitação (formato abaixo).
 
 ### `GET /api/ong/solicitacoes` — tela 6.12 e pedidos em andamento
-Filtros: `status`, `mes` (`2026-09`), `busca` (loja ou tipo de alimento).
+Filtros: `status`, `mes` (`2026-09`; conta a data em que a doação foi recebida ou, se ainda não foi, a data marcada para a retirada, o mesmo critério do resumo), `busca` (loja ou tipo de alimento).
 ```json
 [{"id_doacao": 2, "status": "CONFIRMADA", "quantidade_kg": 5.0, "data_retirada": "...", "observacoes": "...",
   "data_solicitacao": "...", "data_resposta": "...", "data_recebimento": null,
   "id_oferta": 3, "tipo_alimento": "Refeições prontas", "id_estabelecimento": 3, "estabelecimento": "Restaurante Raízes",
-  "tipo_estabelecimento": "RESTAURANTE", "endereco": "...", "bairro": "...", "telefone": "...", "foto": "...", "refeicoes": 12}]
+  "tipo_estabelecimento": "RESTAURANTE", "endereco": "...", "bairro": "...", "cidade": "São Paulo", "uf": "SP",
+  "latitude": -23.5668, "longitude": -46.6852, "telefone": "...", "foto": "...", "refeicoes": 12}]
 ```
 
 ### `POST /api/ong/solicitacoes/{id}/cancelar`

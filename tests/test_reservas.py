@@ -2,6 +2,8 @@
 
 from concurrent.futures import ThreadPoolExecutor
 
+from app.util import refeicoes
+
 
 def reservar(cliente, quem, id_alimento, quantidade=1):
     return cliente.post("/api/reservas", headers=quem,
@@ -104,5 +106,5 @@ def test_painel_mostra_a_reserva_com_nome_curto(cliente, camila, padaria, nova_s
 def test_perfil_do_consumidor(cliente, camila):
     perfil = cliente.get("/api/consumidor/perfil", headers=camila).json()
     impacto = perfil["impacto"]
-    assert impacto["refeicoes"] == int(impacto["kg_salvos"] / 0.4)
+    assert impacto["refeicoes"] == refeicoes(impacto["kg_salvos"])
     assert impacto["nivel"]["nome"] in ("Semente", "Broto", "Raiz Forte", "Floresta")

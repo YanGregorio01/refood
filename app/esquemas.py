@@ -94,6 +94,15 @@ class Sacola(BaseModel):
     foto: Optional[str] = Field(default=None, max_length=255)
     rascunho: bool = False
 
+    @field_validator("foto")
+    @classmethod
+    def validar_foto(cls, v):
+        # Só aceitamos as imagens do próprio site. Um texto livre aqui iria
+        # parar dentro de <img src="..."> no navegador de outras pessoas.
+        if v and not re.fullmatch(r"img/[a-z0-9/_-]+\.(jpg|jpeg|png|webp)", v):
+            raise ValueError("Escolha uma das imagens do Refood (caminho começando com img/).")
+        return v or None
+
     @model_validator(mode="after")
     def conferir_regras(self):
         if self.preco > self.preco_original:

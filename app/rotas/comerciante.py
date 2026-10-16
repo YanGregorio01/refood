@@ -301,6 +301,7 @@ def reservas_da_loja(
 @router.post("/reservas/confirmar-retirada")
 def confirmar_retirada(dados: ConfirmarRetirada, loja=Depends(minha_loja), conn=Depends(get_db)):
     """O comerciante digita o código que o cliente mostra e confirma a entrega."""
+    atualizar_vencidos(conn)
     conn.begin()
     reserva = buscar_um(conn, f"""
         SELECT r.id_reserva, r.status, r.quantidade, r.data_retirada, a.nome AS sacola,

@@ -2,6 +2,8 @@
 
 from datetime import datetime, timedelta
 
+from app.util import refeicoes
+
 
 def daqui(horas):
     return (datetime.now() + timedelta(hours=horas)).replace(microsecond=0).isoformat()
@@ -69,5 +71,5 @@ def test_oferta_encerrada_some_do_mapa(cliente, padaria, ong):
 def test_resumo_da_ong(cliente, ong):
     resumo = cliente.get("/api/ong/resumo", headers=ong, params={"mes": "2026-09"}).json()
     assert resumo["mes"] == "2026-09"
-    assert resumo["refeicoes_estimadas"] == int(resumo["recebido_kg"] / 0.4)
+    assert resumo["refeicoes_estimadas"] == refeicoes(resumo["recebido_kg"])
     assert cliente.get("/api/ong/resumo", headers=ong, params={"mes": "setembro"}).status_code == 422

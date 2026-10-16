@@ -24,10 +24,12 @@ def montar_conta(conn, usuario):
     """Dados da conta que o front guarda depois do login."""
     loja = ong = None
     if usuario["tipo_usuario"] == "ESTABELECIMENTO":
-        loja = buscar_um(conn, "SELECT id_estabelecimento, nome FROM estabelecimentos WHERE id_usuario = %s",
+        loja = buscar_um(conn, "SELECT id_estabelecimento, nome, bairro, cidade, uf FROM estabelecimentos "
+                               "WHERE id_usuario = %s",
                          (usuario["id_usuario"],))
     elif usuario["tipo_usuario"] == "ONG":
-        ong = buscar_um(conn, "SELECT id_ong, nome FROM ongs WHERE id_usuario = %s", (usuario["id_usuario"],))
+        ong = buscar_um(conn, "SELECT id_ong, nome, bairro, cidade, uf FROM ongs WHERE id_usuario = %s",
+                        (usuario["id_usuario"],))
 
     tipo = usuario["tipo_usuario"]
     completo = tipo == "COMUM" or bool(loja or ong)
@@ -42,6 +44,9 @@ def montar_conta(conn, usuario):
         "id_estabelecimento": loja["id_estabelecimento"] if loja else None,
         "id_ong": ong["id_ong"] if ong else None,
         "organizacao": (loja or ong or {}).get("nome"),
+        "bairro": (loja or ong or {}).get("bairro"),
+        "cidade": (loja or ong or {}).get("cidade"),
+        "uf": (loja or ong or {}).get("uf"),
         "pagina_inicial": PAGINA_INICIAL[tipo] if completo else PAGINA_COMPLETAR[tipo],
     }
 

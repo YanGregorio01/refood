@@ -25,6 +25,7 @@ def test_modelo_aprendeu_que_segunda_sobra_mais_que_sabado(cliente, padaria):
 
 def test_nivel_e_refeicoes():
     assert refeicoes(12.4) == 31            # a conta do Figma: 12,4 kg = 31 refeições
+    assert refeicoes(1.2) == 3              # sem o erro de ponto flutuante (1.2 / 0.4 = 2.999...)
     assert nivel(0)["nome"] == "Semente"
     assert nivel(18.6) == {"numero": 3, "nome": "Raiz Forte", "progresso": 24, "falta_kg": 11.4, "proximo": "Floresta"}
     assert nivel(99)["proximo"] is None

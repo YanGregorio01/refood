@@ -1,0 +1,2275 @@
+[
+  {
+    "id": "4:6",
+    "tela": "1.1 Landing Page",
+    "w": 390,
+    "h": 2804,
+    "textos": [
+      "Refood",
+      "Evite o desperdício hoje",
+      "Comida boa não deveria ir para o lixo",
+      "Conectamos negócios com excedente de comida a consumidores conscientes e ONGs. Economize e ajude o planeta.",
+      "Sou consumidor",
+      "Sou comerciante",
+      "Sou ONG",
+      "Nosso Impacto Coletivo",
+      "A revolução já começou",
+      "4.230 kg",
+      "de alimentos salvos do lixo",
+      "1.850",
+      "famílias beneficiadas por ONGs",
+      "R$ 89.400",
+      "economizados pelos consumidores",
+      "Simples & Rápido",
+      "Como funciona?",
+      "1",
+      "Cadastre excedentes",
+      "Comerciantes listam lotes de comida fresca que não foram vendidos no dia por uma fração do preço original.",
+      "2",
+      "Reserve com desconto",
+      "Consumidores encontram ofertas com até 70% de desconto no app e garantem a compra de forma 100% segura.",
+      "3",
+      "Retire no horário",
+      "Retire o pacote direto no estabelecimento parceiro durante o horário agendado de excedentes.",
+      "Comunidade Ativa",
+      "Parceiros de destaque",
+      "Padaria Dona Flor",
+      "Mercado Sabor da Terra",
+      "Pães e Doces",
+      "Hortifruti",
+      "Restaurante Raízes",
+      "Hortifruti Verde Vida",
+      "Refeições",
+      "Orgânicos",
+      "Refood",
+      "Conectando pontas para um consumo mais inteligente, responsável e gerando menos impacto ambiental.",
+      "Links úteis",
+      "Sobre Nós",
+      "Perguntas Frequentes",
+      "Política de Privacidade",
+      "Contato",
+      "Compromisso Global",
+      "ODS 2",
+      "Fome Zero",
+      "ODS 12",
+      "Consumo Resp.",
+      "© 2026 Refood Technologies. Todos os direitos reservados."
+    ],
+    "navegacao": [
+      {
+        "de": "Sou consumidor",
+        "para": "1.5 Login / Cadastro",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sou comerciante",
+        "para": "1.5 Login / Cadastro",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sou ONG",
+        "para": "1.5 Login / Cadastro",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "19:1855",
+    "tela": "1.2 Mapa Interativo",
+    "w": 390,
+    "h": 844,
+    "textos": [
+      "9:41",
+      "▮▮▮ ))) ▰",
+      "Refood",
+      "Explore perto de você",
+      "Pinheiros, São Paulo",
+      "Buscar bairro ou estabelecimento",
+      "500 m",
+      "1 km",
+      "Mercado",
+      "5 km",
+      "Padaria",
+      "Restaurante",
+      "ONG",
+      "Mapa",
+      "Lista",
+      "RESTAURANTE • 350 m",
+      "Restaurante Raízes",
+      "4 sacolas disponíveis",
+      "Ver sacolas",
+      "Início",
+      "Mapa",
+      "Sacolas",
+      "Reservas"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Ver sacolas",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Início",
+        "para": "2.1 Home personalizada do consumidor",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "1.3 Catálogo",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "19:1939",
+    "tela": "1.3 Catálogo",
+    "w": 390,
+    "h": 1951,
+    "textos": [
+      "9:41",
+      "▮▮▮ ))) ▰",
+      "Refood",
+      "Sacolas perto de você",
+      "Salve comida boa e economize",
+      "Buscar sacolas ou lugares",
+      "Alimento",
+      "Distância",
+      "Preço",
+      "Disponível agora",
+      "24 sacolas encontradas",
+      "Mais próximo",
+      "Mais próximo",
+      "Menor preço",
+      "Expira mais cedo",
+      "ÚLTIMAS 2",
+      "Padaria Dona Flor",
+      "450 m",
+      "Sacola surpresa da padaria",
+      "Retirada 18h–19h30",
+      "R$ 32,00",
+      "R$ 11,90",
+      "Reservar",
+      "EXPIRA HOJE",
+      "Mercado Sabor da Terra",
+      "800 m",
+      "Seleção fresca de hortifruti",
+      "Retirada 17h–20h",
+      "R$ 45,00",
+      "R$ 14,90",
+      "Reservar",
+      "3 DISPONÍVEIS",
+      "Restaurante Raízes",
+      "1,2 km",
+      "Refeição brasileira completa",
+      "Retirada 20h–21h",
+      "R$ 39,90",
+      "R$ 15,90",
+      "Reservar",
+      "NOVO",
+      "Hortifruti Verde Vida",
+      "1,8 km",
+      "Cesta de frutas orgânicas",
+      "Retirada até 19h",
+      "R$ 48,00",
+      "R$ 17,50",
+      "Reservar",
+      "Início",
+      "Mapa",
+      "Sacolas",
+      "Reservas"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Reservar",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Reservar",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Reservar",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Reservar",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Início",
+        "para": "2.1 Home personalizada do consumidor",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "1.2 Mapa Interativo",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "26:843",
+    "tela": "1.4 Página do Estabelecimento",
+    "w": 390,
+    "h": 1622,
+    "textos": [
+      "9:41",
+      "▮▮▮ ))) ▰",
+      "★ 4,8 · 32 avaliações",
+      "Restaurante Raízes",
+      "RESTAURANTE • COMIDA BRASILEIRA",
+      "⌖ Rua dos Pinheiros, 824 • Pinheiros, São Paulo",
+      "◷ Aberto hoje • 11h30–22h",
+      "Sacolas disponíveis agora",
+      "Ver todas",
+      "3 DISPONÍVEIS",
+      "Refeição brasileira completa",
+      "◷ Retirada 20h–21h",
+      "R$ 15,90",
+      "Reservar",
+      "ÚLTIMAS 2",
+      "Sacola vegetariana do dia",
+      "◷ Retirada 20h30–21h30",
+      "R$ 13,50",
+      "Reservar",
+      "O que dizem por aqui",
+      "32 avaliações",
+      "Marina Costa",
+      "há 3 dias",
+      "★★★★★",
+      "Comida caseira deliciosa e porção muito bem servida. Retirada rápida e equipe super gentil!",
+      "Rafael Souza",
+      "há 1 semana",
+      "★★★★★",
+      "Ótimo custo-benefício. A sacola veio variada, fresca e muito bem embalada.",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Pedidos",
+      "Perfil"
+    ],
+    "navegacao": [
+      {
+        "de": "Back",
+        "para": "1.3 Catálogo",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Início",
+        "para": "2.1 Home personalizada do consumidor",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "1.2 Mapa Interativo",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "1.3 Catálogo",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "4:171",
+    "tela": "1.5 Login / Cadastro",
+    "w": 390,
+    "h": 1022,
+    "textos": [
+      "9:41",
+      "Refood",
+      "Entrar",
+      "Criar conta",
+      "Seja bem-vindo ao Refood",
+      "Escolha seu perfil e junte-se ao combate ao desperdício.",
+      "Consumidor",
+      "Encontre ofertas perto de você",
+      "Comerciante",
+      "Reduza o desperdício e gere receita",
+      "ONG",
+      "Receba doações de alimentos",
+      "Nome completo",
+      "Digite seu nome completo",
+      "E-mail",
+      "exemplo@email.com",
+      "Senha",
+      "Crie uma senha forte",
+      "Criar conta",
+      "ou",
+      "Continuar com Google",
+      "Já tem conta?",
+      "Entrar"
+    ],
+    "navegacao": [
+      {
+        "de": "back-button-container",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Consumidor",
+        "para": "2.1 Home personalizada do consumidor",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Comerciante",
+        "para": "3.1 Dashboard do Comerciante",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "ONG",
+        "para": "4.1 Mapa de Doações",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Criar conta",
+        "para": "2.1 Home personalizada do consumidor",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Continuar com Google",
+        "para": "2.1 Home personalizada do consumidor",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "26:927",
+    "tela": "2.1 Home personalizada do consumidor",
+    "w": 390,
+    "h": 1421,
+    "textos": [
+      "9:41",
+      "▮▮▮ ))) ▰",
+      "Refood",
+      "Bom dia, Camila! 👋",
+      "Que tal salvar uma refeição hoje?",
+      "Perto de você agora",
+      "Ver mapa",
+      "◷ 01:42:18",
+      "◷ 02:18:40",
+      "Padaria Dona Flor",
+      "Mercado Sabor da Terra",
+      "Sacola surpresa da padaria",
+      "Seleção fresca",
+      "R$ 11,90",
+      "R$ 14,90",
+      "450 m",
+      "450 m",
+      "SEU IMPACTO REFOOD",
+      "Você já salvou 18,6 kg de alimentos",
+      "Isso equivale a 46 refeições aproveitadas 🌱",
+      "Estabelecimentos favoritos",
+      "Ver todos",
+      "Padaria Dona Flor",
+      "Novidade: pães de fermentação natural na sacola de hoje",
+      "Disponível agora",
+      "Restaurante Raízes",
+      "Cardápio novo com opções vegetarianas e sobremesa",
+      "Disponível agora",
+      "Hortifruti Verde Vida",
+      "Cestas orgânicas fresquinhas acabaram de chegar",
+      "Disponível agora",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Pedidos",
+      "Perfil"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Perto de você agora",
+        "para": "1.2 Mapa Interativo",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Estabelecimentos favoritos",
+        "para": "1.3 Catálogo",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Padaria Dona Flor",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Padaria Dona Flor",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Restaurante Raízes",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Hortifruti Verde Vida",
+        "para": "1.4 Página do Estabelecimento",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "1.2 Mapa Interativo",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "1.3 Catálogo",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "35:7",
+    "tela": "3.1 Dashboard do Comerciante",
+    "w": 390,
+    "h": 931,
+    "textos": [
+      "9:41",
+      "Refood Parcerias",
+      "Olá, Padaria Dona Flor! 👋",
+      "Confira as vendas e o impacto de hoje.",
+      "Sacolas Ativas",
+      "Reservas Pendentes",
+      "12",
+      "5",
+      "Vendidas Hoje",
+      "Receita do Mês",
+      "8",
+      "R$ 1.847,00",
+      "Volume de Vendas (Últimos 7 dias)",
+      "Seg",
+      "Ter",
+      "Qua",
+      "Qui",
+      "Sex",
+      "Sáb",
+      "Dom",
+      "Últimas Reservas",
+      "Ver todas",
+      "Lucas Rocha",
+      "L",
+      "Sacola Mista - Doce & Salgado",
+      "Reservado",
+      "Retirada até 19:30",
+      "Mariana Costa",
+      "M",
+      "Sacola Pães artesanais",
+      "Retirado",
+      "Retirado às 18:15",
+      "João Pedro",
+      "J",
+      "Croissants do Dia",
+      "Pendente",
+      "Aguardando confirmação",
+      "Início",
+      "Sacolas",
+      "Pedidos",
+      "Relatórios"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Volume de Vendas (Últimos 7 dias)",
+        "para": "3.4 Relatórios",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Últimas Reservas",
+        "para": "3.3 Gestão de Pedidos",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Ver todas",
+        "para": "3.3 Gestão de Pedidos",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "FAB",
+        "para": "3.2 Cadastrar Sacola",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "3.2 Cadastrar Sacola",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Pedidos",
+        "para": "3.3 Gestão de Pedidos",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Relatórios",
+        "para": "3.4 Relatórios",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "35:112",
+    "tela": "3.2 Cadastrar Sacola",
+    "w": 390,
+    "h": 844,
+    "textos": [
+      "9:41",
+      "Nova Sacola",
+      "1",
+      "Info",
+      "2",
+      "Preço",
+      "3",
+      "Retirada",
+      "Informações da Sacola",
+      "Descreva o lote de alimentos que será disponibilizado hoje.",
+      "Nome da sacola",
+      "Sacola surpresa da padaria",
+      "Categoria",
+      "Pães",
+      "Descrição do conteúdo estimado",
+      "Pães artesanais do dia, croissants e brioches variados.",
+      "Próximo",
+      "Início",
+      "Sacolas",
+      "Pedidos",
+      "Relatórios"
+    ],
+    "navegacao": [
+      {
+        "de": "back-button-container",
+        "para": "3.1 Dashboard do Comerciante",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Início",
+        "para": "3.1 Dashboard do Comerciante",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Pedidos",
+        "para": "3.3 Gestão de Pedidos",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Relatórios",
+        "para": "3.4 Relatórios",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "35:173",
+    "tela": "3.3 Gestão de Pedidos",
+    "w": 390,
+    "h": 865,
+    "textos": [
+      "9:41",
+      "Gestão de Pedidos",
+      "Buscar pelo nome do cliente...",
+      "Todos",
+      "Pendentes",
+      "Confirmados",
+      "Retirados",
+      "C",
+      "Camila Silva",
+      "RESERVADO",
+      "Sacola Mista de Doces",
+      "Hoje, 18h - 19h30",
+      "Confirmar retirada (Escanear QR)",
+      "R",
+      "Rodrigo Melo",
+      "CONFIRMADO",
+      "Pães Artesanais Variados",
+      "Hoje, 18h30 - 20h",
+      "B",
+      "Beatriz Nogueira",
+      "RETIRADO",
+      "Cesta de Hortifrúti",
+      "Hoje, 17h15",
+      "A",
+      "André Santos",
+      "EXPIRADO",
+      "Bolo Inteiro - Festa",
+      "Ontem, 20h",
+      "Início",
+      "Sacolas",
+      "Pedidos",
+      "Relatórios"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "3.1 Dashboard do Comerciante",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "3.2 Cadastrar Sacola",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Relatórios",
+        "para": "3.4 Relatórios",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "35:271",
+    "tela": "3.4 Relatórios",
+    "w": 390,
+    "h": 920,
+    "textos": [
+      "9:41",
+      "Resultados & Impacto",
+      "Últimos 30 dias",
+      "Receita Recuperada (R$)",
+      "Dia 1",
+      "Dia 15",
+      "Dia 30",
+      "Impacto Sustentável",
+      "234 kg salvos",
+      "Evitou a emissão de CO2 equivalente.",
+      "Distribuição por Categoria",
+      "Pães",
+      "40%",
+      "Frutas",
+      "25%",
+      "Verduras",
+      "20%",
+      "Doces",
+      "15%",
+      "Avaliações Recebidas",
+      "4.7 ★",
+      "Clara Mendes",
+      "★★★★★",
+      "Excelente atendimento. Sacola super bem recheada e de muita qualidade!",
+      "Roberto Ramos",
+      "★★★★☆",
+      "Custo-benefício incrível. A retirada foi bem rápida e prática.",
+      "Início",
+      "Sacolas",
+      "Pedidos",
+      "Relatórios"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "3.1 Dashboard do Comerciante",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "3.2 Cadastrar Sacola",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Pedidos",
+        "para": "3.3 Gestão de Pedidos",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "40:6",
+    "tela": "4.1 Mapa de Doações",
+    "w": 390,
+    "h": 844,
+    "textos": [
+      "9:41",
+      "Refood ONG",
+      "Buscar estabelecimentos...",
+      "1 km",
+      "5 km",
+      "Mapa",
+      "Lista",
+      "RESTAURANTE",
+      "• 350 m",
+      "Restaurante Raízes",
+      "~15 kg disponíveis hoje",
+      "Solicitar doação",
+      "Filtrar doações",
+      "Tipo de alimento",
+      "Disponível hoje",
+      "Distância",
+      "Mapa",
+      "Solicitar",
+      "Histórico",
+      "Perfil"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood ONG",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Solicitar doação",
+        "para": "4.2 Solicitar Doação",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Solicitar",
+        "para": "4.2 Solicitar Doação",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Histórico",
+        "para": "4.3 Histórico de Recebimentos",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "40:93",
+    "tela": "4.2 Solicitar Doação",
+    "w": 390,
+    "h": 986,
+    "textos": [
+      "9:41",
+      "Solicitar Doação",
+      "Alimentando vidas",
+      "Os alimentos solicitados serão convertidos em refeições para as famílias cadastradas.",
+      "Estabelecimento parceiro",
+      "Mercado São Jorge",
+      "Alterar",
+      "Av. dos Pinheiros, 1420 - Pinheiros",
+      "Tipo de alimento desejado",
+      "Pães",
+      "Frutas",
+      "Verduras",
+      "Laticínios",
+      "Misto",
+      "Data preferencial para retirada",
+      "26 de Setembro de 2026",
+      "Horário para retirada",
+      "14:00 - 16:00",
+      "Observações / Necessidades",
+      "Ex: Precisamos de alimentos para 50 famílias. Daremos preferência a hortifrúti fresco e pães...",
+      "Enviar solicitação",
+      "Mapa",
+      "Solicitar",
+      "Histórico",
+      "Perfil"
+    ],
+    "navegacao": [
+      {
+        "de": "back-button-container",
+        "para": "4.1 Mapa de Doações",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Alterar",
+        "para": "4.1 Mapa de Doações",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Enviar solicitação",
+        "para": "4.3 Histórico de Recebimentos",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "4.1 Mapa de Doações",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Histórico",
+        "para": "4.3 Histórico de Recebimentos",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "40:167",
+    "tela": "4.3 Histórico de Recebimentos",
+    "w": 390,
+    "h": 1033,
+    "textos": [
+      "9:41",
+      "Histórico",
+      "Suas conquistas",
+      "Últimos 30 dias",
+      "187 kg",
+      "23",
+      "8",
+      "Total recebido",
+      "Doações",
+      "Parceiros",
+      "Recebimentos Recentes",
+      "Padaria Dona Flor",
+      "12 kg",
+      "25 Set 2026",
+      "Pães",
+      "Confirmado",
+      "Mercado Sabor da Terra",
+      "24 kg",
+      "24 Set 2026",
+      "Frutas",
+      "Confirmado",
+      "Hortifruti Verde Vida",
+      "15 kg",
+      "22 Set 2026",
+      "Verduras",
+      "Confirmado",
+      "Supermercado São Jorge",
+      "8 kg",
+      "18 Set 2026",
+      "Laticínios",
+      "Confirmado",
+      "Restaurante Raízes",
+      "18 kg",
+      "15 Set 2026",
+      "Misto",
+      "Confirmado",
+      "Padaria Bella Vista",
+      "10 kg",
+      "12 Set 2026",
+      "Pães",
+      "Confirmado",
+      "Mapa",
+      "Solicitar",
+      "Histórico",
+      "Perfil"
+    ],
+    "navegacao": [
+      {
+        "de": "Mapa",
+        "para": "4.1 Mapa de Doações",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Solicitar",
+        "para": "4.2 Solicitar Doação",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:7",
+    "tela": "5.1 Landing Page Desktop",
+    "w": 1440,
+    "h": 2384,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Entrar / Cadastrar",
+      "Evite o desperdício de alimentos hoje",
+      "Comida boa não deveria ir para o lixo",
+      "Conectamos negócios de alimentação com excedente de produção a consumidores conscientes em busca de descontos imperdíveis e ONGs que apoiam famílias vulneráveis.",
+      "Sou consumidor",
+      "Sou comerciante",
+      "Sou ONG",
+      "Economize até 70% em sacolas surpresas deliciosas.",
+      "Venda seu excedente diário e recupere custos.",
+      "Receba doações e auxilie quem mais precisa.",
+      "Nosso Impacto Coletivo",
+      "A revolução sustentável já começou",
+      "4.230 kg",
+      "1.850",
+      "R$ 89.400",
+      "de alimentos de qualidade salvos do lixo",
+      "famílias paulistanas beneficiadas por doações",
+      "economizados diretamente pelos consumidores",
+      "Simples & Rápido",
+      "Como funciona a nossa rede?",
+      "1",
+      "2",
+      "3",
+      "Cadastre excedentes",
+      "Reserve com desconto",
+      "Retire no local",
+      "Comerciantes listam lotes de comida fresca não vendida por uma fração do preço original.",
+      "Consumidores encontram ofertas excelentes de até 70% off e garantem a compra segura no app.",
+      "Retire o pacote direto no estabelecimento parceiro durante o horário agendado.",
+      "Comunidade Ativa",
+      "Parceiros de Destaque",
+      "Padaria Dona Flor",
+      "Mercado Sabor da Terra",
+      "Restaurante Raízes",
+      "Hortifruti Verde Vida",
+      "Pães e Doces",
+      "Hortifruti",
+      "Refeições",
+      "Orgânicos",
+      "Refood",
+      "Links úteis",
+      "Compromisso Global",
+      "Sobre Nós",
+      "Atuamos diretamente nos Objetivos de Desenvolvimento Sustentável da ONU para 2030.",
+      "Conectando pontas para um consumo mais inteligente, responsável e gerando menos impacto ambiental no Brasil.",
+      "Perguntas Frequentes",
+      "Política de Privacidade",
+      "Contato",
+      "ODS 2",
+      "Fome Zero",
+      "ODS 12",
+      "Consumo Resp.",
+      "© 2026 Refood Technologies. Todos os direitos reservados. Feito com amor para combater o desperdício."
+    ],
+    "navegacao": [
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Entrar / Cadastrar",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sou consumidor",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sou comerciante",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sou ONG",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:156",
+    "tela": "5.2 Login / Cadastro Desktop",
+    "w": 1440,
+    "h": 1201,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Entrar / Cadastrar",
+      "Salvar comida é um ato de amor",
+      "Entrar",
+      "Criar conta",
+      "Faça parte de uma comunidade que transforma desperdício em oportunidade e sustento.",
+      "Seja bem-vindo ao Refood",
+      "Escolha seu perfil e junte-se ao combate ao desperdício.",
+      "Consumidor",
+      "Comerciante",
+      "ONG",
+      "Nome completo",
+      "Digite seu nome completo",
+      "E-mail",
+      "exemplo@email.com",
+      "Senha",
+      "Crie uma senha forte",
+      "Criar conta",
+      "ou",
+      "Continuar com Google",
+      "Já tem conta?",
+      "Entrar",
+      "Refood",
+      "Links úteis",
+      "Compromisso Global",
+      "Sobre Nós",
+      "Atuamos diretamente nos Objetivos de Desenvolvimento Sustentável da ONU para 2030.",
+      "Conectando pontas para um consumo mais inteligente, responsável e gerando menos impacto ambiental no Brasil.",
+      "Perguntas Frequentes",
+      "Política de Privacidade",
+      "Contato",
+      "ODS 2",
+      "Fome Zero",
+      "ODS 12",
+      "Consumo Resp.",
+      "© 2026 Refood Technologies. Todos os direitos reservados. Feito com amor para combater o desperdício."
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Consumidor",
+        "para": "5.5 Home Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Comerciante",
+        "para": "5.6 Dashboard Comerciante Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "ONG",
+        "para": "6.10 Mapa de Doações Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:262",
+    "tela": "5.3 Mapa Interativo Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Entrar / Cadastrar",
+      "Estabelecimento Selecionado",
+      "Mapa",
+      "Lista",
+      "Buscar bairro, mercado, padaria...",
+      "500m",
+      "1km",
+      "5km",
+      "Mercado",
+      "Padaria",
+      "Restaurante",
+      "ONG",
+      "PADARIA • 450 m",
+      "⭐ 4.8 (120 avaliações)",
+      "Padaria Dona Flor",
+      "Rua dos Pinheiros, 450 - Pinheiros, São Paulo",
+      "3 sacolas disponíveis agora",
+      "Retirada recomendada hoje entre 18:00h e 19:30h.",
+      "Ver sacolas"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Entrar / Cadastrar",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Ver sacolas",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:348",
+    "tela": "5.4 Catálogo Desktop",
+    "w": 1440,
+    "h": 1597,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Entrar / Cadastrar",
+      "Alimentos",
+      "Distância",
+      "Preço",
+      "Disponível agora",
+      "Buscar sacolas...",
+      "Mais próximo",
+      "24 sacolas encontradas em São Paulo",
+      "ÚLTIMAS 2",
+      "EXPIRA HOJE",
+      "3 DISPONÍVEIS",
+      "Padaria Dona Flor",
+      "450 m",
+      "Mercado Sabor da Terra",
+      "800 m",
+      "Restaurante Raízes",
+      "1,2 km",
+      "Sacola surpresa da padaria",
+      "Seleção fresca de hortifruti",
+      "Refeição brasileira completa",
+      "Retirada 18h - 19h30",
+      "Retirada 17h - 20h",
+      "Retirada 20h - 21h",
+      "R$ 32,00",
+      "R$ 45,00",
+      "R$ 39,90",
+      "R$ 11,90",
+      "Reservar",
+      "R$ 14,90",
+      "Reservar",
+      "R$ 15,90",
+      "Reservar",
+      "NOVO",
+      "2 DISPONÍVEIS",
+      "Hortifruti Verde Vida",
+      "1,8 km",
+      "Sabor & Cia Mercearia",
+      "2,1 km",
+      "Supermercado Econômico",
+      "3,0 km",
+      "Cesta de frutas orgânicas",
+      "Kit laticínios artesanal",
+      "Super sacola mercearia básica",
+      "Retirada até 19h",
+      "Retirada 16h - 18h",
+      "Retirada 19h - 21h",
+      "R$ 48,00",
+      "R$ 55,00",
+      "R$ 60,00",
+      "R$ 17,50",
+      "Reservar",
+      "R$ 19,90",
+      "Reservar",
+      "R$ 21,90",
+      "Reservar",
+      "Carregar mais sacolas",
+      "Refood",
+      "Links úteis",
+      "Compromisso Global",
+      "Sobre Nós",
+      "Atuamos diretamente nos Objetivos de Desenvolvimento Sustentável da ONU para 2030.",
+      "Conectando pontas para um consumo mais inteligente, responsável e gerando menos impacto ambiental no Brasil.",
+      "Perguntas Frequentes",
+      "Política de Privacidade",
+      "Contato",
+      "ODS 2",
+      "Fome Zero",
+      "ODS 12",
+      "Consumo Resp.",
+      "© 2026 Refood Technologies. Todos os direitos reservados. Feito com amor para combater o desperdício."
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Entrar / Cadastrar",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Reservar",
+        "para": "6.2 Detalhe da Sacola Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "3 DISPONÍVEIS",
+        "para": "5.7 Página do Estabelecimento Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:568",
+    "tela": "5.5 Home Consumidor Desktop",
+    "w": 1440,
+    "h": 1000,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Bom dia, Camila! 👋",
+      "Que tal salvar uma refeição e fazer o bem hoje?",
+      "Perto de você agora",
+      "Ver todos no mapa →",
+      "Seu Impacto Coletivo",
+      "⏱ 01:42:19",
+      "⏱ 02:18:40",
+      "⏱ 00:54:12",
+      "Você já salvou 18,6 kg de alimentos! 🌱",
+      "Isso equivale a cerca de 46 refeições completas aproveitadas e menos CO₂ na atmosfera.",
+      "Nível 3: Defensor da Terra",
+      "80%",
+      "Padaria Dona Flor",
+      "450 m",
+      "Hortifruti Verde Vida",
+      "820 m",
+      "Café Mineiro",
+      "1.1 km",
+      "Sacola Surpresa de Doces",
+      "Sacola Mista Orgânica M",
+      "Combo Pão de Queijo + Bolo",
+      "R$ 12,90",
+      "R$ 15,90",
+      "R$ 38,00",
+      "Garantir",
+      "R$ 45,00",
+      "Garantir",
+      "R$ 10,00",
+      "R$ 28,00",
+      "Garantir",
+      "Seus estabelecimentos favoritos",
+      "Gerenciar favoritos",
+      "Hortifruti Verde Vida",
+      "Disponível agora",
+      "Cestas orgânicas frescas com legumes da época acabaram de chegar!",
+      "Padaria Dona Flor",
+      "Últimas sacolas",
+      "Novidade: pães de fermentação natural integrados na sacola de hoje.",
+      "Restaurante Raízes",
+      "Esgotado hoje",
+      "Refeições brasileiras quentes embaladas prontas para retirada no fim do dia."
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Área do Cliente",
+        "para": "6.6 Perfil do Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "arrow-btn",
+        "para": "6.2 Detalhe da Sacola Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "arrow-btn",
+        "para": "5.7 Página do Estabelecimento Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:692",
+    "tela": "5.6 Dashboard Comerciante Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood Parcerias",
+      "Olá, Padaria Dona Flor! 👋",
+      "Hoje, 24 de Janeiro",
+      "Aqui está o desempenho das suas sacolas e o impacto de hoje.",
+      "Dashboard",
+      "Sacolas Ativas",
+      "Reservas Pendentes",
+      "Vendidas Hoje",
+      "Receita do Mês",
+      "Sacolas",
+      "12",
+      "5",
+      "8",
+      "R$ 1.847,00",
+      "Pedidos",
+      "Relatórios",
+      "Volume de Vendas (Últimos 7 dias)",
+      "Últimas Reservas",
+      "Ver todas",
+      "Lucas Rocha",
+      "Sacola Mista - Doce & Salgado",
+      "Reservado",
+      "Retirada até 19:30",
+      "Mariana Costa",
+      "Sacola Pães Artesanais",
+      "Retirado",
+      "Retirado às 18:15",
+      "Seg",
+      "Ter",
+      "Qua",
+      "Qui",
+      "Sex",
+      "Sáb",
+      "Dom",
+      "João Pedro",
+      "Croissants do Dia x2",
+      "Pendente",
+      "Aguardando confirmação",
+      "Padaria Dona Flor",
+      "Florianópolis, SC",
+      "Cadastrar nova sacola",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "6.7 Cadastrar Sacola Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Pedidos",
+        "para": "6.8 Gestão de Pedidos Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Relatórios",
+        "para": "6.9 Relatórios Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Cadastrar nova sacola",
+        "para": "6.7 Cadastrar Sacola Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "51:799",
+    "tela": "5.7 Página do Estabelecimento Desktop",
+    "w": 1440,
+    "h": 1049,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Restaurante Raízes",
+      "★ 4.8 · 32 avaliações",
+      "RESTAURANTE • COMIDA BRASILEIRA • ALMOÇO & JANTA",
+      "⌖ Rua dos Pinheiros, 824 • Pinheiros, São Paulo",
+      "◷ Aberto hoje • 11h30–22h",
+      "Sacolas disponíveis agora",
+      "O que dizem por aqui",
+      "Sacola Refeição Completa Individual",
+      "3 DISPONÍVEIS",
+      "Marina Costa",
+      "★★★★★",
+      "há 3 dias",
+      "⏱ Retirada 20h–21h",
+      "Comida caseira deliciosa e porção muito bem servida. Retirada rápida e equipe super gentil!",
+      "R$ 48,00",
+      "R$ 15,90",
+      "Reservar",
+      "Rafael Souza",
+      "★★★★★",
+      "há 1 semana",
+      "Ótimo custo-benefício. A sacola veio bem variada, fresca e super organizada na embalagem.",
+      "Sacola Caldos & Sopas do Dia",
+      "ÚLTIMAS 2",
+      "⏱ Retirada 20h30–21h30",
+      "R$ 39,00",
+      "R$ 13,50",
+      "Reservar",
+      "Localização no mapa"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Área do Cliente",
+        "para": "6.6 Perfil do Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9233",
+    "tela": "6.1 Seletor de apresentação",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Entrar / Cadastrar",
+      "BEM-VINDO AO PROTÓTIPO REFOOD",
+      "Como você quer explorar a experiência?",
+      "Escolha o formato ideal para conhecer a rede que transforma excedentes em economia, impacto e novas refeições.",
+      "Mobile",
+      "Desktop",
+      "Jornada compacta para descobrir ofertas, reservar sacolas e acompanhar retiradas pelo celular.",
+      "Experiência ampliada para consumidores, comerciantes e ONGs gerenciarem toda a operação.",
+      "390 × 844 • navegação por toque",
+      "1440 × 900 • visão completa",
+      "Você poderá alternar entre os formatos a qualquer momento."
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Entrar / Cadastrar",
+        "para": "5.2 Login / Cadastro Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Avançar",
+        "para": "1.1 Landing Page",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Avançar",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9295",
+    "tela": "6.2 Detalhe da Sacola Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Catálogo",
+      "/",
+      "Sacola surpresa da padaria",
+      "ÚLTIMAS 2",
+      "ESTABELECIMENTO PARCEIRO",
+      "★ 4,8",
+      "Padaria Dona Flor →",
+      "Sacola surpresa da padaria",
+      "Uma seleção especial de pães artesanais, doces e salgados frescos preparados no dia.",
+      "R$ 11,90",
+      "R$ 32,00",
+      "63% OFF",
+      "Conteúdo estimado",
+      "4 a 6 itens • aproximadamente 1,2 kg",
+      "Horário de retirada",
+      "Hoje, entre 18h e 19h30",
+      "Local de retirada",
+      "Rua dos Pinheiros, 450 • 450 m",
+      "Alta procura: 7 pessoas visualizaram esta sacola nos últimos minutos.",
+      "Reservar agora"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Área do Cliente",
+        "para": "6.6 Perfil do Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Reservar agora",
+        "para": "6.3 Checkout Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9370",
+    "tela": "6.3 Checkout Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Finalizar reserva",
+      "Revise os detalhes e escolha a forma de pagamento.",
+      "Seu pedido",
+      "1 ITEM",
+      "Resumo",
+      "Padaria Dona Flor",
+      "Sacola",
+      "R$ 11,90",
+      "Sacola surpresa da padaria",
+      "R$ 11,90",
+      "Taxa de serviço",
+      "R$ 1,49",
+      "Hoje • 18h às 19h30",
+      "Rua dos Pinheiros, 450 • Pinheiros",
+      "Desconto sustentável",
+      "− R$ 1,49",
+      "R$ 11,90",
+      "Total",
+      "Forma de pagamento",
+      "Você economiza R$ 20,10 e ajuda a salvar cerca de 1,2 kg de alimento.",
+      "Cartão de crédito",
+      "Visa final 4821 • pagamento seguro",
+      "Confirmar reserva",
+      "Pix",
+      "Aprovação imediata pelo QR Code",
+      "Ao confirmar, você concorda com os termos de reserva e retirada.",
+      "Seus dados são protegidos e criptografados."
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Área do Cliente",
+        "para": "6.6 Perfil do Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Confirmar reserva",
+        "para": "6.4 Reserva Confirmada Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9447",
+    "tela": "6.4 Reserva Confirmada Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Código para retirada",
+      "ATIVO",
+      "Reserva confirmada!",
+      "Sua sacola está garantida. Apresente o QR Code no estabelecimento durante a retirada.",
+      "RESERVA #RF-24098",
+      "Sacola",
+      "Sacola surpresa da padaria",
+      "Mostre este código à equipe do estabelecimento. Ele será lido para confirmar sua retirada.",
+      "Estabelecimento",
+      "Padaria Dona Flor",
+      "Total pago",
+      "R$ 11,90",
+      "Padaria Dona Flor",
+      "Retirada hoje, entre 18h e 19h30.",
+      "Rua dos Pinheiros, 450 • Pinheiros, São Paulo",
+      "Acessar meus pedidos"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Área do Cliente",
+        "para": "6.6 Perfil do Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Acessar meus pedidos",
+        "para": "6.5 Meus Pedidos Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9592",
+    "tela": "6.5 Meus Pedidos Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Meus pedidos",
+      "Acompanhe suas reservas e o histórico de retiradas.",
+      "Todos",
+      "Reservados",
+      "Retirados",
+      "Expirados",
+      "Próxima retirada",
+      "Sacola surpresa da padaria",
+      "RESERVADO",
+      "HOJE",
+      "R$ 11,90",
+      "Padaria Dona Flor",
+      "Ver detalhes →",
+      "Hoje • retirada entre 18h e 19h30",
+      "Cesta de frutas orgânicas",
+      "RETIRADO",
+      "R$ 17,50",
+      "Hortifruti Verde Vida",
+      "Avaliar pedido →",
+      "22 set 2026 • retirado às 18h42",
+      "#RF-24098",
+      "Sacola surpresa da padaria",
+      "Refeição brasileira completa",
+      "EXPIRADO",
+      "R$ 15,90",
+      "Padaria Dona Flor",
+      "Restaurante Raízes",
+      "Hoje • 18h às 19h30",
+      "Reservar novamente",
+      "18 set 2026 • retirada não realizada",
+      "Ver reserva completa",
+      "Kit laticínios artesanal",
+      "RETIRADO",
+      "R$ 19,90",
+      "Sabor & Cia Mercearia",
+      "Avaliar pedido →",
+      "12 set 2026 • retirado às 17h18"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Área do Cliente",
+        "para": "6.6 Perfil do Consumidor Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9780",
+    "tela": "6.6 Perfil do Consumidor Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood",
+      "Início",
+      "Mapa",
+      "Catálogo",
+      "Sobre",
+      "Área do Cliente",
+      "Meu perfil",
+      "Editar perfil",
+      "Gerencie seus dados, preferências e acompanhe seu impacto.",
+      "Camila Ferreira",
+      "Alimentos salvos",
+      "Refeições aproveitadas",
+      "Economia total",
+      "18,6 kg",
+      "46",
+      "R$ 284,70",
+      "camila.ferreira@email.com",
+      "DEFENSORA DA TERRA",
+      "+3,2 kg este mês",
+      "12 reservas concluídas",
+      "64% abaixo do original",
+      "Membro desde março de 2025 • São Paulo, SP",
+      "Conta e preferências",
+      "Seu próximo nível",
+      "80%",
+      "Defensora da Terra",
+      "Endereços",
+      "PRINCIPAL",
+      "Casa • Rua Artur de Azevedo, 640",
+      "Salve mais 4,4 kg para alcançar o nível Guardiã do Planeta.",
+      "Notificações",
+      "ATIVAS",
+      "Ofertas próximas, lembretes e novidades",
+      "Precisa de ajuda?",
+      "Consulte as perguntas frequentes ou fale com o time Refood.",
+      "Favoritos",
+      "6 estabelecimentos salvos",
+      "Central de ajuda",
+      "Formas de pagamento",
+      "Visa final 4821 • Pix habilitado"
+    ],
+    "navegacao": [
+      {
+        "de": "Início",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa",
+        "para": "5.3 Mapa Interativo Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Catálogo",
+        "para": "5.4 Catálogo Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9875",
+    "tela": "6.7 Cadastrar Sacola Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood Parcerias",
+      "Cadastrar nova sacola",
+      "Preencha as informações para publicar uma nova oferta.",
+      "Dashboard",
+      "Informações",
+      "2",
+      "Preço e quantidade",
+      "3",
+      "Disponibilidade",
+      "Sacolas",
+      "Pedidos",
+      "1. Informações",
+      "CONCLUÍDO",
+      "Resumo da publicação",
+      "Relatórios",
+      "Nome da sacola",
+      "Categoria",
+      "Sacola Mista — Doce & Salgado",
+      "Padaria e confeitaria ▾",
+      "Conteúdo estimado",
+      "Adicionar foto da sacola",
+      "Pães artesanais, salgados assados e doces do dia",
+      "Sacola Mista — Doce & Salgado",
+      "R$ 12,90",
+      "2. Preço e quantidade",
+      "Hoje • 18h às 19h30",
+      "Preço original",
+      "Preço Refood",
+      "Quantidade",
+      "8 sacolas disponíveis",
+      "R$ 38,00",
+      "R$ 12,90",
+      "8 sacolas",
+      "Publicar sacola",
+      "Desconto de 66% • dentro da faixa recomendada",
+      "Salvar como rascunho",
+      "3. Disponibilidade",
+      "Data",
+      "Início da retirada",
+      "Fim da retirada",
+      "Hoje, 28 set 2026 ▾",
+      "18:00",
+      "19:30",
+      "Padaria Dona Flor",
+      "São Paulo, SP",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Dashboard",
+        "para": "5.6 Dashboard Comerciante Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Pedidos",
+        "para": "6.8 Gestão de Pedidos Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Relatórios",
+        "para": "6.9 Relatórios Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:9994",
+    "tela": "6.8 Gestão de Pedidos Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood Parcerias",
+      "Gestão de pedidos",
+      "Histórico de pedidos",
+      "Acompanhe reservas ativas e confirme as retiradas do dia.",
+      "Dashboard",
+      "5",
+      "aguardando retirada",
+      "8",
+      "retirados hoje",
+      "R$ 186,40",
+      "em reservas",
+      "Sacolas",
+      "Pedidos",
+      "Reservas ativas",
+      "Mais recentes ▾",
+      "Ler QR Code",
+      "CÂMERA ATIVA",
+      "Relatórios",
+      "Lucas Rocha",
+      "Sacola Mista — Doce & Salgado",
+      "AGUARDANDO",
+      "Confirmar retirada",
+      "Hoje • 18h às 19h30 • #RF-24098",
+      "Mariana Costa",
+      "Sacola Pães Artesanais",
+      "RESERVADO",
+      "Confirmar retirada",
+      "Hoje • 18h30 às 20h • #RF-24087",
+      "João Pedro",
+      "Croissants do Dia ×2",
+      "RESERVADO",
+      "Confirmar retirada",
+      "Hoje • 19h às 20h • #RF-24076",
+      "Posicione o código do consumidor dentro da área destacada.",
+      "Ana Beatriz",
+      "Sacola Doces do Dia",
+      "RESERVADO",
+      "Confirmar retirada",
+      "Hoje • 19h30 às 20h30 • #RF-24071",
+      "Inserir código manualmente",
+      "Padaria Dona Flor",
+      "São Paulo, SP",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Dashboard",
+        "para": "5.6 Dashboard Comerciante Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "6.7 Cadastrar Sacola Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Relatórios",
+        "para": "6.9 Relatórios Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:10193",
+    "tela": "6.9 Relatórios Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood Parcerias",
+      "Relatórios",
+      "Exportar relatório",
+      "Resultados da Padaria Dona Flor nos últimos 30 dias.",
+      "Dashboard",
+      "Receita nos últimos 30 dias",
+      "Alimentos não desperdiçados",
+      "Sacolas vendidas",
+      "Nota média",
+      "Sacolas",
+      "R$ 6.482,90",
+      "186,4 kg",
+      "328",
+      "4,8 ★",
+      "↑ 18,4% vs. período anterior",
+      "equivale a 466 refeições",
+      "94% de aproveitamento",
+      "124 avaliações",
+      "Pedidos",
+      "Relatórios",
+      "Receita diária",
+      "ÚLTIMOS 30 DIAS",
+      "Vendas por categoria",
+      "Pães",
+      "42%",
+      "Doces",
+      "26%",
+      "Salgados",
+      "20%",
+      "Outros",
+      "12%",
+      "1",
+      "4",
+      "7",
+      "10",
+      "Avaliações recentes",
+      "Ver todas",
+      "Marina Costa",
+      "★★★★★",
+      "Rafael Souza",
+      "★★★★★",
+      "Bianca Lima",
+      "★★★★★",
+      "há 3 dias",
+      "há 5 dias",
+      "há 1 semana",
+      "Pães frescos, ótima variedade e atendimento muito gentil na retirada.",
+      "A sacola veio bem recheada e tudo estava delicioso. Voltarei com certeza!",
+      "Reserva rápida e retirada organizada. Excelente iniciativa contra o desperdício.",
+      "Padaria Dona Flor",
+      "São Paulo, SP",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Dashboard",
+        "para": "5.6 Dashboard Comerciante Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Sacolas",
+        "para": "6.7 Cadastrar Sacola Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Pedidos",
+        "para": "6.8 Gestão de Pedidos Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:10339",
+    "tela": "6.10 Mapa de Doações Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Doações disponíveis",
+      "Refood Parcerias",
+      "Buscar parceiro ou bairro...",
+      "5 km ▾",
+      "Somente estabelecimentos parceiros com doações ativas.",
+      "Filtros",
+      "Mapa de doações",
+      "Mercados",
+      "Padarias",
+      "Restaurantes",
+      "Tipo: Todos ▾",
+      "Hoje",
+      "Até 5 km ▾",
+      "Solicitações",
+      "7 parceiros encontrados",
+      "Recebimentos",
+      "Relatórios",
+      "HORTIFRUTI • 1,2 KM",
+      "★ 4,9",
+      "Mercado Sabor da Terra",
+      "Rua Fradique Coutinho, 328 • Pinheiros",
+      "12 kg disponíveis hoje",
+      "Frutas, legumes e verduras",
+      "Solicitar doação",
+      "Mercado Sabor da Terra",
+      "12 kg • disponível hoje",
+      "Instituto Mesa Cheia",
+      "São Paulo, SP",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Solicitações",
+        "para": "6.11 Solicitar Doação Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Recebimentos",
+        "para": "6.12 Histórico de Recebimentos Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Solicitar doação",
+        "para": "6.11 Solicitar Doação Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:10436",
+    "tela": "6.11 Solicitar Doação Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood Parcerias",
+      "Solicitar doação",
+      "Agende a retirada diretamente com um estabelecimento parceiro.",
+      "Mapa de doações",
+      "Dados da solicitação",
+      "Resumo",
+      "Solicitações",
+      "HOJE",
+      "Recebimentos",
+      "ESTABELECIMENTO SELECIONADO",
+      "Mercado Sabor da Terra",
+      "Trocar",
+      "Até 30 refeições",
+      "Rua Fradique Coutinho, 328 • 1,2 km",
+      "Relatórios",
+      "poderão ser preparadas com esta doação.",
+      "Tipo de alimento",
+      "Quantidade disponível",
+      "Frutas, legumes e verduras ▾",
+      "Até 12 kg",
+      "Parceiro",
+      "Mercado Sabor da Terra",
+      "Alimentos",
+      "Hortifruti",
+      "Data da retirada",
+      "Horário preferencial",
+      "Data e hora",
+      "Hoje • 15h30",
+      "Hoje, 28 set 2026 ▾",
+      "15:30 ▾",
+      "Distância",
+      "1,2 km",
+      "Observações",
+      "O estabelecimento terá até 30 minutos para confirmar a solicitação.",
+      "Nossa equipe irá com veículo refrigerado. Podemos retirar caixas retornáveis e realizar a pesagem no local.",
+      "Enviar solicitação",
+      "Contato da ONG: (11) 98234-7710 • retirada por Juliana Martins",
+      "Instituto Mesa Cheia",
+      "São Paulo, SP",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa de doações",
+        "para": "6.10 Mapa de Doações Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Recebimentos",
+        "para": "6.12 Histórico de Recebimentos Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  },
+  {
+    "id": "59:10533",
+    "tela": "6.12 Histórico de Recebimentos Desktop",
+    "w": 1440,
+    "h": 900,
+    "textos": [
+      "Refood Parcerias",
+      "Histórico de recebimentos",
+      "Exportar relatório",
+      "Acompanhe as doações recebidas e o impacto gerado pela sua organização.",
+      "Mapa de doações",
+      "Recebido este mês",
+      "Doações concluídas",
+      "Refeições estimadas",
+      "Solicitações",
+      "284,6 kg",
+      "32",
+      "711",
+      "↑ 12% vs. agosto",
+      "de 14 parceiros",
+      "impacto em setembro",
+      "Recebimentos",
+      "Relatórios",
+      "Buscar estabelecimento...",
+      "Período: Setembro ▾",
+      "Tipo: Todos ▾",
+      "Status: Recebido ▾",
+      "Limpar",
+      "Setembro de 2026",
+      "8 recebimentos • 96,8 kg",
+      "Mercado Sabor da Terra",
+      "RECEBIDO",
+      "TIPO",
+      "QUANTIDADE",
+      "IMPACTO",
+      "Hortifruti",
+      "12,4 kg",
+      "28 set 2026 • 15h47",
+      "31 refeições",
+      "Padaria Dona Flor",
+      "RECEBIDO",
+      "TIPO",
+      "QUANTIDADE",
+      "IMPACTO",
+      "Pães e doces",
+      "8,2 kg",
+      "25 set 2026 • 19h12",
+      "20 refeições",
+      "Restaurante Raízes",
+      "RECEBIDO",
+      "TIPO",
+      "QUANTIDADE",
+      "IMPACTO",
+      "Refeições prontas",
+      "18,6 kg",
+      "21 set 2026 • 21h05",
+      "46 refeições",
+      "Hortifruti Verde Vida",
+      "RECEBIDO",
+      "TIPO",
+      "QUANTIDADE",
+      "IMPACTO",
+      "Frutas e legumes",
+      "14,1 kg",
+      "17 set 2026 • 17h38",
+      "35 refeições",
+      "Instituto Mesa Cheia",
+      "São Paulo, SP",
+      "Supermercado Econômico",
+      "RECEBIDO",
+      "TIPO",
+      "QUANTIDADE",
+      "IMPACTO",
+      "Mercearia seca",
+      "22,8 kg",
+      "12 set 2026 • 20h16",
+      "57 refeições",
+      "Configurações"
+    ],
+    "navegacao": [
+      {
+        "de": "Refood Parcerias",
+        "para": "5.1 Landing Page Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Mapa de doações",
+        "para": "6.10 Mapa de Doações Desktop",
+        "gatilho": "ON_CLICK"
+      },
+      {
+        "de": "Solicitações",
+        "para": "6.11 Solicitar Doação Desktop",
+        "gatilho": "ON_CLICK"
+      }
+    ]
+  }
+]

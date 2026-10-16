@@ -10,7 +10,7 @@ from datetime import date, datetime, time
 from decimal import Decimal
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, Field, ValidationInfo, field_validator
 
 EMAIL_VALIDO = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 TIPOS_LOJA = Literal["PADARIA", "MERCADO", "RESTAURANTE", "HORTIFRUTI", "CAFE", "OUTRO"]
@@ -103,13 +103,24 @@ class Sacola(BaseModel):
             raise ValueError("Escolha uma das imagens do Refood (caminho começando com img/).")
         return v or None
 
-    @model_validator(mode="after")
-    def conferir_regras(self):
-        if self.preco > self.preco_original:
+    # Regras que comparam dois campos. Ficam no segundo campo de cada par para
+    # o erro voltar com o nome dele ("preco", "fim_retirada") e o front
+    # destacar o campo certo. info.data tem os campos já validados antes.
+    @field_validator("preco")
+    @classmethod
+    def preco_menor_que_original(cls, v, info: ValidationInfo):
+        original = info.data.get("preco_original")
+        if original is not None and v > original:
             raise ValueError("O preço Refood não pode ser maior que o preço original.")
-        if self.fim_retirada <= self.inicio_retirada:
+        return v
+
+    @field_validator("fim_retirada")
+    @classmethod
+    def fim_depois_do_inicio(cls, v, info: ValidationInfo):
+        inicio = info.data.get("inicio_retirada")
+        if inicio is not None and v <= inicio:
             raise ValueError("O fim da retirada precisa ser depois do início.")
-        return self
+        return v
 
 
 # ---------------------------------------------------------------- reservas

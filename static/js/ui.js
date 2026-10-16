@@ -113,6 +113,10 @@ export const STATUS_DOACAO = {
   RECEBIDA: { texto: "Recebida", classe: "badge-verde" },
   CANCELADA: { texto: "Cancelada", classe: "badge-cinza" },
 };
+export const STATUS_OFERTA = {
+  ATIVA: { texto: "Ativa", classe: "" },
+  ENCERRADA: { texto: "Encerrada", classe: "badge-cinza" },
+};
 export const TIPOS_LOJA = {
   PADARIA: "Padaria", MERCADO: "Mercado", RESTAURANTE: "Restaurante",
   HORTIFRUTI: "Hortifruti", CAFE: "Café", OUTRO: "Outro",
@@ -330,10 +334,24 @@ export function montarPainel(conta, ativo, subtitulo = "") {
   document.querySelectorAll("[data-abrir-menu]").forEach((b) => {
     b.innerHTML = ICONES.menu;
     b.setAttribute("aria-label", "Abrir menu");
+    b.setAttribute("aria-expanded", "false");
     if (b.dataset.ligado) return; // já tinha o clique de uma chamada anterior
     b.dataset.ligado = "1";
-    b.addEventListener("click", () => document.getElementById("lateral").classList.toggle("aberta"));
+    b.addEventListener("click", () => {
+      const aberta = document.getElementById("lateral").classList.toggle("aberta");
+      b.setAttribute("aria-expanded", String(aberta));
+    });
   });
+  if (!document.body.dataset.menuEsc) {
+    document.body.dataset.menuEsc = "1";
+    document.addEventListener("keydown", (e) => {
+      const lateral = document.getElementById("lateral");
+      if (e.key === "Escape" && lateral?.classList.contains("aberta")) {
+        lateral.classList.remove("aberta");
+        document.querySelector("[data-abrir-menu]")?.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 }
 
 /** Data por extenso para o canto do painel: "Hoje, 16 de outubro". */

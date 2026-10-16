@@ -272,9 +272,12 @@ def reservas_da_loja(
     """Tela 6.8 (Gestão de pedidos). A loja só vê as reservas dos próprios alimentos (RN10)."""
     atualizar_vencidos(conn)
     id_loja = loja["id_estabelecimento"]
-    dias = {"hoje": 0, "semana": 6, "mes": 29}[periodo]
-    filtro, params = "a.id_estabelecimento = %s AND DATE(r.data_limite_retirada) >= CURDATE() - INTERVAL %s DAY", \
-        [id_loja, dias]
+    if periodo == "hoje":
+        filtro, params = "a.id_estabelecimento = %s AND DATE(r.data_limite_retirada) = CURDATE()", [id_loja]
+    else:
+        dias = {"semana": 6, "mes": 29}[periodo]
+        filtro = "a.id_estabelecimento = %s AND DATE(r.data_limite_retirada) >= CURDATE() - INTERVAL %s DAY"
+        params = [id_loja, dias]
     if status_reserva:
         filtro += " AND r.status = %s"
         params.append(status_reserva)
@@ -286,7 +289,9 @@ def reservas_da_loja(
         JOIN alimentos a ON a.id_alimento = r.id_alimento
         JOIN usuarios u ON u.id_usuario = r.id_usuario
         WHERE {filtro}
-        ORDER BY (r.status = 'PENDENTE') DESC, a.inicio_retirada, r.data_reserva
+        ORDER BY (r.status = 'PENDENTE') DESC,
+                 CASE WHEN r.status = 'PENDENTE' THEN a.inicio_retirada END,  -- aguardando: a próxima retirada primeiro
+                 r.data_reserva DESC                                          -- o resto: as mais recentes primeiro
     """, params)
     contadores = buscar_um(conn, """
         SELECT COALESCE(SUM(r.status = 'PENDENTE'), 0) AS aguardando,

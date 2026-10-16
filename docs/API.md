@@ -284,7 +284,7 @@ não contam). Não edita sacola `VENCIDO` ou `INDISPONIVEL`.
 Rascunho → no ar; no ar → fora do catálogo (as reservas já feitas continuam valendo).
 
 ### `GET /api/painel/reservas` — tela 6.8 (Gestão de pedidos)
-`periodo`: `hoje` (padrão), `semana`, `mes`. Filtro `status` opcional.
+`periodo`: `hoje` (padrão; só as reservas com retirada hoje), `semana`, `mes` (incluem as próximas). Filtro `status` opcional. As que aguardam retirada vêm primeiro, pela hora da retirada; as demais, das mais recentes para as mais antigas. Erros de regra da sacola voltam no campo certo: `campos.preco` ou `campos.fim_retirada`.
 ```json
 {
   "aguardando": 4, "retirados_hoje": 1, "valor_em_reservas": 54.5,

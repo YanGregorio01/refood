@@ -144,6 +144,11 @@ INSERT INTO alimentos (id_alimento, id_estabelecimento, id_categoria, nome, desc
          5, 5, 30.00, 10.90, 1.00, NULL,
          TIMESTAMP(@amanha, '23:59:00'), TIMESTAMP(@amanha, '18:00:00'), TIMESTAMP(@amanha, '19:30:00'), 'RASCUNHO');
 
+-- A maioria das sacolas foi publicada ontem; só duas são novidade de hoje
+-- (a etiqueta "NOVO" do catálogo aparece para sacolas com menos de 24 horas).
+UPDATE alimentos SET data_cadastro = NOW() - INTERVAL 26 HOUR
+WHERE id_alimento BETWEEN 1 AND 18 AND id_alimento NOT IN (8, 12);
+
 -- ---------------------------------------------------------------------
 -- Reservas de hoje, ainda não retiradas (batem com a quantidade das sacolas)
 -- ---------------------------------------------------------------------

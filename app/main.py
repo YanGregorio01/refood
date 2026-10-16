@@ -99,6 +99,19 @@ async def erro_de_validacao(request: Request, exc: RequestValidationError):
     return JSONResponse(status_code=422, content={"detail": detalhe, "campos": campos})
 
 
+@app.middleware("http")
+async def revalidar_arquivos_do_site(request: Request, chamar_proxima):
+    """Faz o navegador conferir se o HTML/CSS/JS mudou antes de usar o que guardou.
+
+    Sem isso, depois de uma atualização o navegador pode continuar mostrando o
+    CSS antigo. Quando nada mudou, o servidor responde 304 e nada é baixado.
+    """
+    resposta = await chamar_proxima(request)
+    if not request.url.path.startswith("/api"):
+        resposta.headers.setdefault("Cache-Control", "no-cache")
+    return resposta
+
+
 # ------------------------------------------------------------- rotas
 for modulo in (publico, auth, consumidor, comerciante, doacoes, ong):
     app.include_router(modulo.router)

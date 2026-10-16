@@ -99,8 +99,9 @@ function mostrarLocal(loja) {
   const ponto = [loja.latitude, loja.longitude];
   // Mapa pequeno e "parado": a rodinha do mouse rola a página, não o mapa.
   const mapa = L.map("mapa-loja", { scrollWheelZoom: false }).setView(ponto, 16);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  // Mapa do OpenStreetMap: grátis e sem chave (as cores ficam suaves pelo CSS .leaflet-tile-pane)
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19,
   }).addTo(mapa);
   const pino = L.divIcon({ className: "", html: '<span class="pino-loja"></span>', iconSize: [26, 26], iconAnchor: [13, 13] });

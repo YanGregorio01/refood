@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Início | Refood</title>
+  <meta name="description" content="Sacolas perto de você, seu impacto e as lojas onde você já comprou.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 5.5 do Figma: Home do consumidor (no celular, tela 2.1) */
+    .pagina { padding-top: 40px; display: grid; gap: 32px; }
+    .conteudo { display: grid; gap: 40px; }
+
+    .boas-vindas { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .boas-vindas p { color: var(--texto-2); font-size: 17px; margin-top: 8px; }
+    .atalhos { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .inicio-grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 400px); gap: 24px; align-items: start; }
+    .secao-topo { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .secao-topo h2 { font-size: 22px; }
+    .link-seta { font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .link-seta:hover { text-decoration: underline; }
+
+    /* Cards "Perto de você agora" (usam as classes .sacola do refood.css) */
+    .perto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .perto .sacola-foto { aspect-ratio: 16 / 10; }
+    .cronometro { font-variant-numeric: tabular-nums; }
+    .sacola.encerrada { opacity: .6; }
+    .precos { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+
+    /* Card verde "Seu impacto" */
+    .impacto-carregando { min-height: 260px; border-radius: var(--raio-xg); }
+    .impacto { background: var(--verde); color: var(--branco); border-radius: var(--raio-xg); padding: 28px; display: grid; gap: 12px; }
+    .impacto h2 { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .impacto-icone { width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 255, 255, .14); display: grid; place-items: center; }
+    .impacto-icone svg { width: 16px; height: 16px; }
+    .impacto-titulo { font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(24px, 2.6vw, 30px); line-height: 1.15; }
+    .impacto-texto { color: var(--verde-fundo); font-size: 14px; }
+    .nivel { margin-top: 8px; }
+    .nivel-linha { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 8px; }
+    .barra { height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .2); overflow: hidden; }
+    .barra span { display: block; height: 100%; background: var(--verde-claro); border-radius: inherit; }
+
+    /* Lojas onde você já comprou */
+    .lojas .item { color: var(--texto); text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+    .lojas .item:hover { border-color: var(--verde-claro); box-shadow: var(--sombra); }
+    .lojas .item-foto { width: 64px; height: 64px; }
+    .loja-topo { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .loja-seta { width: 36px; height: 36px; border-radius: 50%; background: var(--creme); color: var(--verde); display: grid; place-items: center; flex: none; }
+    .loja-seta svg { width: 18px; height: 18px; }
+
+    @media (max-width: 1080px) {
+      .inicio-grade { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .atalhos { width: 100%; }
+      .atalhos .btn { flex: 1; }
+      /* No celular os cards viram um carrossel na horizontal, como na tela 2.1 */
+      .perto { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%;
+        overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+      .perto > * { scroll-snap-align: start; }
+      .impacto { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container pagina">
+    <section class="boas-vindas" aria-labelledby="saudacao">
+      <div>
+        <h1 id="saudacao">Olá! 👋</h1>
+        <p>Que tal salvar uma refeição e fazer o bem hoje?</p>
+      </div>
+      <nav class="atalhos" aria-label="Atalhos">
+        <a class="btn btn-contorno" href="/pedidos.html">Meus pedidos</a>
+        <a class="btn btn-primario" href="/catalogo.html">Ver catálogo</a>
+      </nav>
+    </section>
+
+    <div id="erro" hidden></div>
+
+    <div id="conteudo" class="conteudo">
+      <div class="inicio-grade">
+        <section aria-labelledby="t-perto">
+          <div class="secao-topo">
+            <h2 id="t-perto">Perto de você agora</h2>
+            <a class="link-seta" href="/mapa.html">Ver todos no mapa <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="perto" id="perto">
+            <div class="esqueleto" style="height: 290px"></div>
+            <div class="esqueleto" style="height: 290px"></div>
+            <div class="esqueleto" style="height: 290px"></div>
+          </div>
+        </section>
+
+        <section id="impacto" class="esqueleto impacto-carregando" aria-label="Seu impacto"></section>
+      </div>
+
+      <section class="lojas" aria-labelledby="t-lojas">
+        <div class="secao-topo">
+          <h2 id="t-lojas">Lojas onde você já comprou</h2>
+        </div>
+        <div class="lista" id="lojas">
+          <div class="esqueleto" style="height: 94px"></div>
+          <div class="esqueleto" style="height: 94px"></div>
+          <div class="esqueleto" style="height: 94px"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="rodape"></footer>
+  <script type="module" src="/js/paginas/inicio.js"></script>
+</body>
+</html>

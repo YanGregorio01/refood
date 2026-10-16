@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meus pedidos | Refood</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.5 do Figma: Meus pedidos */
+    .pagina { padding-top: 40px; display: grid; gap: 24px; }
+    .pagina-cabecalho p { margin-top: 6px; }
+    .chip .contagem { font-variant-numeric: tabular-nums; opacity: .8; }
+
+    /* No HTML a "Próxima retirada" vem antes da lista (fica no topo no celular);
+       no computador ela vai para a coluna da direita. */
+    .pedidos-grade { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start; }
+    .proxima { grid-column: 2; grid-row: 1; position: sticky; top: 96px; display: grid; gap: 10px; }
+    .lista-pedidos { grid-column: 1; grid-row: 1; }
+
+    /* Um pedido da lista */
+    .pedido { display: flex; gap: 18px; align-items: center; padding: 16px; background: var(--branco);
+      border: 1px solid var(--linha); border-radius: var(--raio-g); }
+    .pedido-foto { width: 104px; height: 92px; border-radius: var(--raio); object-fit: cover; flex: none; background: var(--creme-2); }
+    .pedido-info { flex: 1; min-width: 0; display: grid; gap: 4px; }
+    .pedido-titulo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .pedido-titulo h3 { font-size: 17px; }
+    .pedido-loja { font-size: 14px; font-weight: 600; color: var(--verde); }
+    .pedido-lado { display: grid; justify-items: end; gap: 6px; text-align: right; }
+    .pedido-valor { font-family: var(--fonte-titulo); font-size: 19px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .pedido-acoes { display: grid; justify-items: end; gap: 4px; }
+    .link-acao { background: none; border: 0; padding: 2px 0; font-size: 13px; font-weight: 700; color: var(--verde);
+      text-decoration: none; cursor: pointer; }
+    .link-acao:hover { text-decoration: underline; }
+    .link-acao.secundario { color: var(--texto-2); }
+    .avaliado { font-size: 13px; color: var(--texto-2); }
+    .avaliado:focus { outline: none; }
+
+    /* Próxima retirada */
+    .proxima .card-titulo { margin-bottom: 4px; }
+    .proxima .qr { justify-self: center; padding: 12px; border: 1px solid var(--linha); border-radius: var(--raio); }
+    .proxima .codigo { text-align: center; font-weight: 700; color: var(--texto-3); font-size: 13px; letter-spacing: .04em; }
+    .proxima-nome { font-family: var(--fonte-titulo); font-size: 16px; }
+    .proxima .btn { margin-top: 8px; }
+
+    /* Janela "Avaliar pedido" */
+    .modal h2 { font-size: 21px; }
+    .modal form { display: grid; gap: 16px; }
+    .estrelas-escolha { display: flex; gap: 4px; }
+    .estrela { width: 44px; height: 44px; border: 0; background: none; padding: 0; font-size: 32px; line-height: 1;
+      color: var(--texto-3); cursor: pointer; border-radius: var(--raio-p); }
+    .estrela.acesa { color: var(--dourado); }
+    .modal-acoes { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+    @media (max-width: 960px) {
+      .pedidos-grade { grid-template-columns: 1fr; }
+      .proxima, .lista-pedidos { grid-column: auto; grid-row: auto; }
+      .proxima { position: static; }
+    }
+    @media (max-width: 600px) {
+      .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
+      .chip { flex: none; }
+      .pedido { flex-wrap: wrap; align-items: flex-start; gap: 14px; }
+      .pedido-foto { width: 72px; height: 72px; }
+      .pedido-info { flex-basis: calc(100% - 86px); }
+      .pedido-lado { width: 100%; grid-template-columns: auto 1fr; align-items: center; justify-items: start;
+        text-align: left; padding-top: 12px; border-top: 1px solid var(--linha); }
+      .pedido-acoes { justify-self: end; justify-items: end; }
+      .modal-acoes .btn { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container pagina">
+    <div class="pagina-cabecalho">
+      <h1>Meus pedidos</h1>
+      <p class="muted">Acompanhe suas reservas e o histórico de retiradas.</p>
+    </div>
+
+    <!-- Os botões de filtro são criados pelo pedidos.js -->
+    <div class="chips" id="filtros" role="group" aria-label="Filtrar pedidos por situação"></div>
+
+    <div class="pedidos-grade">
+      <aside class="card card-pad proxima" id="proxima" aria-labelledby="t-proxima">
+        <h2 id="t-proxima" class="sr-only">Próxima retirada</h2>
+        <div class="esqueleto" style="height: 320px"></div>
+      </aside>
+
+      <section class="lista-pedidos" aria-labelledby="t-lista">
+        <h2 id="t-lista" class="sr-only">Lista de pedidos</h2>
+        <div class="lista" id="lista" aria-busy="true">
+          <div class="esqueleto" style="height: 126px"></div>
+          <div class="esqueleto" style="height: 126px"></div>
+          <div class="esqueleto" style="height: 126px"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="rodape"></footer>
+  <!-- Gerador de QR Code (cria a variável global QRCode). "defer" roda antes do módulo da página. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+          integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script type="module" src="/js/paginas/pedidos.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sua reserva | Refood</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.4 do Figma: Reserva confirmada */
+    .pagina { max-width: 1076px; padding-top: 40px; display: grid; gap: 24px; }
+    .reserva { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr); gap: 28px; align-items: start; }
+
+    /* Card da esquerda: título e detalhes */
+    .detalhes { display: grid; gap: 18px; padding: 36px; }
+    .selo-icone { width: 58px; height: 58px; border-radius: 50%; background: var(--verde-fundo); color: var(--verde); display: grid; place-items: center; }
+    .selo-icone svg { width: 28px; height: 28px; }
+    .detalhes h1 { font-size: clamp(28px, 3.4vw, 34px); }
+    .detalhes h1:focus { outline: none; }
+    .detalhes-topo p { margin-top: 8px; }
+    .linhas { margin: 0; padding-top: 18px; border-top: 1px solid var(--linha); display: grid; gap: 12px; font-size: 14px; }
+    .linhas div { display: flex; justify-content: space-between; gap: 16px; }
+    .linhas dt { color: var(--texto-3); }
+    .linhas dd { margin: 0; font-weight: 600; text-align: right; }
+    .linhas a { font-weight: 700; text-decoration: none; }
+    .linhas a:hover { text-decoration: underline; }
+    .aviso-retirada { display: flex; gap: 10px; align-items: center; padding: 12px 16px; border-radius: var(--raio);
+      background: var(--laranja-fundo); color: var(--texto-2); font-size: 14px; }
+    .aviso-retirada svg { width: 18px; height: 18px; color: var(--laranja); flex: none; }
+
+    /* Card da direita: QR Code e código de retirada */
+    .codigo { display: grid; gap: 16px; }
+    .codigo .card-titulo { margin-bottom: 0; }
+    .qr { justify-self: center; padding: 16px; border: 1px solid var(--linha); border-radius: var(--raio); background: var(--branco); }
+    .qr-inativo { opacity: .3; }
+    .codigo-grande { display: grid; justify-items: center; gap: 2px; text-align: center; }
+    .codigo-grande strong { font-family: var(--fonte-titulo); font-size: clamp(28px, 3.2vw, 34px); font-weight: 800;
+      letter-spacing: .04em; color: var(--verde-escuro); font-variant-numeric: tabular-nums; }
+    .codigo-ajuda { text-align: center; color: var(--texto-2); font-size: 14px; }
+    .codigo-loja { display: grid; gap: 4px; padding-top: 16px; border-top: 1px solid var(--linha); }
+    .codigo-loja strong { display: flex; align-items: center; gap: 8px; font-family: var(--fonte-titulo); }
+    .codigo-loja svg { width: 18px; height: 18px; color: var(--verde); flex: none; }
+    .acoes { display: grid; gap: 10px; }
+
+    /* Janela de confirmação do cancelamento */
+    .modal h2 { font-size: 21px; }
+    .modal-acoes { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+    @media (max-width: 860px) {
+      .reserva { grid-template-columns: 1fr; }
+      .detalhes { padding: 24px; }
+    }
+    @media (max-width: 480px) {
+      .linhas div { flex-direction: column; gap: 0; }
+      .linhas dd { text-align: left; }
+      .modal-acoes .btn { flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container pagina">
+    <div id="erro" hidden></div>
+
+    <div class="reserva" id="reserva">
+      <section class="card detalhes" id="detalhes" aria-labelledby="titulo">
+        <div class="esqueleto" style="height: 58px; width: 58px; border-radius: 50%"></div>
+        <h1 id="titulo" tabindex="-1">Carregando reserva…</h1>
+        <div class="esqueleto" style="height: 220px"></div>
+      </section>
+      <aside class="card card-pad codigo" id="codigo" aria-labelledby="t-codigo">
+        <h2 id="t-codigo" class="sr-only">Código para retirada</h2>
+        <div class="esqueleto" style="height: 380px"></div>
+      </aside>
+    </div>
+  </main>
+
+  <footer id="rodape"></footer>
+  <!-- Gerador de QR Code (cria a variável global QRCode). "defer" roda antes do módulo da página. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+          integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script type="module" src="/js/paginas/reserva.js"></script>
+</body>
+</html>

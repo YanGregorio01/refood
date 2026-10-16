@@ -168,8 +168,10 @@ def mapa_estabelecimentos(
         filtros.append("e.tipo = %s")
         params.append(tipo.upper())
     if busca:
-        filtros.append("(e.nome LIKE %s OR e.bairro LIKE %s OR e.endereco LIKE %s)")
-        params += [f"%{busca.strip()}%"] * 3
+        # tipo e descrição entram na busca: "hortifruti" acha o Mercado Sabor da Terra
+        filtros.append("(e.nome LIKE %s OR e.bairro LIKE %s OR e.endereco LIKE %s OR e.tipo LIKE %s "
+                       "OR e.descricao LIKE %s)")
+        params += [f"%{busca.strip()}%"] * 5
     if raio_km:
         filtros.append(f"{distancia_sql('e')} <= %s")
         params += [lng, lat, raio_km * 1000]
@@ -182,15 +184,18 @@ def mapa_estabelecimentos(
                {distancia_sql('e')} AS distancia_m,
                COALESCE(av.media, 0) AS nota_media, COALESCE(av.total, 0) AS total_avaliacoes,
                COALESCE(s.sacolas, 0) AS sacolas_disponiveis, COALESCE(s.unidades, 0) AS unidades_disponiveis,
-               s.proximo_inicio, s.proximo_fim
+               p.proximo_inicio, p.proximo_fim
         FROM estabelecimentos e
         LEFT JOIN (SELECT id_estabelecimento, ROUND(AVG(nota), 1) AS media, COUNT(*) AS total
                    FROM avaliacoes GROUP BY id_estabelecimento) av
                ON av.id_estabelecimento = e.id_estabelecimento
-        LEFT JOIN (SELECT a.id_estabelecimento, COUNT(*) AS sacolas, SUM(a.quantidade) AS unidades,
-                          MIN(a.inicio_retirada) AS proximo_inicio, MIN(a.fim_retirada) AS proximo_fim
+        LEFT JOIN (SELECT a.id_estabelecimento, COUNT(*) AS sacolas, SUM(a.quantidade) AS unidades
                    FROM alimentos a WHERE {SACOLA_DISPONIVEL} GROUP BY a.id_estabelecimento) s
                ON s.id_estabelecimento = e.id_estabelecimento
+        LEFT JOIN (SELECT a.id_estabelecimento, a.inicio_retirada AS proximo_inicio, a.fim_retirada AS proximo_fim,
+                          ROW_NUMBER() OVER (PARTITION BY a.id_estabelecimento ORDER BY a.inicio_retirada) AS n
+                   FROM alimentos a WHERE {SACOLA_DISPONIVEL}) p
+               ON p.id_estabelecimento = e.id_estabelecimento AND p.n = 1
         WHERE {" AND ".join(filtros)}
         ORDER BY distancia_m
     """, [lng, lat] + params)

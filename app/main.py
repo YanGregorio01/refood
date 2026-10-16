@@ -45,6 +45,16 @@ app.add_middleware(
 # ------------------------------------------------------------- erros em português
 MENSAGENS = {
     "missing": "Campo obrigatório.",
+    "string_type": "Campo obrigatório.",
+    "int_type": "Informe um número inteiro.",
+    "float_type": "Informe um número.",
+    "decimal_type": "Informe um número.",
+    "bool_type": "Informe verdadeiro ou falso.",
+    "date_type": "Informe uma data válida.",
+    "time_type": "Informe um horário válido.",
+    "datetime_type": "Informe data e hora válidas.",
+    "model_attributes_type": "Envie os dados em JSON.",
+    "dict_type": "Envie os dados em JSON.",
     "string_too_short": "Use pelo menos {min_length} caracteres.",
     "string_too_long": "Use no máximo {max_length} caracteres.",
     "greater_than": "Precisa ser maior que {gt}.",

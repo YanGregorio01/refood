@@ -252,7 +252,7 @@ textarea.entrada { min-height: 96px; resize: vertical; }
 .painel-cabecalho { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .painel-cabecalho p { color: var(--texto-2); margin-top: 6px; }
 .data-hoje { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio-p); padding: 8px 14px; font-size: 13px; font-weight: 600; }
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
 .kpi { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio-g); padding: 18px 20px; display: grid; gap: 6px; }
 .kpi span { font-size: 13px; color: var(--texto-2); }
 .kpi strong { font-family: var(--fonte-titulo); font-size: 28px; font-weight: 800; color: var(--verde); font-variant-numeric: tabular-nums; }

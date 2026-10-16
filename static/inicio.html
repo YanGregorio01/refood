@@ -26,6 +26,9 @@
     .link-seta:hover { text-decoration: underline; }
 
     /* Cards "Perto de você agora" (usam as classes .sacola do refood.css) */
+    /* min-width: 0 deixa o carrossel rolar por dentro, sem esticar a página */
+    .pagina, .conteudo { grid-template-columns: minmax(0, 1fr); }
+    .inicio-grade > *, .inicio-grade section { min-width: 0; }
     .perto { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .perto .sacola-foto { aspect-ratio: 16 / 10; }
     .cronometro { font-variant-numeric: tabular-nums; }
@@ -58,10 +61,11 @@
     }
     @media (max-width: 760px) {
       .atalhos { width: 100%; }
-      .atalhos .btn { flex: 1; }
+      .atalhos .btn { flex: 1; white-space: normal; }
       /* No celular os cards viram um carrossel na horizontal, como na tela 2.1 */
       .perto { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%;
-        overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+        overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px;
+        contain: paint; /* sem isso o Chrome soma o carrossel na largura da página */ }
       .perto > * { scroll-snap-align: start; }
       .impacto { padding: 22px; }
     }

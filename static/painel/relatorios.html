@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatórios · Refood Parcerias</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.9 do Figma: Relatórios (no celular, tela 3.4). */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .painel-menu-btn { align-items: center; justify-content: center; cursor: pointer; }
+    /* No celular, as ações e o botão do menu ficam no alto, acima do título */
+    @media (max-width: 960px) { .cabecalho-acoes { order: -1; width: 100%; justify-content: flex-end; } }
+
+    .kpi.claro strong { color: var(--verde-claro); }
+    .kpi.laranja strong { color: var(--laranja); }
+    .kpi small.sobe { color: var(--verde); font-weight: 600; }
+    .kpi small.desce { color: var(--coral); font-weight: 600; }
+
+    .rel-grade { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    .grafico { position: relative; height: 240px; }
+    .legenda-hoje { display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--verde-claro); margin-right: 4px; }
+    #aviso-grafico { margin-top: 8px; }
+
+    /* Vendas por categoria: barras horizontais feitas só com HTML e CSS */
+    .categorias { display: grid; gap: 14px; }
+    .categoria { display: grid; gap: 6px; }
+    .categoria-linha { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+    .categoria-linha strong { font-variant-numeric: tabular-nums; }
+    .trilho { height: 8px; border-radius: 99px; background: var(--verde-fundo); overflow: hidden; }
+    .preenchido { height: 100%; border-radius: 99px; background: var(--verde); }
+    .categoria small { font-size: 12px; color: var(--texto-3); }
+
+    /* Avaliações recentes */
+    .avaliacoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .avaliacao { display: grid; gap: 8px; align-content: start; }
+    .avaliacao-topo { display: flex; align-items: center; gap: 10px; }
+    .avaliacao-topo .avatar { width: 32px; height: 32px; font-size: 13px; background: var(--verde-fundo); }
+    .avaliacao-topo div { flex: 1; display: grid; }
+    .avaliacao-topo small { font-size: 12px; color: var(--texto-3); }
+    .avaliacao p { font-size: 14px; color: var(--texto-2); }
+
+    @media (max-width: 1100px) { .rel-grade { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <header class="painel-cabecalho">
+        <div>
+          <h1>Relatórios</h1>
+          <p id="subtitulo">Resultados da sua loja nos últimos 30 dias.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <div class="chips" role="group" aria-label="Período do relatório">
+            <button type="button" class="chip" data-dias="7" aria-pressed="false">7 dias</button>
+            <button type="button" class="chip" data-dias="30" aria-pressed="true">30 dias</button>
+            <button type="button" class="chip" data-dias="90" aria-pressed="false">90 dias</button>
+          </div>
+          <button type="button" class="btn btn-contorno" id="b-exportar" disabled>Exportar relatório</button>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </header>
+
+      <section class="kpis" aria-label="Indicadores do período">
+        <div class="kpi"><span id="k-receita-rotulo">Receita nos últimos 30 dias</span><strong id="k-receita">…</strong><small id="k-variacao" hidden></small></div>
+        <div class="kpi claro"><span>Alimentos não desperdiçados</span><strong id="k-kg">…</strong><small id="k-refeicoes"></small></div>
+        <div class="kpi"><span>Sacolas vendidas</span><strong id="k-vendidas">…</strong><small id="k-aproveitamento"></small></div>
+        <div class="kpi laranja"><span>Nota média</span><strong id="k-nota">…</strong><small id="k-avaliacoes"></small></div>
+      </section>
+
+      <div class="rel-grade">
+        <section class="card card-pad" aria-labelledby="t-receita">
+          <div class="card-titulo">
+            <h3 id="t-receita">Receita diária</h3>
+            <span class="badge" id="badge-periodo">Últimos 30 dias</span>
+          </div>
+          <div class="grafico">
+            <canvas id="grafico-receita" role="img" aria-label="Gráfico da receita por dia"></canvas>
+          </div>
+          <p class="sutil" id="aviso-grafico"><span class="legenda-hoje" aria-hidden="true"></span>Hoje, com o dia ainda em andamento.</p>
+        </section>
+
+        <section class="card card-pad" aria-labelledby="t-categorias">
+          <div class="card-titulo"><h3 id="t-categorias">Vendas por categoria</h3></div>
+          <div class="categorias" id="categorias">
+            <div class="esqueleto" style="height:40px"></div>
+            <div class="esqueleto" style="height:40px"></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card card-pad" aria-labelledby="t-avaliacoes">
+        <div class="card-titulo"><h3 id="t-avaliacoes">Avaliações recentes</h3></div>
+        <div class="avaliacoes" id="avaliacoes">
+          <div class="esqueleto" style="height:110px"></div>
+          <div class="esqueleto" style="height:110px"></div>
+          <div class="esqueleto" style="height:110px"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Chart.js (gráficos). Fica antes do módulo da página, que usa a variável global Chart. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script type="module" src="/js/paginas/painel-relatorios.js"></script>
+</body>
+</html>

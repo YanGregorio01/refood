@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedidos · Refood Parcerias</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.8 do Figma: Gestão de Pedidos (no celular, tela 3.3).
+       No lugar da câmera que lê o QR Code, por enquanto, só o código digitado. */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 12px; }
+    .painel-menu-btn { align-items: center; justify-content: center; cursor: pointer; }
+    /* No celular, as ações e o botão do menu ficam no alto, acima do título */
+    @media (max-width: 960px) { .cabecalho-acoes { order: -1; width: 100%; justify-content: flex-end; } }
+
+    /* Os três contadores do topo */
+    .contadores { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .contador { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio-g); padding: 16px 20px;
+      display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .contador strong { font-family: var(--fonte-titulo); font-size: 24px; font-weight: 800; color: var(--verde);
+      font-variant-numeric: tabular-nums; }
+    .contador span { font-size: 14px; color: var(--texto-2); }
+    .contador.laranja strong { color: var(--laranja); }
+    .contador.claro strong { color: var(--verde-claro); }
+
+    /* Filtros */
+    .filtros { display: flex; gap: 16px 32px; flex-wrap: wrap; }
+    .filtro { display: grid; gap: 8px; }
+    .filtro-rotulo { font-size: 12px; font-weight: 700; color: var(--texto-2); }
+
+    /* Lista + painel "Confirmar retirada" */
+    .pedidos-grade { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start; }
+    .lista-titulo { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .lista-titulo h2 { font-size: 20px; }
+    .pedido { flex-wrap: wrap; }
+    .pedido .item-corpo > span { font-size: 13px; }
+    #mais-pedidos { margin-top: 16px; }
+
+    .confirmar { display: grid; gap: 16px; position: sticky; top: 24px; }
+    .confirmar h2 { font-size: 20px; }
+    .sem-camera { display: grid; gap: 10px; justify-items: center; text-align: center; padding: 20px;
+      border: 2px dashed var(--linha); border-radius: var(--raio); background: var(--creme); color: var(--texto-2); font-size: 14px; }
+    .sem-camera svg { width: 40px; height: 40px; color: var(--verde); }
+    #form-codigo { display: grid; gap: 12px; }
+    #f-codigo { text-transform: uppercase; letter-spacing: .04em; }
+
+    @media (max-width: 1100px) {
+      .pedidos-grade { grid-template-columns: 1fr; }
+      .confirmar { position: static; order: -1; } /* no celular, o código vem antes da lista */
+    }
+    @media (max-width: 760px) {
+      .contadores { grid-template-columns: 1fr; }
+      .pedido .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <header class="painel-cabecalho">
+        <div>
+          <h1>Gestão de pedidos</h1>
+          <p>Acompanhe reservas ativas e confirme as retiradas do dia.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <button class="btn btn-contorno" type="button" id="b-historico">Histórico de pedidos</button>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </header>
+
+      <section class="contadores" aria-label="Resumo das reservas">
+        <div class="contador laranja"><strong id="c-aguardando">…</strong><span>aguardando retirada</span></div>
+        <div class="contador claro"><strong id="c-retirados">…</strong><span>retirados hoje</span></div>
+        <div class="contador"><strong id="c-valor">…</strong><span>em reservas</span></div>
+      </section>
+
+      <div class="filtros">
+        <div class="filtro" role="group" aria-labelledby="l-periodo">
+          <span class="filtro-rotulo" id="l-periodo">Período</span>
+          <div class="chips">
+            <button type="button" class="chip" data-periodo="hoje" aria-pressed="true">Hoje</button>
+            <button type="button" class="chip" data-periodo="semana" aria-pressed="false">7 dias</button>
+            <button type="button" class="chip" data-periodo="mes" aria-pressed="false">30 dias</button>
+          </div>
+        </div>
+        <div class="filtro" role="group" aria-labelledby="l-status">
+          <span class="filtro-rotulo" id="l-status">Status</span>
+          <div class="chips">
+            <button type="button" class="chip" data-status="" aria-pressed="true">Todos</button>
+            <button type="button" class="chip" data-status="PENDENTE" aria-pressed="false">Aguardando</button>
+            <button type="button" class="chip" data-status="RETIRADA" aria-pressed="false">Retirados</button>
+            <button type="button" class="chip" data-status="NAO_COMPARECEU" aria-pressed="false">Expirados</button>
+            <button type="button" class="chip" data-status="CANCELADA" aria-pressed="false">Cancelados</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pedidos-grade">
+        <section aria-labelledby="t-lista">
+          <div class="lista-titulo">
+            <h2 id="t-lista">Reservas ativas</h2>
+            <span class="sutil" id="contagem"></span>
+          </div>
+          <div class="lista" id="lista-pedidos">
+            <div class="esqueleto" style="height:84px"></div>
+            <div class="esqueleto" style="height:84px"></div>
+            <div class="esqueleto" style="height:84px"></div>
+          </div>
+          <button type="button" class="btn btn-claro btn-pequeno" id="mais-pedidos" hidden>Mostrar mais</button>
+        </section>
+
+        <aside class="card card-pad confirmar" aria-labelledby="t-confirmar">
+          <h2 id="t-confirmar">Confirmar retirada</h2>
+          <div class="sem-camera">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M14 21h7v-4"/>
+            </svg>
+            <p>A leitura do QR Code pela câmera fica para a próxima versão. Digite o código que o cliente mostrar.</p>
+          </div>
+          <form id="form-codigo">
+            <div class="campo">
+              <label for="f-codigo">Inserir código manualmente</label>
+              <input class="entrada" id="f-codigo" name="codigo" required minlength="4" maxlength="12"
+                autocomplete="off" placeholder="RF-24098" aria-describedby="ajuda-codigo">
+              <span class="ajuda" id="ajuda-codigo">Pode digitar 24098, RF-24098 ou #RF-24098.</span>
+            </div>
+            <button type="submit" class="btn btn-primario btn-bloco">Confirmar retirada</button>
+          </form>
+          <div id="resultado-codigo" aria-live="polite"></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/paginas/painel-pedidos.js"></script>
+</body>
+</html>

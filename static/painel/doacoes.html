@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doações · Refood Parcerias</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela nova, sem desenho no Figma: doações do comerciante para as ONGs.
+       O fluxo está em docs/API.md, "Doações do comerciante". Segue o visual das telas 6.7 e 6.8. */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 12px; }
+    .painel-menu-btn { align-items: center; justify-content: center; cursor: pointer; }
+    /* No celular, as ações e o botão do menu ficam no alto, acima do título */
+    @media (max-width: 960px) { .cabecalho-acoes { order: -1; width: 100%; justify-content: flex-end; } }
+
+    .doacoes-grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    .coluna { display: grid; gap: 24px; }
+    .card h2 { font-size: 20px; }
+    .card-titulo { flex-wrap: wrap; }
+
+    /* Formulário "Nova oferta de doação" */
+    .form-oferta { display: grid; gap: 16px; }
+    .form-oferta .btn-primario { justify-self: start; }
+    .campo label .sutil { font-weight: 400; }
+
+    /* Listas "Suas ofertas" e "Pedidos das ONGs" */
+    .oferta, .pedido-ong { align-items: flex-start; flex-wrap: wrap; }
+    .linha-titulo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .item-corpo > span { font-size: 13px; }
+    .item-corpo a { font-weight: 600; }
+    .obs { font-size: 13px; color: var(--texto-2); font-style: italic; margin-top: 4px; }
+    .item-acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    @media (max-width: 1100px) { .doacoes-grade { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <header class="painel-cabecalho">
+        <div>
+          <h1>Doações</h1>
+          <p>Ofereça o que sobrou para ONGs parceiras buscarem. Elas veem sua oferta no mapa de doações.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </header>
+
+      <div class="doacoes-grade">
+        <!-- ========================================== coluna (a): ofertas da loja -->
+        <div class="coluna">
+          <form class="card card-pad form-oferta" id="form-oferta" aria-labelledby="t-nova">
+            <h2 id="t-nova">Nova oferta de doação</h2>
+            <div class="campo">
+              <label for="f-tipo">Tipo de alimento</label>
+              <input class="entrada" id="f-tipo" name="tipo_alimento" list="sugestoes-tipo" required minlength="3" maxlength="100"
+                placeholder="Pães e doces" autocomplete="off">
+              <datalist id="sugestoes-tipo">
+                <option value="Pães e doces"></option>
+                <option value="Frutas, legumes e verduras"></option>
+                <option value="Refeições prontas"></option>
+                <option value="Laticínios"></option>
+                <option value="Mercearia seca"></option>
+              </datalist>
+            </div>
+            <div class="grade-form">
+              <div class="campo">
+                <label for="f-kg">Quantidade (kg)</label>
+                <input class="entrada" id="f-kg" name="quantidade_kg" type="number" min="0.1" max="1000" step="0.1" required placeholder="8">
+              </div>
+              <div class="campo">
+                <label for="f-ate">Disponível até</label>
+                <input class="entrada" id="f-ate" name="disponivel_ate" type="datetime-local" required>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="f-obs">Observações <span class="sutil">(opcional)</span></label>
+              <textarea class="entrada" id="f-obs" name="observacoes" maxlength="300" rows="3"
+                placeholder="Ex.: pães do dia, embalados em sacos de papel."></textarea>
+            </div>
+            <p class="alerta alerta-erro" id="erro-oferta" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primario">Publicar oferta</button>
+          </form>
+
+          <section class="card card-pad" aria-labelledby="t-ofertas">
+            <div class="card-titulo"><h2 id="t-ofertas">Suas ofertas</h2><span class="sutil">ativas e dos últimos 14 dias</span></div>
+            <div class="lista" id="lista-ofertas">
+              <div class="esqueleto" style="height:84px"></div>
+              <div class="esqueleto" style="height:84px"></div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ========================================== coluna (b): pedidos das ONGs -->
+        <section class="card card-pad" aria-labelledby="t-pedidos">
+          <div class="card-titulo"><h2 id="t-pedidos">Pedidos das ONGs</h2></div>
+          <div class="lista" id="lista-solicitacoes">
+            <div class="esqueleto" style="height:120px"></div>
+            <div class="esqueleto" style="height:120px"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/paginas/painel-doacoes.js"></script>
+</body>
+</html>

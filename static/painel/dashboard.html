@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard · Refood Parcerias</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 5.6 do Figma: Dashboard do comerciante (no celular, tela 3.1).
+       O card "Previsão de sobras · IA" é novo: não existe no Figma. */
+    .painel-conteudo { padding-bottom: 112px; } /* espaço para o botão flutuante */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 12px; }
+    .painel-menu-btn { align-items: center; justify-content: center; cursor: pointer; }
+    /* No celular, as ações e o botão do menu ficam no alto, acima do título */
+    @media (max-width: 960px) { .cabecalho-acoes { order: -1; width: 100%; justify-content: flex-end; } }
+
+    .kpi.laranja strong { color: var(--laranja); }
+    .kpi.claro strong { color: var(--verde-claro); }
+
+    .dash-grade { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    .dash-coluna { display: grid; gap: 24px; }
+    .card-titulo a { font-size: 14px; font-weight: 700; text-decoration: none; }
+    .card-titulo a:hover { text-decoration: underline; }
+    .grafico { position: relative; height: 220px; }
+
+    /* Últimas reservas */
+    .reserva { background: var(--creme); border-color: transparent; }
+    .reserva .item-corpo > span { font-size: 13px; color: var(--texto-2); }
+    .reserva .item-corpo > small { font-size: 12px; color: var(--texto-3); }
+
+    /* Previsão de sobras (IA) */
+    .previsao-barras { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+    .dia-prev { display: grid; gap: 4px; justify-items: center; padding: 8px 2px; border: 1px solid transparent;
+      border-radius: var(--raio-p); background: none; cursor: pointer; font-size: 12px; color: var(--texto-2); }
+    .dia-prev:hover { background: var(--creme); }
+    .dia-prev[aria-pressed="true"] { background: var(--verde-fundo); border-color: var(--verde-claro); color: var(--texto); }
+    .dia-prev .valor { font-weight: 700; color: var(--texto); font-variant-numeric: tabular-nums; }
+    .dia-prev .trilho { height: 72px; width: 100%; display: flex; align-items: flex-end; justify-content: center; }
+    .dia-prev .barra { width: 60%; max-width: 26px; min-height: 3px; border-radius: 4px 4px 0 0; background: var(--verde); }
+    .dia-prev.maior .barra { background: var(--laranja); }
+    .dia-prev .nome { font-weight: 600; text-transform: capitalize; }
+    .legenda-laranja { display: inline-block; width: 10px; height: 10px; border-radius: 2px; background: var(--laranja); margin-right: 4px; }
+    .previsao-corpo { display: grid; gap: 16px; }
+    .previsao-detalhe h4 { font-size: 15px; margin-bottom: 8px; }
+    .rolagem { overflow-x: auto; }
+    .tabela { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .tabela th { text-align: left; font-size: 12px; font-weight: 600; color: var(--texto-2); padding: 8px; border-bottom: 1px solid var(--linha); }
+    .tabela td { padding: 10px 8px; border-bottom: 1px solid var(--linha); }
+    .tabela .n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .letra-miuda { font-size: 12px; color: var(--texto-3); }
+
+    /* Botão "+ Cadastrar nova sacola", fixo no canto da tela */
+    .botao-flutuante { position: fixed; right: 32px; bottom: 32px; z-index: 60; min-height: 52px; padding: 0 24px;
+      border-radius: 99px; box-shadow: var(--sombra); }
+
+    @media (max-width: 960px) {
+      .dash-grade { grid-template-columns: 1fr; }
+      .botao-flutuante { right: 16px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <header class="painel-cabecalho">
+        <div>
+          <h1 id="saudacao">Olá! 👋</h1>
+          <p>Aqui está o desempenho das suas sacolas e o impacto de hoje.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <span class="data-hoje" id="data-hoje"></span>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </header>
+
+      <section class="kpis" aria-label="Números de hoje">
+        <div class="kpi"><span>Sacolas ativas</span><strong id="k-ativas">…</strong></div>
+        <div class="kpi laranja"><span>Reservas pendentes</span><strong id="k-pendentes">…</strong></div>
+        <div class="kpi claro"><span>Vendidas hoje</span><strong id="k-vendidas">…</strong></div>
+        <div class="kpi"><span>Receita do mês</span><strong id="k-receita">…</strong></div>
+      </section>
+
+      <div class="dash-grade">
+        <div class="dash-coluna">
+          <section class="card card-pad" aria-labelledby="t-vendas">
+            <div class="card-titulo"><h3 id="t-vendas">Volume de vendas (últimos 7 dias)</h3></div>
+            <div class="grafico" id="area-grafico">
+              <canvas id="grafico-vendas" role="img" aria-label="Gráfico de sacolas vendidas por dia"></canvas>
+            </div>
+            <p class="sutil" id="grafico-aviso" hidden>Não foi possível carregar as vendas da semana.</p>
+          </section>
+
+          <section class="card card-pad" aria-labelledby="t-previsao">
+            <div class="card-titulo">
+              <h3 id="t-previsao">Previsão de sobras</h3>
+              <span class="badge badge-laranja-claro">IA · próximos 7 dias</span>
+            </div>
+            <div id="previsao" class="previsao-corpo">
+              <div class="esqueleto" style="height:150px"></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="card card-pad" aria-labelledby="t-reservas">
+          <div class="card-titulo">
+            <h3 id="t-reservas">Últimas reservas</h3>
+            <a href="/painel/pedidos.html">Ver todas</a>
+          </div>
+          <div class="lista" id="ultimas-reservas">
+            <div class="esqueleto" style="height:76px"></div>
+            <div class="esqueleto" style="height:76px"></div>
+            <div class="esqueleto" style="height:76px"></div>
+          </div>
+        </section>
+      </div>
+
+      <a class="btn btn-primario botao-flutuante" href="/painel/sacolas.html#nova">+ Cadastrar nova sacola</a>
+    </main>
+  </div>
+
+  <!-- Chart.js (gráficos). Fica antes do módulo da página, que usa a variável global Chart. -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script type="module" src="/js/paginas/painel-dashboard.js"></script>
+</body>
+</html>

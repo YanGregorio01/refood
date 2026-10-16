@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sacolas · Refood Parcerias</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/refood.css">
+  <style>
+    /* Tela 6.7 do Figma: Cadastrar Sacola (no celular, tela 3.2), mais a lista
+       "Suas sacolas", que não tem tela própria no Figma. */
+    .cabecalho-acoes { display: flex; align-items: center; gap: 12px; }
+    .painel-menu-btn { align-items: center; justify-content: center; cursor: pointer; }
+    /* No celular, as ações e o botão do menu ficam no alto, acima do título */
+    @media (max-width: 960px) { .cabecalho-acoes { order: -1; width: 100%; justify-content: flex-end; } }
+    .card-titulo h2 { font-size: 20px; }
+    .card-titulo { flex-wrap: wrap; }
+
+    /* Lista "Suas sacolas" */
+    .sacola-item { flex-wrap: wrap; }
+    .sacola-item .linha-titulo { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .sacola-item .item-corpo > span { font-size: 13px; }
+    .item-preco { display: grid; justify-items: end; }
+    .item-preco .preco { font-size: 18px; }
+    .item-acoes { display: flex; gap: 8px; flex-wrap: wrap; }
+    #mais-sacolas { margin-top: 16px; }
+
+    /* Formulário "Cadastrar nova sacola" */
+    .secao-form { display: grid; gap: 16px; scroll-margin-top: 16px; }
+    .secao-form > div > p { margin-top: 6px; }
+    .form-grade { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 24px; align-items: start; }
+    .blocos { display: grid; gap: 20px; }
+    .bloco { display: grid; gap: 16px; }
+    .bloco .card-titulo { margin-bottom: 0; }
+    .duas-colunas { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    .dica { padding: 10px 14px; font-size: 13px; width: fit-content; }
+
+    /* Card "Resumo da publicação" */
+    .resumo { display: grid; gap: 12px; position: sticky; top: 24px; }
+    .resumo-foto { aspect-ratio: 16 / 9; border-radius: var(--raio); background: var(--creme-2); overflow: hidden;
+      display: grid; place-items: center; text-align: center; padding: 16px; font-size: 13px; color: var(--texto-3); }
+    .resumo-foto img { width: 100%; height: 100%; object-fit: cover; }
+    .resumo-foto.com-foto { padding: 0; }
+    .resumo-nome { font-family: var(--fonte-titulo); font-size: 17px; }
+    .resumo .preco { font-size: 24px; }
+    .resumo p { font-size: 14px; color: var(--texto-2); }
+
+    @media (max-width: 1100px) {
+      .form-grade { grid-template-columns: 1fr; }
+      .resumo { position: static; }
+    }
+    @media (max-width: 600px) {
+      .duas-colunas { grid-template-columns: 1fr; }
+      .item-acoes { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="painel">
+    <aside id="lateral"></aside>
+
+    <main class="painel-conteudo">
+      <header class="painel-cabecalho">
+        <div>
+          <h1>Sacolas</h1>
+          <p>Acompanhe suas sacolas e cadastre novas ofertas.</p>
+        </div>
+        <div class="cabecalho-acoes">
+          <a class="btn btn-primario" href="#nova">+ Cadastrar nova sacola</a>
+          <button class="btn-icone painel-menu-btn" type="button" data-abrir-menu></button>
+        </div>
+      </header>
+
+      <!-- ========================================== parte (a): lista -->
+      <section class="card card-pad" aria-labelledby="t-suas">
+        <div class="card-titulo">
+          <h2 id="t-suas">Suas sacolas</h2>
+          <div class="abas" role="tablist" aria-label="Quais sacolas mostrar">
+            <button type="button" role="tab" aria-selected="true" aria-controls="lista-sacolas" data-periodo="ativas">Ativas</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="lista-sacolas" data-periodo="todas">Últimos 30 dias</button>
+          </div>
+        </div>
+        <div class="lista" id="lista-sacolas" role="tabpanel" aria-labelledby="t-suas">
+          <div class="esqueleto" style="height:84px"></div>
+          <div class="esqueleto" style="height:84px"></div>
+        </div>
+        <button type="button" class="btn btn-claro btn-pequeno" id="mais-sacolas" hidden>Mostrar mais</button>
+      </section>
+
+      <!-- ========================================== parte (b): formulário -->
+      <section class="secao-form" id="nova" aria-labelledby="t-form">
+        <div>
+          <h2 id="t-form">Cadastrar nova sacola</h2>
+          <p class="muted" id="sub-form">Preencha as informações para publicar uma nova oferta.</p>
+        </div>
+
+        <form id="form-sacola" class="form-grade">
+          <div class="blocos">
+            <section class="card card-pad bloco" aria-labelledby="t-bloco1">
+              <div class="card-titulo">
+                <h3 id="t-bloco1">1. Informações</h3>
+                <span class="badge" data-concluido hidden>Concluído</span>
+              </div>
+              <div class="grade-form">
+                <div class="campo">
+                  <label for="f-nome">Nome da sacola</label>
+                  <input class="entrada" id="f-nome" name="nome" required minlength="3" maxlength="150"
+                    placeholder="Sacola Mista — Doce & Salgado">
+                </div>
+                <div class="campo">
+                  <label for="f-categoria">Categoria</label>
+                  <select class="entrada" id="f-categoria" name="id_categoria" required>
+                    <option value="">Carregando…</option>
+                  </select>
+                </div>
+              </div>
+              <div class="duas-colunas">
+                <div class="campo">
+                  <label for="f-descricao">Conteúdo estimado</label>
+                  <input class="entrada" id="f-descricao" name="descricao" maxlength="500"
+                    placeholder="Pães artesanais, salgados assados e doces do dia">
+                </div>
+                <div class="campo">
+                  <label for="f-peso">Peso estimado (kg)</label>
+                  <input class="entrada" id="f-peso" name="peso_estimado_kg" type="number" min="0.1" max="50" step="0.1" value="1">
+                </div>
+              </div>
+            </section>
+
+            <section class="card card-pad bloco" aria-labelledby="t-bloco2">
+              <div class="card-titulo">
+                <h3 id="t-bloco2">2. Preço e quantidade</h3>
+                <span class="badge" data-concluido hidden>Concluído</span>
+              </div>
+              <div class="grade-form">
+                <div class="campo">
+                  <label for="f-original">Preço original (R$)</label>
+                  <input class="entrada" id="f-original" name="preco_original" type="number" min="0.01" max="9999" step="0.01"
+                    required placeholder="38,00">
+                </div>
+                <div class="campo">
+                  <label for="f-preco">Preço Refood (R$)</label>
+                  <input class="entrada" id="f-preco" name="preco" type="number" min="0.01" max="9999" step="0.01"
+                    required placeholder="12,90">
+                </div>
+                <div class="campo">
+                  <label for="f-quantidade">Quantidade</label>
+                  <input class="entrada" id="f-quantidade" name="quantidade" type="number" min="1" max="100" step="1"
+                    required value="8" aria-describedby="ajuda-quantidade">
+                  <span class="ajuda" id="ajuda-quantidade">Quantas sacolas vão ficar disponíveis.</span>
+                </div>
+              </div>
+              <p class="alerta dica" id="dica-desconto" role="status" hidden></p>
+            </section>
+
+            <section class="card card-pad bloco" aria-labelledby="t-bloco3">
+              <div class="card-titulo">
+                <h3 id="t-bloco3">3. Disponibilidade</h3>
+                <span class="badge" data-concluido hidden>Concluído</span>
+              </div>
+              <div class="grade-form">
+                <div class="campo">
+                  <label for="f-data">Data</label>
+                  <input class="entrada" id="f-data" name="data" type="date" required>
+                </div>
+                <div class="campo">
+                  <label for="f-inicio">Início da retirada</label>
+                  <input class="entrada" id="f-inicio" name="inicio_retirada" type="time" required value="18:00">
+                </div>
+                <div class="campo">
+                  <label for="f-fim">Fim da retirada</label>
+                  <input class="entrada" id="f-fim" name="fim_retirada" type="time" required value="19:30">
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <aside class="card card-pad resumo" aria-labelledby="t-resumo">
+            <h3 id="t-resumo">Resumo da publicação</h3>
+            <div class="resumo-foto" id="r-foto">Escolha a categoria para ver a foto da sacola.</div>
+            <strong class="resumo-nome" id="r-nome">Nome da sacola</strong>
+            <div><span class="preco num" id="r-preco">R$ 0,00</span> <span class="preco-de" id="r-preco-de"></span></div>
+            <p id="r-quando"></p>
+            <p id="r-quantidade"></p>
+            <p class="alerta alerta-erro" id="erro-form" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primario btn-bloco" id="b-publicar">Publicar sacola</button>
+            <button type="submit" class="btn btn-contorno btn-bloco" id="b-rascunho">Salvar como rascunho</button>
+            <button type="button" class="btn btn-claro btn-bloco" id="b-cancelar" hidden>Cancelar edição</button>
+          </aside>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/js/paginas/painel-sacolas.js"></script>
+</body>
+</html>

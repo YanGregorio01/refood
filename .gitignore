@@ -21,3 +21,5 @@ Thumbs.db
 # Saída do Understand Anything que não precisa ir para o git
 .ua/intermediate/
 .ua/diff-overlay.json
+.ua/.trash-*/
+.ua/tmp/

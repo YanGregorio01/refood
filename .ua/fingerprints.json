@@ -1,0 +1,5926 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "b508f0c8f9a6c443706ad06e8251d0ada2d03e6a",
+  "generatedAt": "2026-10-16T21:33:17.555Z",
+  "files": {
+    ".env.example": {
+      "filePath": ".env.example",
+      "contentHash": "8ddd2a53d25a594ab405d4658cb2949605a21c317dc281dad9d14e0c481390fd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": false
+    },
+    ".gitattributes": {
+      "filePath": ".gitattributes",
+      "contentHash": "bb4f69696c8fd6531adb7b8d1bd76c59d863a74ce5251eb3f2e1f5593bed055c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": false
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "561419ef84f26bc64c5febda2ccf380d171e9f1a7a5256ca3712c17f03582593",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 116,
+      "hasStructuralAnalysis": false
+    },
+    "app/__init__.py": {
+      "filePath": "app/__init__.py",
+      "contentHash": "1a68df5c38b19983f2a8854849c8589d41824f44ca6db71c9e8dd038c4dfcaab",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "app/config.py": {
+      "filePath": "app/config.py",
+      "contentHash": "51adb23d306c2ef137b57bed8c75591968f366c5a5696a98c9c3fd75408ab3e0",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "dotenv",
+          "specifiers": [
+            "load_dotenv"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "app/database.py": {
+      "filePath": "app/database.py",
+      "contentHash": "00b432aa02b1e20974e96f7c3675887715c381b1ef26c3b5a802d71c6e22d58e",
+      "functions": [
+        {
+          "name": "conectar",
+          "params": [],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "get_db",
+          "params": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "buscar_um",
+          "params": [
+            "conn",
+            "sql",
+            "params"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "buscar_todos",
+          "params": [
+            "conn",
+            "sql",
+            "params"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "inserir",
+          "params": [
+            "conn",
+            "sql",
+            "params"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "executar",
+          "params": [
+            "conn",
+            "sql",
+            "params"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "pymysql",
+          "specifiers": [
+            "pymysql"
+          ]
+        },
+        {
+          "source": "pymysql.cursors",
+          "specifiers": [
+            "DictCursor"
+          ]
+        },
+        {
+          "source": "app",
+          "specifiers": [
+            "config"
+          ]
+        }
+      ],
+      "exports": [
+        "conectar",
+        "get_db",
+        "buscar_um",
+        "buscar_todos",
+        "inserir",
+        "executar"
+      ],
+      "totalLines": 70,
+      "hasStructuralAnalysis": true
+    },
+    "app/esquemas.py": {
+      "filePath": "app/esquemas.py",
+      "contentHash": "0683885f3a3ef1a6e45c8beda7f1e8f6a4fb945f077bb2b0d7f05a999fc4f3cb",
+      "functions": [],
+      "classes": [
+        {
+          "name": "Cadastro",
+          "methods": [
+            "limpar_nome",
+            "validar_email"
+          ],
+          "properties": [
+            "nome",
+            "email",
+            "senha",
+            "telefone",
+            "tipo"
+          ],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "Login",
+          "methods": [
+            "normalizar_email"
+          ],
+          "properties": [
+            "email",
+            "senha"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "Endereco",
+          "methods": [],
+          "properties": [
+            "endereco",
+            "bairro",
+            "cidade",
+            "uf",
+            "cep",
+            "latitude",
+            "longitude"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "DadosLoja",
+          "methods": [],
+          "properties": [
+            "nome",
+            "cnpj",
+            "telefone",
+            "tipo",
+            "descricao",
+            "horario_abertura",
+            "horario_fechamento"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "DadosOng",
+          "methods": [],
+          "properties": [
+            "nome",
+            "cnpj",
+            "telefone",
+            "responsavel"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "Sacola",
+          "methods": [
+            "validar_foto",
+            "preco_menor_que_original",
+            "fim_depois_do_inicio"
+          ],
+          "properties": [
+            "nome",
+            "id_categoria",
+            "descricao",
+            "preco_original",
+            "preco",
+            "quantidade",
+            "peso_estimado_kg",
+            "data",
+            "inicio_retirada",
+            "fim_retirada",
+            "validade",
+            "foto",
+            "rascunho"
+          ],
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "NovaReserva",
+          "methods": [],
+          "properties": [
+            "id_alimento",
+            "quantidade",
+            "forma_pagamento"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "NovaAvaliacao",
+          "methods": [],
+          "properties": [
+            "nota",
+            "comentario"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "ConfirmarRetirada",
+          "methods": [
+            "normalizar_codigo"
+          ],
+          "properties": [
+            "codigo"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "NovaOfertaDoacao",
+          "methods": [],
+          "properties": [
+            "tipo_alimento",
+            "quantidade_kg",
+            "disponivel_ate",
+            "observacoes"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "NovaSolicitacao",
+          "methods": [],
+          "properties": [
+            "id_oferta",
+            "quantidade_kg",
+            "data_retirada",
+            "observacoes"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "imports": [
+        {
+          "source": "re",
+          "specifiers": [
+            "re"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "datetime",
+            "time"
+          ]
+        },
+        {
+          "source": "decimal",
+          "specifiers": [
+            "Decimal"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Literal",
+            "Optional"
+          ]
+        },
+        {
+          "source": "pydantic",
+          "specifiers": [
+            "BaseModel",
+            "Field",
+            "ValidationInfo",
+            "field_validator"
+          ]
+        }
+      ],
+      "exports": [
+        "Cadastro",
+        "Login",
+        "Endereco",
+        "DadosLoja",
+        "DadosOng",
+        "Sacola",
+        "NovaReserva",
+        "NovaAvaliacao",
+        "ConfirmarRetirada",
+        "NovaOfertaDoacao",
+        "NovaSolicitacao"
+      ],
+      "totalLines": 161,
+      "hasStructuralAnalysis": true
+    },
+    "app/main.py": {
+      "filePath": "app/main.py",
+      "contentHash": "ae2ea64e3c771520bd95ec63651a4e3733e33c28af28de18ed445392fe9cda6f",
+      "functions": [
+        {
+          "name": "_mensagem",
+          "params": [
+            "erro"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "erro_de_validacao",
+          "params": [
+            "request",
+            "exc"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "revalidar_arquivos_do_site",
+          "params": [
+            "request",
+            "chamar_proxima"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "rota_inexistente",
+          "params": [
+            "caminho"
+          ],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "mimetypes",
+          "specifiers": [
+            "mimetypes"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "FastAPI",
+            "Request"
+          ]
+        },
+        {
+          "source": "fastapi.exceptions",
+          "specifiers": [
+            "RequestValidationError"
+          ]
+        },
+        {
+          "source": "fastapi.middleware.cors",
+          "specifiers": [
+            "CORSMiddleware"
+          ]
+        },
+        {
+          "source": "fastapi.responses",
+          "specifiers": [
+            "JSONResponse"
+          ]
+        },
+        {
+          "source": "fastapi.staticfiles",
+          "specifiers": [
+            "StaticFiles"
+          ]
+        },
+        {
+          "source": "app",
+          "specifiers": [
+            "config"
+          ]
+        },
+        {
+          "source": "app.rotas",
+          "specifiers": [
+            "auth",
+            "comerciante",
+            "consumidor",
+            "doacoes",
+            "ong",
+            "publico"
+          ]
+        }
+      ],
+      "exports": [
+        "_mensagem",
+        "erro_de_validacao",
+        "revalidar_arquivos_do_site",
+        "rota_inexistente"
+      ],
+      "totalLines": 128,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/__init__.py": {
+      "filePath": "app/rotas/__init__.py",
+      "contentHash": "dbf79ba4638c03401368822cc64e8b50807621fcd7b405eaca08b23522ed2064",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/auth.py": {
+      "filePath": "app/rotas/auth.py",
+      "contentHash": "c414f965d6351895db2a698a5c09819c80399efe87e66f43843d6e00143ad4bc",
+      "functions": [
+        {
+          "name": "montar_conta",
+          "params": [
+            "conn",
+            "usuario"
+          ],
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "cadastrar",
+          "params": [
+            "dados",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "entrar",
+          "params": [
+            "dados",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "quem_sou_eu",
+          "params": [
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 2
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "Depends",
+            "HTTPException",
+            "status"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_um",
+            "get_db",
+            "inserir"
+          ]
+        },
+        {
+          "source": "app.esquemas",
+          "specifiers": [
+            "Cadastro",
+            "Login"
+          ]
+        },
+        {
+          "source": "app.seguranca",
+          "specifiers": [
+            "conferir_senha",
+            "criar_token",
+            "gerar_hash",
+            "usuario_atual"
+          ]
+        }
+      ],
+      "exports": [
+        "montar_conta",
+        "cadastrar",
+        "entrar",
+        "quem_sou_eu"
+      ],
+      "totalLines": 86,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/comerciante.py": {
+      "filePath": "app/rotas/comerciante.py",
+      "contentHash": "f1e0336ebecbc71a4f6352329b3cd0407694ffc42b1703db3a525511afa10d0d",
+      "functions": [
+        {
+          "name": "minha_loja",
+          "params": [
+            "usuario",
+            "conn"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "ver_loja",
+          "params": [
+            "loja"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "cadastrar_loja",
+          "params": [
+            "dados",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "editar_loja",
+          "params": [
+            "dados",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "resumo",
+          "params": [
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 42
+        },
+        {
+          "name": "_sacola_da_loja",
+          "params": [
+            "conn",
+            "id_alimento",
+            "id_loja",
+            "travar"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "_datas_da_sacola",
+          "params": [
+            "conn",
+            "dados"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_no_futuro",
+          "params": [
+            "conn",
+            "momento"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "minhas_sacolas",
+          "params": [
+            "periodo",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "_sacola_completa",
+          "params": [
+            "conn",
+            "id_alimento"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "cadastrar_sacola",
+          "params": [
+            "dados",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "editar_sacola",
+          "params": [
+            "id_alimento",
+            "dados",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "publicar_sacola",
+          "params": [
+            "id_alimento",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "remover_sacola",
+          "params": [
+            "id_alimento",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "reservas_da_loja",
+          "params": [
+            "status_reserva",
+            "periodo",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 38
+        },
+        {
+          "name": "confirmar_retirada",
+          "params": [
+            "dados",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 31
+        },
+        {
+          "name": "relatorios",
+          "params": [
+            "dias",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 79
+        },
+        {
+          "name": "previsao_de_sobras",
+          "params": [
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "datetime",
+            "time",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Literal",
+            "Optional"
+          ]
+        },
+        {
+          "source": "pymysql",
+          "specifiers": [
+            "pymysql"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "Depends",
+            "HTTPException",
+            "Query",
+            "status"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_todos",
+            "buscar_um",
+            "executar",
+            "get_db",
+            "inserir"
+          ]
+        },
+        {
+          "source": "app.esquemas",
+          "specifiers": [
+            "ConfirmarRetirada",
+            "DadosLoja",
+            "Sacola"
+          ]
+        },
+        {
+          "source": "app.seguranca",
+          "specifiers": [
+            "exigir"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "DIAS_CURTOS",
+            "atualizar_vencidos",
+            "nome_curto_sql",
+            "primeiro_dia_do_mes_sql",
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "minha_loja",
+        "ver_loja",
+        "cadastrar_loja",
+        "editar_loja",
+        "resumo",
+        "_sacola_da_loja",
+        "_datas_da_sacola",
+        "_no_futuro",
+        "minhas_sacolas",
+        "_sacola_completa",
+        "cadastrar_sacola",
+        "editar_sacola",
+        "publicar_sacola",
+        "remover_sacola",
+        "reservas_da_loja",
+        "confirmar_retirada",
+        "relatorios",
+        "previsao_de_sobras"
+      ],
+      "totalLines": 429,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/consumidor.py": {
+      "filePath": "app/rotas/consumidor.py",
+      "contentHash": "2d890944f05935b0c4681fc1b6c0aa8ae6da78369437445c0a5c734dce3dfa0c",
+      "functions": [
+        {
+          "name": "_impacto",
+          "params": [
+            "conn",
+            "id_usuario"
+          ],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "_reserva_do_usuario",
+          "params": [
+            "conn",
+            "id_reserva",
+            "id_usuario"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "inicio",
+          "params": [
+            "lat",
+            "lng",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "perfil",
+          "params": [
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "reservar",
+          "params": [
+            "dados",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 34
+        },
+        {
+          "name": "minhas_reservas",
+          "params": [
+            "status_reserva",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "ver_reserva",
+          "params": [
+            "id_reserva",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "cancelar_reserva",
+          "params": [
+            "id_reserva",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "avaliar",
+          "params": [
+            "id_reserva",
+            "dados",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Literal",
+            "Optional"
+          ]
+        },
+        {
+          "source": "pymysql",
+          "specifiers": [
+            "pymysql"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "Depends",
+            "HTTPException",
+            "Query",
+            "status"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_todos",
+            "buscar_um",
+            "executar",
+            "get_db",
+            "inserir"
+          ]
+        },
+        {
+          "source": "app.esquemas",
+          "specifiers": [
+            "NovaAvaliacao",
+            "NovaReserva"
+          ]
+        },
+        {
+          "source": "app.rotas.publico",
+          "specifiers": [
+            "CAMPOS_SACOLA",
+            "JUNCAO_SACOLA",
+            "SACOLA_DISPONIVEL",
+            "_ponto"
+          ]
+        },
+        {
+          "source": "app.seguranca",
+          "specifiers": [
+            "exigir"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "atualizar_vencidos",
+            "nivel",
+            "novo_codigo_retirada",
+            "primeiro_dia_do_mes_sql",
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "_impacto",
+        "_reserva_do_usuario",
+        "inicio",
+        "perfil",
+        "reservar",
+        "minhas_reservas",
+        "ver_reserva",
+        "cancelar_reserva",
+        "avaliar"
+      ],
+      "totalLines": 222,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/doacoes.py": {
+      "filePath": "app/rotas/doacoes.py",
+      "contentHash": "19131697517163f14ee7305e6fb743f18a0aa42e2d3a592451b92207614d5f15",
+      "functions": [
+        {
+          "name": "minhas_ofertas",
+          "params": [
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "nova_oferta",
+          "params": [
+            "dados",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "encerrar_oferta",
+          "params": [
+            "id_oferta",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "solicitacoes_recebidas",
+          "params": [
+            "status_doacao",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "responder_solicitacao",
+          "params": [
+            "id_doacao",
+            "acao",
+            "loja",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 28
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Literal",
+            "Optional"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "Depends",
+            "HTTPException",
+            "Query",
+            "status"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_todos",
+            "buscar_um",
+            "executar",
+            "get_db",
+            "inserir"
+          ]
+        },
+        {
+          "source": "app.esquemas",
+          "specifiers": [
+            "NovaOfertaDoacao"
+          ]
+        },
+        {
+          "source": "app.rotas.comerciante",
+          "specifiers": [
+            "minha_loja"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "atualizar_vencidos",
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "minhas_ofertas",
+        "nova_oferta",
+        "encerrar_oferta",
+        "solicitacoes_recebidas",
+        "responder_solicitacao"
+      ],
+      "totalLines": 126,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/ong.py": {
+      "filePath": "app/rotas/ong.py",
+      "contentHash": "a9f1538ac65c7795a292acf856e6ceced487be6161f75e9d1c75664d2563d46e",
+      "functions": [
+        {
+          "name": "minha_ong",
+          "params": [
+            "usuario",
+            "conn"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "ver_perfil",
+          "params": [
+            "ong"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "cadastrar_ong",
+          "params": [
+            "dados",
+            "usuario",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "editar_ong",
+          "params": [
+            "dados",
+            "ong",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "mapa_de_doacoes",
+          "params": [
+            "raio_km",
+            "tipo",
+            "busca",
+            "ong",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "solicitar_doacao",
+          "params": [
+            "dados",
+            "ong",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 29
+        },
+        {
+          "name": "_solicitacao",
+          "params": [
+            "conn",
+            "id_doacao",
+            "id_ong"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "_intervalo_do_mes",
+          "params": [
+            "mes"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "minhas_solicitacoes",
+          "params": [
+            "status_doacao",
+            "mes",
+            "busca",
+            "ong",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 26
+        },
+        {
+          "name": "cancelar_solicitacao",
+          "params": [
+            "id_doacao",
+            "ong",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "resumo_do_mes",
+          "params": [
+            "mes",
+            "ong",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 35
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "typing",
+          "specifiers": [
+            "Literal",
+            "Optional"
+          ]
+        },
+        {
+          "source": "pymysql",
+          "specifiers": [
+            "pymysql"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "Depends",
+            "HTTPException",
+            "Query",
+            "status"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_todos",
+            "buscar_um",
+            "executar",
+            "get_db",
+            "inserir"
+          ]
+        },
+        {
+          "source": "app.esquemas",
+          "specifiers": [
+            "DadosOng",
+            "NovaSolicitacao"
+          ]
+        },
+        {
+          "source": "app.seguranca",
+          "specifiers": [
+            "exigir"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "atualizar_vencidos",
+            "distancia_sql",
+            "kg_texto",
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "minha_ong",
+        "ver_perfil",
+        "cadastrar_ong",
+        "editar_ong",
+        "mapa_de_doacoes",
+        "solicitar_doacao",
+        "_solicitacao",
+        "_intervalo_do_mes",
+        "minhas_solicitacoes",
+        "cancelar_solicitacao",
+        "resumo_do_mes"
+      ],
+      "totalLines": 257,
+      "hasStructuralAnalysis": true
+    },
+    "app/rotas/publico.py": {
+      "filePath": "app/rotas/publico.py",
+      "contentHash": "d6988f17483cd5caa821fc60961ffd9b8a7cbb1104d66c47f74b3c97493c5620",
+      "functions": [
+        {
+          "name": "_ponto",
+          "params": [
+            "lat",
+            "lng"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "health",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "impacto",
+          "params": [
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "listar_categorias",
+          "params": [
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "catalogo",
+          "params": [
+            "lat",
+            "lng",
+            "raio_km",
+            "categoria",
+            "estabelecimento",
+            "busca",
+            "preco_max",
+            "disponivel_agora",
+            "ordem",
+            "limite",
+            "pagina",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 44
+        },
+        {
+          "name": "detalhe_sacola",
+          "params": [
+            "id_alimento",
+            "lat",
+            "lng",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "mapa_estabelecimentos",
+          "params": [
+            "lat",
+            "lng",
+            "raio_km",
+            "tipo",
+            "busca",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 46
+        },
+        {
+          "name": "pagina_estabelecimento",
+          "params": [
+            "id_estabelecimento",
+            "lat",
+            "lng",
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 29
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "typing",
+          "specifiers": [
+            "Literal",
+            "Optional"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "APIRouter",
+            "Depends",
+            "HTTPException",
+            "Query"
+          ]
+        },
+        {
+          "source": "fastapi.responses",
+          "specifiers": [
+            "JSONResponse"
+          ]
+        },
+        {
+          "source": "app",
+          "specifiers": [
+            "config"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_todos",
+            "buscar_um",
+            "conectar",
+            "get_db"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "distancia_sql",
+            "nome_curto_sql",
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "_ponto",
+        "health",
+        "impacto",
+        "listar_categorias",
+        "catalogo",
+        "detalhe_sacola",
+        "mapa_estabelecimentos",
+        "pagina_estabelecimento"
+      ],
+      "totalLines": 234,
+      "hasStructuralAnalysis": true
+    },
+    "app/seguranca.py": {
+      "filePath": "app/seguranca.py",
+      "contentHash": "fd73ff2311ed4821ed395583bd47a9c7bba178c0b205adef29a4453d19b6487d",
+      "functions": [
+        {
+          "name": "gerar_hash",
+          "params": [
+            "senha"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "conferir_senha",
+          "params": [
+            "senha",
+            "senha_hash"
+          ],
+          "returnType": "bool",
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "criar_token",
+          "params": [
+            "id_usuario",
+            "tipo"
+          ],
+          "returnType": "str",
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "_nao_autorizado",
+          "params": [
+            "mensagem"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "usuario_atual",
+          "params": [
+            "credenciais",
+            "conn"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "exigir",
+          "params": [
+            "*tipos"
+          ],
+          "exported": true,
+          "lineCount": 13
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timedelta",
+            "timezone"
+          ]
+        },
+        {
+          "source": "bcrypt",
+          "specifiers": [
+            "bcrypt"
+          ]
+        },
+        {
+          "source": "jwt",
+          "specifiers": [
+            "jwt"
+          ]
+        },
+        {
+          "source": "fastapi",
+          "specifiers": [
+            "Depends",
+            "HTTPException",
+            "status"
+          ]
+        },
+        {
+          "source": "fastapi.security",
+          "specifiers": [
+            "HTTPAuthorizationCredentials",
+            "HTTPBearer"
+          ]
+        },
+        {
+          "source": "app",
+          "specifiers": [
+            "config"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_um",
+            "get_db"
+          ]
+        }
+      ],
+      "exports": [
+        "gerar_hash",
+        "conferir_senha",
+        "criar_token",
+        "_nao_autorizado",
+        "usuario_atual",
+        "exigir"
+      ],
+      "totalLines": 94,
+      "hasStructuralAnalysis": true
+    },
+    "app/util.py": {
+      "filePath": "app/util.py",
+      "contentHash": "036bd4cdf6340e78cc058972a2b5b95d556c216f4143308f97ae879432c5098d",
+      "functions": [
+        {
+          "name": "distancia_sql",
+          "params": [
+            "tabela"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "nome_curto_sql",
+          "params": [
+            "coluna"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "refeicoes",
+          "params": [
+            "kg"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "kg_texto",
+          "params": [
+            "kg"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "nivel",
+          "params": [
+            "kg"
+          ],
+          "exported": true,
+          "lineCount": 18
+        },
+        {
+          "name": "atualizar_vencidos",
+          "params": [
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "novo_codigo_retirada",
+          "params": [
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "primeiro_dia_do_mes_sql",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "math",
+          "specifiers": [
+            "math"
+          ]
+        },
+        {
+          "source": "secrets",
+          "specifiers": [
+            "secrets"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_um",
+            "executar"
+          ]
+        }
+      ],
+      "exports": [
+        "distancia_sql",
+        "nome_curto_sql",
+        "refeicoes",
+        "kg_texto",
+        "nivel",
+        "atualizar_vencidos",
+        "novo_codigo_retirada",
+        "primeiro_dia_do_mes_sql"
+      ],
+      "totalLines": 95,
+      "hasStructuralAnalysis": true
+    },
+    "docs/API.md": {
+      "filePath": "docs/API.md",
+      "contentHash": "248d25f023f362db9d4a967b64e44c9369151e7c6e5161342025b3971cdfd750",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 399,
+      "hasStructuralAnalysis": false
+    },
+    "docs/DECISOES.md": {
+      "filePath": "docs/DECISOES.md",
+      "contentHash": "04e3f28f8afdb5902e6a659c7b31e50cd5010de7c28921ba91a765011f559a70",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 60,
+      "hasStructuralAnalysis": false
+    },
+    "docs/ENUNCIADO-2a-ENTREGA.md": {
+      "filePath": "docs/ENUNCIADO-2a-ENTREGA.md",
+      "contentHash": "ff05378f39fe66df09664ae95d29fcc2fe39fdc5105dbb6ecd4ca84832cae287",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 226,
+      "hasStructuralAnalysis": false
+    },
+    "docs/ETAPAS-E-DIVISAO.md": {
+      "filePath": "docs/ETAPAS-E-DIVISAO.md",
+      "contentHash": "28acea6e0100a6ac92a2cc5048fa9777067b6112a5a3a87dc581a63432ca796d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 291,
+      "hasStructuralAnalysis": false
+    },
+    "docs/REQUISITOS.md": {
+      "filePath": "docs/REQUISITOS.md",
+      "contentHash": "844e3e166553a479bb9247ba399da4d4a54477bb16891b6e125b4784265eb4d6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 73,
+      "hasStructuralAnalysis": false
+    },
+    "docs/ROTEIRO-DE-ESTUDO.md": {
+      "filePath": "docs/ROTEIRO-DE-ESTUDO.md",
+      "contentHash": "f1ecdcc78dcb417453ab2ad22d8564d29064b6f8ce0f3a99f6cab047f5a3443c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 155,
+      "hasStructuralAnalysis": false
+    },
+    "docs/ia/RESULTADO.md": {
+      "filePath": "docs/ia/RESULTADO.md",
+      "contentHash": "b2991bdcaa5292dbb5d27aabd335398feaaa7deb5218e9fa53652aab271603cd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 30,
+      "hasStructuralAnalysis": false
+    },
+    "ia/__init__.py": {
+      "filePath": "ia/__init__.py",
+      "contentHash": "3dc56dcd463e469dec6c5b66d5ec269dc22efd4c56456b34a094e6094ff26016",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "ia/gerar_historico.py": {
+      "filePath": "ia/gerar_historico.py",
+      "contentHash": "1161911daae7ecdf90225574bd9218ec7d376621aaa5db2f95c9f19e7196ddd4",
+      "functions": [
+        {
+          "name": "_hora",
+          "params": [
+            "texto"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "_juntar",
+          "params": [
+            "dia",
+            "hora"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "gerar",
+          "params": [
+            "nome_banco"
+          ],
+          "exported": true,
+          "lineCount": 142
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "random",
+          "specifiers": [
+            "random"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "datetime",
+            "time",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "pymysql",
+          "specifiers": [
+            "pymysql"
+          ]
+        },
+        {
+          "source": "app",
+          "specifiers": [
+            "config"
+          ]
+        }
+      ],
+      "exports": [
+        "_hora",
+        "_juntar",
+        "gerar"
+      ],
+      "totalLines": 236,
+      "hasStructuralAnalysis": true
+    },
+    "ia/previsao.py": {
+      "filePath": "ia/previsao.py",
+      "contentHash": "50a26f5eff7774ec485df139c25c35eaf508d6af95c3047536bfff283de03322",
+      "functions": [
+        {
+          "name": "carregar_historico",
+          "params": [
+            "conn"
+          ],
+          "returnType": "pd.DataFrame",
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "treinar",
+          "params": [
+            "df"
+          ],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "_modelo",
+          "params": [
+            "conn"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "prever_sobras",
+          "params": [
+            "conn",
+            "id_estabelecimento",
+            "dias"
+          ],
+          "returnType": "dict",
+          "exported": true,
+          "lineCount": 67
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "time",
+          "specifiers": [
+            "relogio"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "pandas",
+          "specifiers": [
+            "pd"
+          ]
+        },
+        {
+          "source": "sklearn.compose",
+          "specifiers": [
+            "ColumnTransformer"
+          ]
+        },
+        {
+          "source": "sklearn.linear_model",
+          "specifiers": [
+            "LinearRegression"
+          ]
+        },
+        {
+          "source": "sklearn.metrics",
+          "specifiers": [
+            "mean_absolute_error",
+            "r2_score"
+          ]
+        },
+        {
+          "source": "sklearn.model_selection",
+          "specifiers": [
+            "train_test_split"
+          ]
+        },
+        {
+          "source": "sklearn.pipeline",
+          "specifiers": [
+            "Pipeline"
+          ]
+        },
+        {
+          "source": "sklearn.preprocessing",
+          "specifiers": [
+            "OneHotEncoder"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_todos"
+          ]
+        }
+      ],
+      "exports": [
+        "carregar_historico",
+        "treinar",
+        "_modelo",
+        "prever_sobras"
+      ],
+      "totalLines": 166,
+      "hasStructuralAnalysis": true
+    },
+    "ia/relatorio.py": {
+      "filePath": "ia/relatorio.py",
+      "contentHash": "1508d6223df28960db78e46ec92d4e92ad09ddd0175e140e6128557fe57e0801",
+      "functions": [
+        {
+          "name": "main",
+          "params": [],
+          "exported": true,
+          "lineCount": 84
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "matplotlib",
+          "specifiers": [
+            "matplotlib"
+          ]
+        },
+        {
+          "source": "matplotlib.pyplot",
+          "specifiers": [
+            "plt"
+          ]
+        },
+        {
+          "source": "numpy",
+          "specifiers": [
+            "np"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "conectar"
+          ]
+        },
+        {
+          "source": "ia.previsao",
+          "specifiers": [
+            "COLUNAS",
+            "DIAS",
+            "carregar_historico",
+            "treinar"
+          ]
+        }
+      ],
+      "exports": [
+        "main"
+      ],
+      "totalLines": 117,
+      "hasStructuralAnalysis": true
+    },
+    "pytest.ini": {
+      "filePath": "pytest.ini",
+      "contentHash": "d6a6411149520371892f2218ab8d30dd095263cbd09c66757a1faf0012e7c474",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": false
+    },
+    "requirements.txt": {
+      "filePath": "requirements.txt",
+      "contentHash": "7bc91497b3b653b4af6dba1df58e05513d6e0be6e5a9005c5698fd43a30f32cf",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 19,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/__init__.py": {
+      "filePath": "scripts/__init__.py",
+      "contentHash": "f33adab9c494bb3f256978722098c28d600a3119d1477f05a42e5fa6955c9e46",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 2,
+      "hasStructuralAnalysis": true
+    },
+    "scripts/preparar_banco.py": {
+      "filePath": "scripts/preparar_banco.py",
+      "contentHash": "dece18129702e552c0182a25668b062f9ecec38574cc9da0c85357978396770c",
+      "functions": [
+        {
+          "name": "dividir_comandos",
+          "params": [
+            "texto"
+          ],
+          "exported": true,
+          "lineCount": 24
+        },
+        {
+          "name": "rodar_arquivo",
+          "params": [
+            "conn",
+            "nome_arquivo",
+            "nome_banco"
+          ],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "preparar",
+          "params": [
+            "nome_banco",
+            "com_historico"
+          ],
+          "exported": true,
+          "lineCount": 21
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "sys",
+          "specifiers": [
+            "sys"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "pymysql",
+          "specifiers": [
+            "pymysql"
+          ]
+        },
+        {
+          "source": "app",
+          "specifiers": [
+            "config"
+          ]
+        }
+      ],
+      "exports": [
+        "dividir_comandos",
+        "rodar_arquivo",
+        "preparar"
+      ],
+      "totalLines": 93,
+      "hasStructuralAnalysis": true
+    },
+    "sql/dados_exemplo.sql": {
+      "filePath": "sql/dados_exemplo.sql",
+      "contentHash": "da7995e24123ac1a65ab94e0193b0ce0d32c0ba2396475b8a0eccbff9076059d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 186,
+      "hasStructuralAnalysis": false
+    },
+    "sql/schema.sql": {
+      "filePath": "sql/schema.sql",
+      "contentHash": "78a1e36b6ec120b3ba3c0563bdc0844ee6ea1b252ce44a47cc94abd531f27c7a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 198,
+      "hasStructuralAnalysis": false
+    },
+    "static/catalogo.html": {
+      "filePath": "static/catalogo.html",
+      "contentHash": "10d965803c59ae3253520d6d42fd5d7f1ce3601f3fc95825fd3ec59ea59cb0cb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 117,
+      "hasStructuralAnalysis": false
+    },
+    "static/checkout.html": {
+      "filePath": "static/checkout.html",
+      "contentHash": "b565ddeb6ad6e7e742aeda76b76dbe0dafc5cf8879ad83de45ff115ec58e2476",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 147,
+      "hasStructuralAnalysis": false
+    },
+    "static/completar-cadastro.html": {
+      "filePath": "static/completar-cadastro.html",
+      "contentHash": "92f418e81dc7639977aec762cf7dc7bee050ed97ec75cff841877d3fdd95383d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 173,
+      "hasStructuralAnalysis": false
+    },
+    "static/css/refood.css": {
+      "filePath": "static/css/refood.css",
+      "contentHash": "b4c292eb5586dd2260b0e3f0ae5f3db7980005f9c95748ab5f5ff6a2ce86cc15",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 282,
+      "hasStructuralAnalysis": false
+    },
+    "static/estabelecimento.html": {
+      "filePath": "static/estabelecimento.html",
+      "contentHash": "2c3adbf05241410874b6513916d4c328df5afc553403ba94d8c89ec643fa8e0f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 129,
+      "hasStructuralAnalysis": false
+    },
+    "static/index.html": {
+      "filePath": "static/index.html",
+      "contentHash": "112c8c74b04fd0ce2ac80eda970cef46033ac7cff5db97636b75733b20d7e887",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 133,
+      "hasStructuralAnalysis": false
+    },
+    "static/inicio.html": {
+      "filePath": "static/inicio.html",
+      "contentHash": "7ede216406d59e964eaa2304e1f3676a8df771bc6f919eae03d9ad3a9ec6386d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 125,
+      "hasStructuralAnalysis": false
+    },
+    "static/js/api.js": {
+      "filePath": "static/js/api.js",
+      "contentHash": "d56dfecee79532eed094dba69a1e727030060676ca5f1c088f7b10699d5739c9",
+      "functions": [
+        {
+          "name": "lerArmazenado",
+          "params": [
+            "chave"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "sessao",
+          "params": [],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "salvarSessao",
+          "params": [
+            "token",
+            "conta"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "sair",
+          "params": [],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "irParaLogin",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "api",
+          "params": [
+            "caminho"
+          ],
+          "exported": true,
+          "lineCount": 33
+        },
+        {
+          "name": "exigirLogin",
+          "params": [
+            "...tipos"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [
+        {
+          "name": "ErroApi",
+          "methods": [
+            "constructor"
+          ],
+          "properties": [],
+          "exported": true,
+          "lineCount": 7
+        }
+      ],
+      "imports": [],
+      "exports": [
+        "ErroApi",
+        "sessao",
+        "salvarSessao",
+        "sair",
+        "api",
+        "exigirLogin"
+      ],
+      "totalLines": 124,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/cliente.js": {
+      "filePath": "static/js/cliente.js",
+      "contentHash": "c3af8c23ae40e56bbe8ac2c4292339956e4ef72ff479136c6189e9c69c9fe30c",
+      "functions": [
+        {
+          "name": "diaComAno",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "diaNaFrase",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "horarioRetirada",
+          "params": [
+            "inicio",
+            "fim"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "ehHoje",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "plural",
+          "params": [
+            "n",
+            "singular",
+            "varios"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "enderecoCompleto",
+          "params": [
+            "lugar"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "linkComoChegar",
+          "params": [
+            "lat",
+            "lng"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "svg",
+          "params": [
+            "desenho"
+          ],
+          "exported": false,
+          "lineCount": 2
+        },
+        {
+          "name": "iconeCliente",
+          "params": [
+            "nome"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "avatar",
+          "params": [
+            "conta"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "barraProgresso",
+          "params": [
+            "percentual",
+            "rotulo"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "gerarQrCode",
+          "params": [
+            "elemento",
+            "codigo"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "mostrarErro",
+          "params": [
+            "elemento",
+            "mensagem"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "abrirModal",
+          "params": [
+            "html"
+          ],
+          "exported": true,
+          "lineCount": 42
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "dia",
+            "esc",
+            "hora",
+            "numero"
+          ]
+        }
+      ],
+      "exports": [
+        "FORMAS_PAGAMENTO",
+        "diaComAno",
+        "diaNaFrase",
+        "horarioRetirada",
+        "ehHoje",
+        "plural",
+        "enderecoCompleto",
+        "linkComoChegar",
+        "iconeCliente",
+        "avatar",
+        "barraProgresso",
+        "gerarQrCode",
+        "mostrarErro",
+        "abrirModal"
+      ],
+      "totalLines": 167,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/ong-comum.js": {
+      "filePath": "static/js/ong-comum.js",
+      "contentHash": "e47621abae84386eb1b04536e3ad694783b738df0ebdc160afde2990bec31475",
+      "functions": [
+        {
+          "name": "refeicoes",
+          "params": [
+            "kg"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "plural",
+          "params": [
+            "n",
+            "singular"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "doisDigitos",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "paraMes",
+          "params": [
+            "d"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "nomeDoMes",
+          "params": [
+            "aaaaMm"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "mesPorExtenso",
+          "params": [
+            "aaaaMm"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "dataCompleta",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "prazoDaOferta",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "comPausa",
+          "params": [
+            "funcao"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "chaveCidade",
+          "params": [
+            "conta"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "cidadeDaOng",
+          "params": [
+            "conta"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "atualizarCidade",
+          "params": [
+            "conta"
+          ],
+          "exported": true,
+          "lineCount": 12
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "dia",
+            "hora"
+          ]
+        }
+      ],
+      "exports": [
+        "refeicoes",
+        "plural",
+        "paraMes",
+        "nomeDoMes",
+        "mesPorExtenso",
+        "dataCompleta",
+        "prazoDaOferta",
+        "comPausa",
+        "cidadeDaOng",
+        "atualizarCidade"
+      ],
+      "totalLines": 109,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/catalogo.js": {
+      "filePath": "static/js/paginas/catalogo.js",
+      "contentHash": "cffab191ba0004012a98b9968b6e5d3c4f111e6c34f330aeaf7d3100fa9acf3a",
+      "functions": [
+        {
+          "name": "lerFiltrosDaUrl",
+          "params": [],
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "mostrarFiltrosNaTela",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "atualizarUrl",
+          "params": [],
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "textoTotal",
+          "params": [
+            "total"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 57
+        },
+        {
+          "name": "carregarCategorias",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "mostrarAvisoDaLoja",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "iniciar",
+          "params": [],
+          "exported": false,
+          "lineCount": 9
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "cardSacola",
+            "esc",
+            "localizacao",
+            "montarRodape",
+            "montarTopo",
+            "parametros",
+            "toast",
+            "vazio"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 236,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/checkout.js": {
+      "filePath": "static/js/paginas/checkout.js",
+      "contentHash": "19b35061c242f756a0aafb284c1ba1992acff08824e80894165890504f306dbe",
+      "functions": [
+        {
+          "name": "mostrarPedido",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "atualizarResumo",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "bloquear",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 23
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "esc",
+            "imagem",
+            "kg",
+            "montarRodape",
+            "montarTopo",
+            "moeda",
+            "parametros"
+          ]
+        },
+        {
+          "source": "/js/cliente.js",
+          "specifiers": [
+            "horarioRetirada",
+            "mostrarErro",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 140,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/completar-cadastro.js": {
+      "filePath": "static/js/paginas/completar-cadastro.js",
+      "contentHash": "6bf0fc1344ce32e7fa256e1947ecbd4da44432c02e1b6ef5d8ae192b48319bd5",
+      "functions": [
+        {
+          "name": "prepararPagina",
+          "params": [
+            "paginaInicial"
+          ],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "preencher",
+          "params": [
+            "dados"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "criarMapa",
+          "params": [],
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "marcar",
+          "params": [
+            "lat",
+            "lng"
+          ],
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "montarCorpo",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "iniciar",
+          "params": [],
+          "exported": false,
+          "lineCount": 20
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin",
+            "salvarSessao",
+            "sessao"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "montarRodape",
+            "montarTopo",
+            "mostrarErrosDoFormulario",
+            "TIPOS_LOJA",
+            "toast"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 226,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/estabelecimento.js": {
+      "filePath": "static/js/paginas/estabelecimento.js",
+      "contentHash": "144eaed3de542e54d447c26768340e9911987b88d2c86f39721f0cddb5aab85a",
+      "functions": [
+        {
+          "name": "abertaAgora",
+          "params": [
+            "abre",
+            "fecha"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "textoHorario",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "mostrarCabecalho",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "mostrarSacolas",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "mostrarAvaliacoes",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "mostrarLocal",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 27
+        },
+        {
+          "name": "mostrarProblema",
+          "params": [
+            "titulo",
+            "texto",
+            "acao"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "iniciar",
+          "params": [],
+          "exported": false,
+          "lineCount": 26
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "cardSacola",
+            "data",
+            "esc",
+            "estrelas",
+            "hora",
+            "imagem",
+            "localizacao",
+            "montarRodape",
+            "montarTopo",
+            "numero",
+            "parametros",
+            "relativo",
+            "TIPOS_LOJA",
+            "vazio"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 146,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/index.js": {
+      "filePath": "static/js/paginas/index.js",
+      "contentHash": "27322391a614ea8b18cab8e9877821796126d1de976f61b774f6af7f0beabbf7",
+      "functions": [
+        {
+          "name": "carregarImpacto",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "carregarParceiros",
+          "params": [],
+          "exported": false,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "esc",
+            "imagem",
+            "montarRodape",
+            "montarTopo",
+            "moeda",
+            "numero"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 36,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/inicio.js": {
+      "filePath": "static/js/paginas/inicio.js",
+      "contentHash": "ef622facc66d3fc37d7d47cda49c60a2d502ca926929b1a755ff2587fd626010",
+      "functions": [
+        {
+          "name": "saudacao",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "relogio",
+          "params": [
+            "segundos"
+          ],
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "atualizarCronometros",
+          "params": [],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "cardPerto",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "htmlImpacto",
+          "params": [
+            "impacto"
+          ],
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "itemLoja",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "localComLimite",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 29
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "distancia",
+            "esc",
+            "icone",
+            "imagem",
+            "kg",
+            "localizacao",
+            "montarRodape",
+            "montarTopo",
+            "moeda",
+            "numero",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/cliente.js",
+          "specifiers": [
+            "barraProgresso",
+            "iconeCliente",
+            "mostrarErro",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 158,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/login.js": {
+      "filePath": "static/js/paginas/login.js",
+      "contentHash": "1aa0307b97d3194f2d2206be7e38dddca1578d4cbc6b6491df0b63db77aef07d",
+      "functions": [
+        {
+          "name": "mostrarAba",
+          "params": [
+            "nome"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "destinoDepoisDoLogin",
+          "params": [
+            "conta"
+          ],
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "enviar",
+          "params": [
+            "form",
+            "caminho",
+            "corpo",
+            "textoEsperando"
+          ],
+          "exported": false,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "sair",
+            "salvarSessao",
+            "sessao"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "montarRodape",
+            "montarTopo",
+            "mostrarErrosDoFormulario",
+            "parametros"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 140,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/mapa.js": {
+      "filePath": "static/js/paginas/mapa.js",
+      "contentHash": "1fbb85f4fc740bc4c100d5c2a0aac2a24e9f08f4426c99cce03beb6b3b0a31fd",
+      "functions": [
+        {
+          "name": "SVG",
+          "params": [
+            "caminhos"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "corDoTipo",
+          "params": [
+            "tipo"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "nomeDoTipo",
+          "params": [
+            "tipo"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "quando",
+          "params": [
+            "iso"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "textoAvaliacoes",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "enderecoCompleto",
+          "params": [
+            "l"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "etiquetaTipo",
+          "params": [
+            "l"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "criarMapa",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "marcarVoce",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "iconeDaLoja",
+          "params": [
+            "loja",
+            "ativa"
+          ],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "desenharPinos",
+          "params": [],
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "desenharRaio",
+          "params": [],
+          "exported": false,
+          "lineCount": 8
+        },
+        {
+          "name": "enquadrar",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "desenharPainel",
+          "params": [
+            "loja"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "desenharLista",
+          "params": [],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "selecionar",
+          "params": [
+            "id"
+          ],
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "montarChipsTipo",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "mostrarModo",
+          "params": [
+            "modo"
+          ],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "iniciar",
+          "params": [],
+          "exported": false,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "dia",
+            "distancia",
+            "esc",
+            "hora",
+            "icone",
+            "imagem",
+            "localizacao",
+            "montarRodape",
+            "montarTopo",
+            "numero",
+            "TIPOS_LOJA",
+            "toast",
+            "vazio"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 334,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/ong-mapa.js": {
+      "filePath": "static/js/paginas/ong-mapa.js",
+      "contentHash": "b183c704d6ef0472ce2242c59da40b791f2e7a891b45fbf30086dcd80e3c28b5",
+      "functions": [
+        {
+          "name": "criarMapa",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "iconeDoPino",
+          "params": [
+            "classe",
+            "svg"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "balao",
+          "params": [
+            "o"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "desenharPinos",
+          "params": [
+            "ong"
+          ],
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "selecionar",
+          "params": [
+            "id",
+            "origem"
+          ],
+          "exported": false,
+          "lineCount": 18
+        },
+        {
+          "name": "cardOferta",
+          "params": [
+            "o"
+          ],
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "mostrarOfertas",
+          "params": [
+            "filtros"
+          ],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "mostrarCarregando",
+          "params": [],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 24
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "distancia",
+            "esc",
+            "icone",
+            "imagem",
+            "kg",
+            "montarPainel",
+            "numero",
+            "TIPOS_LOJA",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/ong-comum.js",
+          "specifiers": [
+            "atualizarCidade",
+            "cidadeDaOng",
+            "comPausa",
+            "plural",
+            "prazoDaOferta"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 221,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/ong-recebimentos.js": {
+      "filePath": "static/js/paginas/ong-recebimentos.js",
+      "contentHash": "c8383095f2f5702c7238412c1963ce90cc9c96917ee040ce3c086dc5c4bb6ffb",
+      "functions": [
+        {
+          "name": "preencherMeses",
+          "params": [],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "mesAnterior",
+          "params": [
+            "aaaaMm"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "carregarResumo",
+          "params": [],
+          "exported": false,
+          "lineCount": 38
+        },
+        {
+          "name": "etiqueta",
+          "params": [
+            "status"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "itemRecebimento",
+          "params": [
+            "p"
+          ],
+          "exported": false,
+          "lineCount": 21
+        },
+        {
+          "name": "agruparPorMes",
+          "params": [
+            "itens"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "mostrarLista",
+          "params": [
+            "filtros"
+          ],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "carregarLista",
+          "params": [],
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "celula",
+          "params": [
+            "valor"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "dataPlanilha",
+          "params": [
+            "iso"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "exportar",
+          "params": [],
+          "exported": false,
+          "lineCount": 26
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "badge",
+            "esc",
+            "imagem",
+            "kg",
+            "montarPainel",
+            "numero",
+            "STATUS_DOACAO",
+            "toast",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/ong-comum.js",
+          "specifiers": [
+            "atualizarCidade",
+            "cidadeDaOng",
+            "comPausa",
+            "dataCompleta",
+            "mesPorExtenso",
+            "nomeDoMes",
+            "paraMes",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 237,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/ong-solicitacoes.js": {
+      "filePath": "static/js/paginas/ong-solicitacoes.js",
+      "contentHash": "4f45415aa4892975f0dc30516817c413b611e893affb4dac3d5ed82d77c475aa",
+      "functions": [
+        {
+          "name": "linkComoChegar",
+          "params": [
+            "p"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "cardAndamento",
+          "params": [
+            "p"
+          ],
+          "exported": false,
+          "lineCount": 31
+        },
+        {
+          "name": "itemEncerrado",
+          "params": [
+            "p"
+          ],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "mostrar",
+          "params": [],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "destacarNovo",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "abrirModal",
+          "params": [
+            "pedido",
+            "botao"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "fecharModal",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "ocupado",
+          "params": [
+            "sim"
+          ],
+          "exported": false,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "badge",
+            "data",
+            "diaHora",
+            "esc",
+            "imagem",
+            "kg",
+            "montarPainel",
+            "parametros",
+            "relativo",
+            "STATUS_DOACAO",
+            "toast",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/ong-comum.js",
+          "specifiers": [
+            "atualizarCidade",
+            "cidadeDaOng",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 215,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/ong-solicitar.js": {
+      "filePath": "static/js/paginas/ong-solicitar.js",
+      "contentHash": "b2279e9810a52005350d6ff9ec28fa604c16bf204550ddd8de184d71f34c6882",
+      "functions": [
+        {
+          "name": "doisDigitos",
+          "params": [
+            "n"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "paraData",
+          "params": [
+            "d"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "paraHora",
+          "params": [
+            "d"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "retiradaEscolhida",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "horarioPadrao",
+          "params": [],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "ajustarLimitesDoHorario",
+          "params": [],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "mostrarSemOferta",
+          "params": [
+            "titulo",
+            "texto"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "preencher",
+          "params": [
+            "ong"
+          ],
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "atualizarResumo",
+          "params": [],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 24
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "dia",
+            "diaHora",
+            "distancia",
+            "esc",
+            "hora",
+            "imagem",
+            "kg",
+            "montarPainel",
+            "mostrarErrosDoFormulario",
+            "parametros",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/ong-comum.js",
+          "specifiers": [
+            "atualizarCidade",
+            "cidadeDaOng",
+            "plural",
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 184,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/painel-dashboard.js": {
+      "filePath": "static/js/paginas/painel-dashboard.js",
+      "contentHash": "59929d6b5544fd974a57b739414b6a4e6c45a9a4ab6e017ce6ff7396a86f6d34",
+      "functions": [
+        {
+          "name": "carregarResumo",
+          "params": [],
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "desenharGrafico",
+          "params": [
+            "dias"
+          ],
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "situacao",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "mostrarUltimasReservas",
+          "params": [
+            "reservas"
+          ],
+          "exported": false,
+          "lineCount": 17
+        },
+        {
+          "name": "carregarPrevisao",
+          "params": [],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "barraDoDia",
+          "params": [
+            "d"
+          ],
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "textoDoModelo",
+          "params": [
+            "m"
+          ],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "mostrarDetalhe",
+          "params": [
+            "dataDoDia"
+          ],
+          "exported": false,
+          "lineCount": 33
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "STATUS_RESERVA",
+            "badge",
+            "dia",
+            "esc",
+            "hojePorExtenso",
+            "hora",
+            "kg",
+            "moeda",
+            "montarPainel",
+            "numero",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/painel-comum.js",
+          "specifiers": [
+            "diaMes",
+            "esqueletos",
+            "graficoDeBarras",
+            "inicial",
+            "localDaLoja",
+            "momento",
+            "mostrarErro"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 185,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/painel-doacoes.js": {
+      "filePath": "static/js/paginas/painel-doacoes.js",
+      "contentHash": "538717de317622ba54a80ba661832a9f82b1606a1a4939f32977613a67aa6574",
+      "functions": [
+        {
+          "name": "preencherPadrao",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "carregarOfertas",
+          "params": [],
+          "exported": false,
+          "lineCount": 14
+        },
+        {
+          "name": "itemDaOferta",
+          "params": [
+            "o"
+          ],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "carregarSolicitacoes",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "acoesDoPedido",
+          "params": [
+            "p"
+          ],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "itemDoPedido",
+          "params": [
+            "p"
+          ],
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "recarregarTudo",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "STATUS_DOACAO",
+            "badge",
+            "diaHora",
+            "esc",
+            "kg",
+            "montarPainel",
+            "mostrarErrosDoFormulario",
+            "numero",
+            "toast",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/painel-comum.js",
+          "specifiers": [
+            "confirmar",
+            "dataISO",
+            "enquantoEspera",
+            "esqueletos",
+            "localDaLoja",
+            "momento",
+            "mostrarErro"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 218,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/painel-pedidos.js": {
+      "filePath": "static/js/paginas/painel-pedidos.js",
+      "contentHash": "906b805d42d4ebc6a4801d4a34981a14d3b116819aceeb77ba60f340e67f517b",
+      "functions": [
+        {
+          "name": "carregarReservas",
+          "params": [],
+          "exported": false,
+          "lineCount": 19
+        },
+        {
+          "name": "mostrarReservas",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "itemDaReserva",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 20
+        },
+        {
+          "name": "confirmarRetirada",
+          "params": [
+            "codigo"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "marcarChip",
+          "params": [
+            "seletor",
+            "escolhido"
+          ],
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "STATUS_RESERVA",
+            "badge",
+            "data",
+            "esc",
+            "moeda",
+            "montarPainel",
+            "numero",
+            "toast",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/painel-comum.js",
+          "specifiers": [
+            "diaEFaixa",
+            "enquantoEspera",
+            "esqueletos",
+            "inicial",
+            "localDaLoja",
+            "momento",
+            "mostrarErro"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 157,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/painel-relatorios.js": {
+      "filePath": "static/js/paginas/painel-relatorios.js",
+      "contentHash": "180bd47c2238f3dff908d420e481767567b6d73752a4e37f489b90a0ffa7fb17",
+      "functions": [
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 28
+        },
+        {
+          "name": "mostrarIndicadores",
+          "params": [
+            "d"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "desenharGrafico",
+          "params": [
+            "receitaDiaria"
+          ],
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "mostrarCategorias",
+          "params": [
+            "categorias"
+          ],
+          "exported": false,
+          "lineCount": 13
+        },
+        {
+          "name": "mostrarAvaliacoes",
+          "params": [
+            "avaliacoes"
+          ],
+          "exported": false,
+          "lineCount": 16
+        },
+        {
+          "name": "decimal",
+          "params": [
+            "valor",
+            "casas"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "dataBR",
+          "params": [
+            "iso"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "celula",
+          "params": [
+            "valor"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "exportarCSV",
+          "params": [],
+          "exported": false,
+          "lineCount": 38
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "esc",
+            "estrelas",
+            "kg",
+            "moeda",
+            "montarPainel",
+            "numero",
+            "relativo",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/painel-comum.js",
+          "specifiers": [
+            "cor",
+            "dataISO",
+            "diaMes",
+            "esqueletos",
+            "graficoDeBarras",
+            "inicial",
+            "localDaLoja",
+            "mostrarErro"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 201,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/painel-sacolas.js": {
+      "filePath": "static/js/paginas/painel-sacolas.js",
+      "contentHash": "81590a33568dfde21bccb3afe4f9069759d92665d11e4131f320d6db927857fc",
+      "functions": [
+        {
+          "name": "carregarSacolas",
+          "params": [],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "mostrarSacolas",
+          "params": [],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "itemDaSacola",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "publicar",
+          "params": [
+            "sacola",
+            "botao"
+          ],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "remover",
+          "params": [
+            "sacola",
+            "botao"
+          ],
+          "exported": false,
+          "lineCount": 30
+        },
+        {
+          "name": "campo",
+          "params": [
+            "nome"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "carregarCategorias",
+          "params": [],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "preencherPadrao",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "atualizarTela",
+          "params": [],
+          "exported": false,
+          "lineCount": 9
+        },
+        {
+          "name": "atualizarDicaDeDesconto",
+          "params": [],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "atualizarResumo",
+          "params": [],
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "entrarEmEdicao",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 26
+        },
+        {
+          "name": "sairDaEdicao",
+          "params": [],
+          "exported": false,
+          "lineCount": 10
+        },
+        {
+          "name": "irParaFormulario",
+          "params": [],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "montarCorpo",
+          "params": [
+            "rascunho"
+          ],
+          "exported": false,
+          "lineCount": 16
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "STATUS_SACOLA",
+            "badge",
+            "dia",
+            "esc",
+            "imagem",
+            "moeda",
+            "montarPainel",
+            "mostrarErrosDoFormulario",
+            "toast",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/painel-comum.js",
+          "specifiers": [
+            "confirmar",
+            "dataISO",
+            "diaEFaixa",
+            "enquantoEspera",
+            "esqueletos",
+            "faixaAs",
+            "localDaLoja",
+            "mostrarErro"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 352,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/pedidos.js": {
+      "filePath": "static/js/paginas/pedidos.js",
+      "contentHash": "dfa57526077e003865c3cf9c84d5b7e622fe527905a94e0155b57006394d0b59",
+      "functions": [
+        {
+          "name": "criarFiltros",
+          "params": [],
+          "exported": false,
+          "lineCount": 6
+        },
+        {
+          "name": "atualizarContagem",
+          "params": [
+            "contagem"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "linhaDaData",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 11
+        },
+        {
+          "name": "acoesDoPedido",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "itemPedido",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 23
+        },
+        {
+          "name": "carregarLista",
+          "params": [],
+          "exported": false,
+          "lineCount": 22
+        },
+        {
+          "name": "carregarProxima",
+          "params": [],
+          "exported": false,
+          "lineCount": 29
+        },
+        {
+          "name": "abrirAvaliacao",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 80
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "STATUS_RESERVA",
+            "badge",
+            "data",
+            "dia",
+            "esc",
+            "estrelas",
+            "hora",
+            "imagem",
+            "montarRodape",
+            "montarTopo",
+            "moeda",
+            "parametros",
+            "toast",
+            "vazio"
+          ]
+        },
+        {
+          "source": "/js/cliente.js",
+          "specifiers": [
+            "abrirModal",
+            "diaComAno",
+            "ehHoje",
+            "gerarQrCode",
+            "horarioRetirada",
+            "mostrarErro",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 265,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/perfil.js": {
+      "filePath": "static/js/paginas/perfil.js",
+      "contentHash": "3746b6bab72be0db24e69f431e08076dbc03d35f101ddff018f30887d62f03a4",
+      "functions": [
+        {
+          "name": "mesEAno",
+          "params": [
+            "iso"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "htmlTopo",
+          "params": [
+            "perfil"
+          ],
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "htmlNivel",
+          "params": [
+            "nivel"
+          ],
+          "exported": false,
+          "lineCount": 15
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 14
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin",
+            "sair"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "esc",
+            "kg",
+            "montarRodape",
+            "montarTopo",
+            "moeda",
+            "numero"
+          ]
+        },
+        {
+          "source": "/js/cliente.js",
+          "specifiers": [
+            "avatar",
+            "barraProgresso",
+            "mostrarErro",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 88,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/reserva.js": {
+      "filePath": "static/js/paginas/reserva.js",
+      "contentHash": "b79abd03155b26ba1a313229907259044a1c5e34102bfb60b41c248bb7d66fd1",
+      "functions": [
+        {
+          "name": "statusNaTela",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "textoDoTopo",
+          "params": [
+            "r",
+            "status"
+          ],
+          "exported": false,
+          "lineCount": 12
+        },
+        {
+          "name": "mostrar",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 51
+        },
+        {
+          "name": "perguntarCancelamento",
+          "params": [
+            "r"
+          ],
+          "exported": false,
+          "lineCount": 34
+        },
+        {
+          "name": "carregar",
+          "params": [],
+          "exported": false,
+          "lineCount": 15
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "exigirLogin"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "STATUS_RESERVA",
+            "badge",
+            "data",
+            "esc",
+            "hora",
+            "icone",
+            "montarRodape",
+            "montarTopo",
+            "moeda",
+            "parametros",
+            "toast"
+          ]
+        },
+        {
+          "source": "/js/cliente.js",
+          "specifiers": [
+            "FORMAS_PAGAMENTO",
+            "abrirModal",
+            "diaNaFrase",
+            "enderecoCompleto",
+            "gerarQrCode",
+            "horarioRetirada",
+            "iconeCliente",
+            "linkComoChegar",
+            "mostrarErro",
+            "plural"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 155,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/paginas/sacola.js": {
+      "filePath": "static/js/paginas/sacola.js",
+      "contentHash": "ee9a09d59f788486b06af070760d4ff9a0953230924a5ce86a99e8d63f6731cc",
+      "functions": [
+        {
+          "name": "SVG",
+          "params": [
+            "caminhos"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "esgotou",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "etiquetaDaFoto",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 4
+        },
+        {
+          "name": "areaReservar",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 24
+        },
+        {
+          "name": "mostrarSacola",
+          "params": [
+            "s"
+          ],
+          "exported": false,
+          "lineCount": 53
+        },
+        {
+          "name": "mostrarProblema",
+          "params": [
+            "titulo",
+            "texto",
+            "acao"
+          ],
+          "exported": false,
+          "lineCount": 5
+        },
+        {
+          "name": "iniciar",
+          "params": [],
+          "exported": false,
+          "lineCount": 22
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api",
+            "sessao"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "dia",
+            "distancia",
+            "esc",
+            "etiquetaSacola",
+            "hora",
+            "imagem",
+            "kg",
+            "localizacao",
+            "moeda",
+            "montarRodape",
+            "montarTopo",
+            "numero",
+            "parametros",
+            "vazio"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 140,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/painel-comum.js": {
+      "filePath": "static/js/painel-comum.js",
+      "contentHash": "8cda42e0b54b0e56053d168986002489f3920da934a3b84da089efb1960ef149",
+      "functions": [
+        {
+          "name": "localDaLoja",
+          "params": [],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "faixaAs",
+          "params": [
+            "inicio",
+            "fim"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "diaEFaixa",
+          "params": [
+            "inicio",
+            "fim"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "diaMes",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "dataISO",
+          "params": [
+            "d"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "momento",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "inicial",
+          "params": [
+            "nome"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "esqueletos",
+          "params": [
+            "quantos"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "mostrarErro",
+          "params": [
+            "area",
+            "erro",
+            "tentarDeNovo"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "enquantoEspera",
+          "params": [
+            "botao",
+            "tarefa"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "confirmar",
+          "params": [],
+          "exported": true,
+          "lineCount": 43
+        },
+        {
+          "name": "cor",
+          "params": [
+            "token"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "graficoDeBarras",
+          "params": [
+            "canvas"
+          ],
+          "exported": true,
+          "lineCount": 48
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "api"
+          ]
+        },
+        {
+          "source": "/js/ui.js",
+          "specifiers": [
+            "data",
+            "dia",
+            "esc",
+            "hora",
+            "vazio"
+          ]
+        }
+      ],
+      "exports": [
+        "localDaLoja",
+        "faixaAs",
+        "diaEFaixa",
+        "diaMes",
+        "dataISO",
+        "momento",
+        "inicial",
+        "esqueletos",
+        "mostrarErro",
+        "enquantoEspera",
+        "confirmar",
+        "cor",
+        "graficoDeBarras"
+      ],
+      "totalLines": 191,
+      "hasStructuralAnalysis": true
+    },
+    "static/js/ui.js": {
+      "filePath": "static/js/ui.js",
+      "contentHash": "6492effab13e57b7b391e70a578e146c0a09fc38164ee6e7c2c6922cf5e02129",
+      "functions": [
+        {
+          "name": "fmtNumero",
+          "params": [
+            "casas"
+          ],
+          "exported": false,
+          "lineCount": 1
+        },
+        {
+          "name": "esc",
+          "params": [
+            "texto"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "moeda",
+          "params": [
+            "v"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "numero",
+          "params": [
+            "v"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "kg",
+          "params": [
+            "v"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "distancia",
+          "params": [
+            "metros"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "data",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 13
+        },
+        {
+          "name": "hora",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "faixa",
+          "params": [
+            "inicio",
+            "fim"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "mesmoDia",
+          "params": [
+            "a",
+            "b"
+          ],
+          "exported": false,
+          "lineCount": 3
+        },
+        {
+          "name": "dia",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 11
+        },
+        {
+          "name": "diaHora",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "relativo",
+          "params": [
+            "iso"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "estrelas",
+          "params": [
+            "nota"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "imagem",
+          "params": [
+            "caminho"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "parametros",
+          "params": [],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "badge",
+          "params": [
+            "mapa",
+            "status"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "toast",
+          "params": [
+            "mensagem"
+          ],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "mostrarErrosDoFormulario",
+          "params": [
+            "form",
+            "erro"
+          ],
+          "exported": true,
+          "lineCount": 16
+        },
+        {
+          "name": "vazio",
+          "params": [
+            "titulo"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "localizacao",
+          "params": [],
+          "exported": true,
+          "lineCount": 22
+        },
+        {
+          "name": "icone",
+          "params": [
+            "nome"
+          ],
+          "exported": true,
+          "lineCount": 1
+        },
+        {
+          "name": "MARCA",
+          "params": [],
+          "exported": false,
+          "lineCount": 2
+        },
+        {
+          "name": "montarTopo",
+          "params": [],
+          "exported": true,
+          "lineCount": 57
+        },
+        {
+          "name": "montarRodape",
+          "params": [],
+          "exported": true,
+          "lineCount": 15
+        },
+        {
+          "name": "montarPainel",
+          "params": [
+            "conta",
+            "ativo"
+          ],
+          "exported": true,
+          "lineCount": 41
+        },
+        {
+          "name": "hojePorExtenso",
+          "params": [],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "etiquetaSacola",
+          "params": [
+            "s"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "cardSacola",
+          "params": [
+            "s"
+          ],
+          "exported": true,
+          "lineCount": 19
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "/js/api.js",
+          "specifiers": [
+            "sair",
+            "sessao"
+          ]
+        }
+      ],
+      "exports": [
+        "esc",
+        "moeda",
+        "numero",
+        "kg",
+        "distancia",
+        "data",
+        "hora",
+        "faixa",
+        "dia",
+        "diaHora",
+        "relativo",
+        "estrelas",
+        "imagem",
+        "parametros",
+        "STATUS_RESERVA",
+        "STATUS_SACOLA",
+        "STATUS_DOACAO",
+        "STATUS_OFERTA",
+        "TIPOS_LOJA",
+        "badge",
+        "toast",
+        "mostrarErrosDoFormulario",
+        "vazio",
+        "localizacao",
+        "icone",
+        "montarTopo",
+        "montarRodape",
+        "montarPainel",
+        "hojePorExtenso",
+        "etiquetaSacola",
+        "cardSacola"
+      ],
+      "totalLines": 394,
+      "hasStructuralAnalysis": true
+    },
+    "static/login.html": {
+      "filePath": "static/login.html",
+      "contentHash": "985295a0c2c76ab17a2821fe6c697354fe65a6af0e4e797431140094703c7cd1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 208,
+      "hasStructuralAnalysis": false
+    },
+    "static/mapa.html": {
+      "filePath": "static/mapa.html",
+      "contentHash": "4705b4e2bb60de83ccf74982a026f361bcf2afffdc727c50ea97c463bc5131f4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 158,
+      "hasStructuralAnalysis": false
+    },
+    "static/ong/mapa.html": {
+      "filePath": "static/ong/mapa.html",
+      "contentHash": "85a8a27b1af514e9f829135ee9e6c99c15861a197fd3aecb95157da15c03076a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 154,
+      "hasStructuralAnalysis": false
+    },
+    "static/ong/recebimentos.html": {
+      "filePath": "static/ong/recebimentos.html",
+      "contentHash": "b90009db6ae28baa79befd06ac3cd7ef78decc760a8590d6c440aa34f821e592",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 120,
+      "hasStructuralAnalysis": false
+    },
+    "static/ong/solicitacoes.html": {
+      "filePath": "static/ong/solicitacoes.html",
+      "contentHash": "9a53975985681dcd95f631c40b9491b0c980ec92604ad373e40d5495a9cea0da",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 104,
+      "hasStructuralAnalysis": false
+    },
+    "static/ong/solicitar.html": {
+      "filePath": "static/ong/solicitar.html",
+      "contentHash": "64daa27b37999f9a4360e776ba43112070da03bbd75a91512948873e40ef044d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 158,
+      "hasStructuralAnalysis": false
+    },
+    "static/painel/dashboard.html": {
+      "filePath": "static/painel/dashboard.html",
+      "contentHash": "d9426dbd02e860d70cd79f0bd3cc297f80d1695d96311ecaa144cb0e07477e93",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 134,
+      "hasStructuralAnalysis": false
+    },
+    "static/painel/doacoes.html": {
+      "filePath": "static/painel/doacoes.html",
+      "contentHash": "4bec59d0ace94fa3b5586eed918a52986e92c65989c79f58de2d892a7342197d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 116,
+      "hasStructuralAnalysis": false
+    },
+    "static/painel/pedidos.html": {
+      "filePath": "static/painel/pedidos.html",
+      "contentHash": "515daed4e37f3c0b91f4f423e415db6b8392c5663e48ed489a5a58e06312e7c9",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 145,
+      "hasStructuralAnalysis": false
+    },
+    "static/painel/relatorios.html": {
+      "filePath": "static/painel/relatorios.html",
+      "contentHash": "9be29d772c831b3be72cadd3b0e1abe4533b84d909a1bd65f7abb49393aae552",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 115,
+      "hasStructuralAnalysis": false
+    },
+    "static/painel/sacolas.html": {
+      "filePath": "static/painel/sacolas.html",
+      "contentHash": "a136b22cba039865ab7d060eb26f2ac1a74a5d612446883debb27a63d64369df",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 201,
+      "hasStructuralAnalysis": false
+    },
+    "static/pedidos.html": {
+      "filePath": "static/pedidos.html",
+      "contentHash": "6ba3b24c7ddbf32cac0a4a3ed0ec5f7f9e9336dac154fcaa352c9a5dc8d4f2f3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 113,
+      "hasStructuralAnalysis": false
+    },
+    "static/perfil.html": {
+      "filePath": "static/perfil.html",
+      "contentHash": "05ee6b7d5e309f40ae9ea541706d5d4ae2b6da3583dc17f2336d170ae235f178",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 138,
+      "hasStructuralAnalysis": false
+    },
+    "static/reserva.html": {
+      "filePath": "static/reserva.html",
+      "contentHash": "e034a806697cf20b0ac2cba6efd374c49d828f3d850c5c04b1fd81f8ba41f5be",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 90,
+      "hasStructuralAnalysis": false
+    },
+    "static/sacola.html": {
+      "filePath": "static/sacola.html",
+      "contentHash": "7f12bbb01cc5c7e52161b9f9fd58bb2a6201d4aac98b1e75c5fb4bb40cccd3ce",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 92,
+      "hasStructuralAnalysis": false
+    },
+    "tests/conftest.py": {
+      "filePath": "tests/conftest.py",
+      "contentHash": "6ee05257de3c638bee9e85760931e6cfcc685707395278a932bf927b34346f12",
+      "functions": [
+        {
+          "name": "banco_de_teste",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "cliente",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "login",
+          "params": [
+            "cliente",
+            "email",
+            "senha"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "camila",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "lucas",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "padaria",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "mercado",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "ong",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "nova_sacola",
+          "params": [
+            "cliente",
+            "padaria"
+          ],
+          "exported": true,
+          "lineCount": 16
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "os",
+          "specifiers": [
+            "os"
+          ]
+        },
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "pathlib",
+          "specifiers": [
+            "Path"
+          ]
+        },
+        {
+          "source": "dotenv",
+          "specifiers": [
+            "dotenv_values"
+          ]
+        },
+        {
+          "source": "pytest",
+          "specifiers": [
+            "pytest"
+          ]
+        },
+        {
+          "source": "fastapi.testclient",
+          "specifiers": [
+            "TestClient"
+          ]
+        },
+        {
+          "source": "app.main",
+          "specifiers": [
+            "app"
+          ]
+        },
+        {
+          "source": "scripts.preparar_banco",
+          "specifiers": [
+            "preparar"
+          ]
+        }
+      ],
+      "exports": [
+        "banco_de_teste",
+        "cliente",
+        "login",
+        "camila",
+        "lucas",
+        "padaria",
+        "mercado",
+        "ong",
+        "nova_sacola"
+      ],
+      "totalLines": 88,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_conta.py": {
+      "filePath": "tests/test_conta.py",
+      "contentHash": "6444f067b90bba326209c42588dd4fc4452314312ca1950cbc83ffb0f7c5fbbc",
+      "functions": [
+        {
+          "name": "email_novo",
+          "params": [],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "test_health",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "test_cadastro_devolve_token_e_guarda_so_o_hash",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "test_email_repetido_e_recusado",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "test_validacao_em_portugues",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "test_login_errado_nao_diz_qual_campo_errou",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "test_rota_protegida_sem_token_ou_com_token_falso",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "test_cada_tipo_de_usuario_so_entra_na_sua_area",
+          "params": [
+            "cliente",
+            "camila",
+            "padaria",
+            "ong"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "test_comerciante_novo_precisa_cadastrar_a_loja",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 19
+        },
+        {
+          "name": "test_api_desconhecida_responde_json",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 4
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "uuid",
+          "specifiers": [
+            "uuid"
+          ]
+        },
+        {
+          "source": "app.database",
+          "specifiers": [
+            "buscar_um",
+            "conectar"
+          ]
+        }
+      ],
+      "exports": [
+        "email_novo",
+        "test_health",
+        "test_cadastro_devolve_token_e_guarda_so_o_hash",
+        "test_email_repetido_e_recusado",
+        "test_validacao_em_portugues",
+        "test_login_errado_nao_diz_qual_campo_errou",
+        "test_rota_protegida_sem_token_ou_com_token_falso",
+        "test_cada_tipo_de_usuario_so_entra_na_sua_area",
+        "test_comerciante_novo_precisa_cadastrar_a_loja",
+        "test_api_desconhecida_responde_json"
+      ],
+      "totalLines": 95,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_doacoes.py": {
+      "filePath": "tests/test_doacoes.py",
+      "contentHash": "e3095e4ace21d7ce906ee81dbcd1cba3982c8b998b18922f5316f2ce53c10d85",
+      "functions": [
+        {
+          "name": "daqui",
+          "params": [
+            "horas"
+          ],
+          "exported": true,
+          "lineCount": 2
+        },
+        {
+          "name": "nova_oferta",
+          "params": [
+            "cliente",
+            "loja",
+            "kg"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "pedir",
+          "params": [
+            "cliente",
+            "ong",
+            "id_oferta",
+            "kg",
+            "horas"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "test_fluxo_completo_de_doacao",
+          "params": [
+            "cliente",
+            "padaria",
+            "ong"
+          ],
+          "exported": true,
+          "lineCount": 23
+        },
+        {
+          "name": "test_recusar_e_cancelar_devolvem_os_quilos",
+          "params": [
+            "cliente",
+            "padaria",
+            "ong"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "test_oferta_encerrada_some_do_mapa",
+          "params": [
+            "cliente",
+            "padaria",
+            "ong"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "test_resumo_da_ong",
+          "params": [
+            "cliente",
+            "ong"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "datetime",
+            "timedelta"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "daqui",
+        "nova_oferta",
+        "pedir",
+        "test_fluxo_completo_de_doacao",
+        "test_recusar_e_cancelar_devolvem_os_quilos",
+        "test_oferta_encerrada_some_do_mapa",
+        "test_resumo_da_ong"
+      ],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_ia_e_util.py": {
+      "filePath": "tests/test_ia_e_util.py",
+      "contentHash": "18cb5314b3969cd420ac54e91c51e2090f91328c956a6f942534a9d5d2903bff",
+      "functions": [
+        {
+          "name": "test_previsao_de_sobras",
+          "params": [
+            "cliente",
+            "padaria"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "test_modelo_aprendeu_que_segunda_sobra_mais_que_sabado",
+          "params": [
+            "cliente",
+            "padaria"
+          ],
+          "exported": true,
+          "lineCount": 8
+        },
+        {
+          "name": "test_nivel_e_refeicoes",
+          "params": [],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "test_divisor_de_sql_ignora_ponto_e_virgula_em_texto_e_comentario",
+          "params": [],
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "app.util",
+          "specifiers": [
+            "nivel",
+            "refeicoes"
+          ]
+        },
+        {
+          "source": "scripts.preparar_banco",
+          "specifiers": [
+            "dividir_comandos"
+          ]
+        }
+      ],
+      "exports": [
+        "test_previsao_de_sobras",
+        "test_modelo_aprendeu_que_segunda_sobra_mais_que_sabado",
+        "test_nivel_e_refeicoes",
+        "test_divisor_de_sql_ignora_ponto_e_virgula_em_texto_e_comentario"
+      ],
+      "totalLines": 37,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_reservas.py": {
+      "filePath": "tests/test_reservas.py",
+      "contentHash": "a40e23a115bc3ca9f0c03c2d4f4bcc6e26aac27ab3b4f624e9f33f5c7c288d80",
+      "functions": [
+        {
+          "name": "reservar",
+          "params": [
+            "cliente",
+            "quem",
+            "id_alimento",
+            "quantidade"
+          ],
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "test_reservar_baixa_o_estoque_e_gera_codigo",
+          "params": [
+            "cliente",
+            "camila",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "test_nao_reserva_mais_do_que_tem",
+          "params": [
+            "cliente",
+            "camila",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "test_ultima_sacola_esgota_e_sai_do_catalogo",
+          "params": [
+            "cliente",
+            "camila",
+            "lucas",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "test_duas_pessoas_ao_mesmo_tempo_nao_estouram_o_estoque",
+          "params": [
+            "cliente",
+            "camila",
+            "lucas",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_cancelar_devolve_a_sacola",
+          "params": [
+            "cliente",
+            "camila",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_cada_um_ve_so_as_proprias_reservas",
+          "params": [
+            "cliente",
+            "camila",
+            "lucas",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "test_retirada_pelo_codigo_e_avaliacao",
+          "params": [
+            "cliente",
+            "camila",
+            "padaria",
+            "mercado",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 25
+        },
+        {
+          "name": "test_painel_mostra_a_reserva_com_nome_curto",
+          "params": [
+            "cliente",
+            "camila",
+            "padaria",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 7
+        },
+        {
+          "name": "test_perfil_do_consumidor",
+          "params": [
+            "cliente",
+            "camila"
+          ],
+          "exported": true,
+          "lineCount": 5
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "concurrent.futures",
+          "specifiers": [
+            "ThreadPoolExecutor"
+          ]
+        },
+        {
+          "source": "app.util",
+          "specifiers": [
+            "refeicoes"
+          ]
+        }
+      ],
+      "exports": [
+        "reservar",
+        "test_reservar_baixa_o_estoque_e_gera_codigo",
+        "test_nao_reserva_mais_do_que_tem",
+        "test_ultima_sacola_esgota_e_sai_do_catalogo",
+        "test_duas_pessoas_ao_mesmo_tempo_nao_estouram_o_estoque",
+        "test_cancelar_devolve_a_sacola",
+        "test_cada_um_ve_so_as_proprias_reservas",
+        "test_retirada_pelo_codigo_e_avaliacao",
+        "test_painel_mostra_a_reserva_com_nome_curto",
+        "test_perfil_do_consumidor"
+      ],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "tests/test_sacolas.py": {
+      "filePath": "tests/test_sacolas.py",
+      "contentHash": "0da16e6c3bc7e389ee7fc267802405175ef52cc0631993762a358c75b95554f1",
+      "functions": [
+        {
+          "name": "ids_no_catalogo",
+          "params": [
+            "cliente",
+            "**params"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "test_catalogo_so_mostra_o_que_da_para_reservar",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "test_filtros_do_catalogo",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 12
+        },
+        {
+          "name": "test_criar_sacola_aparece_no_catalogo",
+          "params": [
+            "cliente",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "test_rascunho_so_entra_no_catalogo_depois_de_publicado",
+          "params": [
+            "cliente",
+            "padaria",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 9
+        },
+        {
+          "name": "test_remover_tira_do_catalogo",
+          "params": [
+            "cliente",
+            "padaria",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 5
+        },
+        {
+          "name": "test_regras_de_cadastro",
+          "params": [
+            "cliente",
+            "padaria"
+          ],
+          "exported": true,
+          "lineCount": 17
+        },
+        {
+          "name": "test_loja_nao_mexe_na_sacola_de_outra",
+          "params": [
+            "cliente",
+            "mercado",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 4
+        },
+        {
+          "name": "test_editar_quantidade_respeita_as_ja_reservadas",
+          "params": [
+            "cliente",
+            "padaria",
+            "camila",
+            "nova_sacola"
+          ],
+          "exported": true,
+          "lineCount": 10
+        },
+        {
+          "name": "test_mapa_e_pagina_da_loja",
+          "params": [
+            "cliente"
+          ],
+          "exported": true,
+          "lineCount": 11
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "datetime",
+          "specifiers": [
+            "date",
+            "timedelta"
+          ]
+        }
+      ],
+      "exports": [
+        "ids_no_catalogo",
+        "test_catalogo_so_mostra_o_que_da_para_reservar",
+        "test_filtros_do_catalogo",
+        "test_criar_sacola_aparece_no_catalogo",
+        "test_rascunho_so_entra_no_catalogo_depois_de_publicado",
+        "test_remover_tira_do_catalogo",
+        "test_regras_de_cadastro",
+        "test_loja_nao_mexe_na_sacola_de_outra",
+        "test_editar_quantidade_respeita_as_ja_reservadas",
+        "test_mapa_e_pagina_da_loja"
+      ],
+      "totalLines": 108,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

@@ -23,3 +23,16 @@ Thumbs.db
 .ua/diff-overlay.json
 .ua/.trash-*/
 .ua/tmp/
+
+# Vídeo guia: dependências, áudios, fotos de revisão e o MP4 ficam fora do git
+video/node_modules/
+video/voz/
+video/fotos/
+video/*.mp4
+video/*.wav
+video/voz-rascunho/
+video/voz-teste/
+video/voz-rafael/
+video/voz-andre-jobs.txt
+video/voz-andre/
+video/voz-julian-jobs.txt

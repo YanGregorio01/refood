@@ -35,7 +35,7 @@ com `NOVO` em `sql/schema.sql`.
 | # | Decisão | Por quê |
 |---|---|---|
 | 13 | `tipo_usuario` ganhou `'ONG'` e foi criada a tabela `ongs`. | O cadastro do Figma tem o perfil ONG. |
-| 14 | Cada linha de `alimentos` é uma **sacola** do catálogo. Ganhou `preco_original`, `preco`, `peso_estimado_kg`, `foto`, `inicio_retirada`, `fim_retirada`, `quantidade_inicial` e o status `RASCUNHO`. | A tela Cadastrar Sacola pede preço e horário. O peso alimenta o "kg salvos". A `quantidade_inicial` permite à IA saber quanto sobrou. |
+| 14 | Cada linha de `alimentos` é uma **sacola** do catálogo. Ganhou `preco_original`, `preco`, `peso_estimado_kg`, `foto`, `inicio_retirada`, `fim_retirada`, `quantidade_inicial` e o status `RASCUNHO`. | A tela Cadastrar Sacola pede preço e horário. O peso alimenta o "kg salvos". A `quantidade_inicial` permite ao relatório calcular o aproveitamento (vendidas ÷ oferecidas). |
 | 15 | `estabelecimentos` ganhou `tipo`, `descricao`, `bairro`, `uf`, `latitude`, `longitude`, `horario_abertura`, `horario_fechamento` e `foto`. Virou uma loja por usuário (`id_usuario` UNIQUE). | O mapa filtra por distância e por tipo de loja. |
 | 16 | `reservas` ganhou `codigo_retirada`, `valor_pago`, `forma_pagamento` e `data_retirada`. | O código RF-24098 da tela de reserva confirmada. |
 | 17 | Duas tabelas novas: `ofertas_doacao` (o que a loja tem para doar) e `doacoes` (o pedido da ONG). | Uma tabela só misturaria a oferta com os pedidos de várias ONGs sobre ela. |

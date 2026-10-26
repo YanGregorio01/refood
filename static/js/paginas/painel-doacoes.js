@@ -5,7 +5,7 @@
 //     confirmar, recusar ou marcar como entregue.
 import { api, exigirLogin } from "/js/api.js";
 import {
-  STATUS_DOACAO, badge, diaHora, esc, kg, montarPainel, mostrarErrosDoFormulario, numero, toast, vazio,
+  STATUS_DOACAO, STATUS_OFERTA, badge, diaHora, esc, kg, montarPainel, mostrarErrosDoFormulario, numero, toast, vazio,
 } from "/js/ui.js";
 import {
   confirmar, dataISO, enquantoEspera, esqueletos, localDaLoja, momento, mostrarErro,
@@ -13,12 +13,6 @@ import {
 
 const conta = exigirLogin("ESTABELECIMENTO");
 montarPainel(conta, "doacoes", await localDaLoja());
-
-// O ui.js não tem os textos de status da oferta; ficam aqui.
-const STATUS_OFERTA = {
-  ATIVA: { texto: "Ativa", classe: "" },
-  ENCERRADA: { texto: "Encerrada", classe: "badge-cinza" },
-};
 
 // ================================================================ (a) nova oferta
 const form = document.getElementById("form-oferta");

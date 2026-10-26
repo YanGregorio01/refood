@@ -22,8 +22,7 @@ o código de cada um.
 | RF12 Registrar o status da reserva | coluna `reservas.status`; confirmação de retirada em `POST /api/painel/reservas/confirmar-retirada` |
 | RF13 Estabelecimento consulta suas reservas e doações | `GET /api/painel/reservas` e `GET /api/painel/doacoes/solicitacoes`; telas `static/painel/pedidos.html` e `static/painel/doacoes.html` |
 | RF14 Usuário consulta suas reservas | `GET /api/reservas`; tela `static/pedidos.html` |
-| RF15 Análises preditivas de excedentes | `ia/previsao.py` (regressão linear); `GET /api/painel/previsao` |
-| RF16 Resultados em gráficos e indicadores | card "Previsão de sobras" em `static/painel/dashboard.html`; relatórios em `static/painel/relatorios.html`; gráficos do modelo em `docs/ia/` |
+| RF16 Resultados em gráficos e indicadores | gráfico da semana e indicadores em `static/painel/dashboard.html`; relatórios em `static/painel/relatorios.html` |
 
 ## Regras de negócio
 
@@ -41,9 +40,6 @@ o código de cada um.
 | RN10 Cada um vê só o que é seu | as consultas filtram por `id_usuario` / `id_estabelecimento`; testado em `tests/test_reservas.py` |
 | RN11 Alimento vinculado ao estabelecimento | `alimentos.id_estabelecimento` (chave estrangeira) |
 | RN12 Localização do estabelecimento | `estabelecimentos.latitude/longitude` |
-| RN13 Previsões a partir dos dados do sistema | `carregar_historico()` em `ia/previsao.py` lê do MySQL |
-| RN14 Previsão é estimativa | campo `aviso` da previsão e o erro médio mostrado no card |
-| RN15 Modelo atualizável | o modelo é retreinado a cada 15 minutos com o que estiver no banco |
 
 ## Restrições do sistema
 
@@ -53,7 +49,6 @@ o código de cada um.
 | RS03 Só reserva alimento cadastrado e disponível | `reservar()` |
 | RS04 Não publica alimento vencido | `cadastrar_sacola()` recusa horário de retirada no passado |
 | RS05 Não reserva acima do estoque | `reservar()` (409 "Só restam N sacolas") |
-| RS08 Previsão como estimativa | igual RN14 |
 | RS09 Sem transporte/entrega | o sistema só agenda a retirada no local |
 
 ## Requisitos não funcionais (principais)
@@ -67,6 +62,11 @@ o código de cada um.
 | RNF11 Mensagens de erro compreensíveis | erros de validação traduzidos em `app/main.py` |
 | RNF18 Responsivo | CSS com breakpoints em `static/css/refood.css` |
 | RNF21/RNF30 Integridade | chaves estrangeiras, `UNIQUE`, `CHECK` e transações |
-| RNF28 Modelo atualizável | `python -m ia.relatorio` retreina e gera o relatório |
 | RNF33/34 Código organizado e documentado | pastas por frente, `docs/API.md`, este arquivo |
-| RNF36 Facilitar correção de erros | 35 testes automáticos em `tests/` (`python -m pytest`) |
+| RNF36 Facilitar correção de erros | 33 testes automáticos em `tests/` (`python -m pytest`) |
+
+## Fora do escopo
+
+O grupo tirou do projeto a análise preditiva de excedentes (RF15) e as regras
+que dependiam dela (RN13, RN14, RN15, RS08 e RNF28). O Dashboard e os
+Relatórios mostram o que já aconteceu na loja, sem previsão.

@@ -418,11 +418,3 @@ def relatorios(dias: int = Query(default=30, ge=7, le=90), loja=Depends(minha_lo
         "vendas_por_categoria": categorias,
         "avaliacoes_recentes": avaliacoes,
     }
-
-
-@router.get("/previsao")
-def previsao_de_sobras(loja=Depends(minha_loja), conn=Depends(get_db)):
-    """IA: quantas sacolas devem sobrar nos próximos 7 dias (RF15, RF16, RN13, RN14)."""
-    from ia.previsao import prever_sobras
-
-    return prever_sobras(conn, loja["id_estabelecimento"])

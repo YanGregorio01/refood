@@ -12,7 +12,7 @@ decisão diz onde mexer.
 | 1 | Depois de criar a conta, o comerciante cai numa tela "Complete o cadastro da sua loja" (nome, CNPJ, tipo, endereço, horário e um pino no mapa). | `static/completar-cadastro.html`, `POST /api/painel/estabelecimento` |
 | 2 | A mesma tela serve para a ONG, com os campos da instituição e o responsável pelas retiradas. | `static/completar-cadastro.html`, `POST /api/ong/perfil` |
 | 3 | O comerciante ganhou a aba **Doações** no painel: publica uma oferta ("10 kg de pães até as 21h") e confirma, recusa ou marca como entregue os pedidos das ONGs. | `static/painel/doacoes.html`, `app/rotas/doacoes.py` |
-| 4 | A previsão da IA aparece num card **"Previsão de sobras"** no Dashboard do comerciante: próximos 7 dias, dia de maior sobra e uma sugestão. | `static/painel/dashboard.html`, `ia/previsao.py` |
+| 4 | A previsão de sobras por IA saiu do projeto: o Dashboard do comerciante mostra só os números da loja, o gráfico da semana e as últimas reservas. | `static/painel/dashboard.html` |
 
 ## Front-end
 
@@ -25,7 +25,7 @@ decisão diz onde mexer.
 | 9 | Pagamento (cartão/Pix) e "Continuar com Google" são só visuais. Nada é cobrado. |
 | 10 | Foto da sacola: imagem padrão por categoria (o comerciante não faz upload). As fotos vieram do próprio arquivo do Figma. |
 | 11 | Gráficos com Chart.js. O back-end entrega os números já somados. |
-| 12 | Um repositório só, com uma pasta por frente (`app/`, `static/`, `sql/`, `ia/`, `docs/`, `tests/`), como estava no plano do grupo (`docs/ETAPAS-E-DIVISAO.md`). |
+| 12 | Um repositório só, com uma pasta por frente (`app/`, `static/`, `sql/`, `scripts/`, `docs/`, `tests/`), como estava no plano do grupo (`docs/ETAPAS-E-DIVISAO.md`). |
 
 ## Banco de dados (sobre o modelo do Vitor)
 
@@ -54,6 +54,5 @@ confirmada, cancelada, concluída"; vale atualizar o texto da RN09 no documento.
 - **Login com JWT** (token assinado, válido por 12 horas) e senha com **bcrypt**.
 - **Status vencidos são atualizados na hora da consulta** (`atualizar_vencidos` em `app/util.py`) em vez de um job agendado. É mais simples de entender e de testar.
 - **Nome curto do cliente** ("Camila F.") para a loja e para as avaliações públicas: mostra o suficiente para reconhecer o cliente sem expor o nome completo (LGPD).
-- **IA com regressão linear** (scikit-learn), como prometido na 2ª entrega. Ela prevê a fração da sacola que sobra a partir do dia da semana, da categoria, da loja e da tendência no tempo. Detalhes e resultado em `docs/ia/RESULTADO.md`.
-- **Histórico simulado.** Um sistema novo não tem passado; `ia/gerar_historico.py` cria 12 semanas de vendas com padrões conhecidos, para os relatórios e a IA terem o que mostrar. A semente é fixa: sempre gera os mesmos dados.
+- **Histórico simulado.** Um sistema novo não tem passado; `scripts/gerar_historico.py` cria 12 semanas de vendas com padrões conhecidos, para os relatórios e o dashboard terem o que mostrar. A semente é fixa: sempre gera os mesmos dados.
 - **E-mails de demonstração em `@refood.test`.** O domínio `.test` é reservado e nunca recebe e-mail de verdade.

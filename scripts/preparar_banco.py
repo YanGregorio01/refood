@@ -6,8 +6,8 @@ Uso, na raiz do projeto, com o venv ativo:
     python -m scripts.preparar_banco --sem-historico
 
 Passos: roda sql/schema.sql, depois sql/dados_exemplo.sql e por fim gera o
-histórico das últimas 12 semanas (ia/gerar_historico.py), que alimenta os
-relatórios e a IA. ATENÇÃO: apaga tudo o que estiver no banco.
+histórico das últimas 12 semanas (scripts/gerar_historico.py), que alimenta
+os relatórios e o dashboard. ATENÇÃO: apaga tudo o que estiver no banco.
 """
 
 import sys
@@ -82,7 +82,7 @@ def preparar(nome_banco=None, com_historico=True):
         conn.close()
 
     if com_historico:
-        from ia.gerar_historico import gerar
+        from scripts.gerar_historico import gerar
 
         gerar(nome_banco)
 

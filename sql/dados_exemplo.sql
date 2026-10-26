@@ -5,8 +5,8 @@
 -- de Pinheiros (São Paulo) que aparecem no Figma e as sacolas de HOJE e
 -- de AMANHÃ, sempre relativas à data em que o arquivo é executado.
 --
--- O histórico das últimas semanas (vendas, avaliações, doações recebidas,
--- dados que a IA usa para prever sobras) vem do script ia/gerar_historico.py.
+-- O histórico das últimas semanas (vendas, avaliações, doações recebidas)
+-- vem do script scripts/gerar_historico.py.
 --
 -- Todas as contas usam a senha: refood123
 -- =====================================================================

@@ -7,12 +7,6 @@ bcrypt==5.0.0
 PyJWT==2.15.1
 python-dotenv==1.2.4
 
-# IA (previsão de sobras)
-pandas==3.0.6
-numpy==2.5.4
-scikit-learn==1.9.1
-matplotlib==3.11.2     # só para o gráfico do relatório da IA (ia/relatorio.py)
-
 # Testes
 pytest==9.1.1
 httpx==0.28.1

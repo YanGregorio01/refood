@@ -17,13 +17,13 @@ saber explicar a própria parte, porque a apresentação é oral e o enunciado a
 que grupo que não consegue explicar o documento perde ponto.
 
 Parte do documento já está resolvida pela 1ª entrega: identificação do grupo,
-tecnologias (Python/FastAPI, MySQL, HTML/CSS/JavaScript, NumPy/Pandas), estrutura
+tecnologias (Python/FastAPI, MySQL, HTML/CSS/JavaScript), estrutura
 técnica, viabilidade do MVP e valor gerado (ODS 2 e 12). Isso é transporte, não
 trabalho novo.
 
 ## Como as frentes se encaixam
 
-O projeto tem sete frentes, e elas não são independentes. A ordem em que uma
+O projeto tem seis frentes, e elas não são independentes. A ordem em que uma
 destrava a outra é esta:
 
     Protótipo das telas ──> Front-end (telas em HTML/CSS)
@@ -32,7 +32,7 @@ destrava a outra é esta:
                                     │                    │
                                     └──> Integração front + back <──┘
                                                  │
-                                    Testes finais e IA (usam dados reais)
+                                    Testes finais (usam dados reais)
                                                  │
                                     Documento final e apresentação
 
@@ -133,25 +133,7 @@ na apresentação, porque é o que o professor vê na tela.
 Esforço: 20 a 30 horas. Meta para 29/09: telas de cadastro, login e lista de
 ofertas prontas, mesmo que ainda com dados fixos.
 
-### 5. Módulo de IA (análise preditiva)
-
-A quarta funcionalidade prometida na 1ª entrega: um script em Python com NumPy
-e Pandas que olha o histórico de ofertas e reservas e estima quanto excedente
-cada estabelecimento terá nos próximos dias. No começo não existe histórico,
-então a primeira versão trabalha com dados inventados em CSV, e só depois passa
-a ler do banco.
-
-Sai daqui: um notebook ou script em `ia/`, com um gráfico ou tabela de
-resultado para o documento.
-
-Depende de: ter dados. Até o banco ter movimento, usa CSV de exemplo. Pode
-começar a qualquer momento.
-
-Perfil: quem gosta mais de dados que de tela. Pandas básico resolve.
-
-Esforço: 8 a 12 horas. Não entra na meta de 29/09; é trabalho de outubro.
-
-### 6. Testes finais
+### 5. Testes finais
 
 Usar o sistema como um usuário usaria e anotar o que quebra: cadastrar,
 logar, criar oferta, buscar, reservar, tentar reservar mais do que tem, tentar
@@ -168,7 +150,7 @@ porque quem escreve testa com carinho demais.
 
 Esforço: 4 a 6 horas, na segunda quinzena de outubro.
 
-### 7. Documento, Kanban e apresentação
+### 6. Documento, Kanban e apresentação
 
 Manter o ClickUp em dia (tarefas com responsável, status correto, print para o
 documento), montar o PDF no modelo do professor juntando o que cada frente
@@ -211,11 +193,6 @@ cada rota, o que se manda e o que volta, com exemplo de JSON. O front escreve o
 arquivo diz. Enquanto o back-end não existe, o front trabalha com dados fixos
 no mesmo formato do contrato, e a troca depois é só apontar a URL.
 
-Banco e IA. A IA lê as mesmas tabelas de ofertas e reservas. Ela precisa de
-coluna de data e de quantidade em cada uma, e quem modela o banco só sabe disso
-se quem faz a IA pedir antes. Se a tabela nascer sem `criado_em`, a IA não tem
-o que analisar.
-
 Testes e todo mundo. Cada bug encontrado volta para quem fez aquela parte, com
 o passo a passo para reproduzir. Quem testa não conserta; quem fez conserta.
 
@@ -230,19 +207,19 @@ Como as partes se conversam, todo mundo vai encostar um pouco em cada coisa. O
 que evita que isso vire bagunça:
 
 1. Um repositório só no GitHub, com uma pasta por frente: `app/` (back-end),
-   `static/` (front), `sql/` (banco), `ia/` e `docs/`. Cada um trabalha em
+   `static/` (front), `sql/` (banco) e `docs/`. Cada um trabalha em
    branch própria e abre PR. Quem revisa o PR é alguém de outra frente, o que
    já é a forma de "ajudar um pouco em cada coisa" sem tomar o lugar de ninguém,
    e é assim que cada um aprende o suficiente para explicar o todo no dia 29.
 
 2. Três arquivos funcionam como contrato entre frentes, e mudança neles é
    avisada no grupo no mesmo dia: o protótipo (entre desenho e front), o
-   `sql/schema.sql` (entre banco, back-end e IA) e o `docs/API.md` (entre
+   `sql/schema.sql` (entre banco e back-end) e o `docs/API.md` (entre
    back-end e front). Ninguém altera um contrato só para si.
 
 3. Um arquivo `sql/dados_exemplo.sql` com meia dúzia de usuários, dois
-   estabelecimentos e umas dez ofertas. Serve para o front ter o que listar, para
-   a IA ter o que analisar e para quem testa começar do mesmo ponto. Quem faz o
+   estabelecimentos e umas dez ofertas. Serve para o front ter o que listar e
+   para quem testa começar do mesmo ponto. Quem faz o
    banco cria; todo mundo usa.
 
 4. Reunião curta no começo de cada sprint, 15 minutos, cada um responde três
@@ -260,7 +237,7 @@ que evita que isso vire bagunça:
 
 ## Divisão de tarefas
 
-Somos quatro e são sete frentes. A ideia é cada um ter uma frente principal,
+Somos quatro e são seis frentes. A ideia é cada um ter uma frente principal,
 pela qual responde, e uma ou duas de apoio, onde revisa, testa e cobre quando
 precisar. As datas são sugestão e cabem ajuste.
 
@@ -270,15 +247,13 @@ precisar. As datas são sugestão e cabem ajuste.
 | Back-end | a definir | a definir | 10/09 a 25/10 |
 | Protótipo das telas | a definir | a definir | até 20/09 |
 | Front-end | a definir | a definir | 15/09 a 25/10 |
-| Módulo de IA | a definir | a definir | outubro |
 | Testes finais | a definir | a definir | 13/10 a 25/10 |
 | Documento, Kanban e apresentação | a definir | a definir | contínuo, PDF até 27/09 |
 
 Encaixes que costumam funcionar: banco e back-end na mesma pessoa, ou em duas
 que sentam juntas na primeira semana; protótipo e front na mesma pessoa se ela
 tiver segurança com HTML e CSS; documento e testes na mesma pessoa, porque os
-dois exigem olhar o trabalho dos outros. A IA pode ficar com quem tiver a
-frente principal mais leve, já que só começa para valer em outubro.
+dois exigem olhar o trabalho dos outros.
 
 ## Sobre o calendário do ClickUp
 

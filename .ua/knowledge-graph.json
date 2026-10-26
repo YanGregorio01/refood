@@ -18,7 +18,7 @@
       "Uvicorn",
       "pytest"
     ],
-    "description": "Plataforma web que conecta estabelecimentos com alimentos excedentes a consumidores (sacolas surpresa com até 70% de desconto) e a ONGs (doações), com back-end em FastAPI sobre MySQL 8, front-end em HTML, CSS e JavaScript puros e um módulo de IA (regressão linear) com pandas e scikit-learn. Projeto Integrador 4 da PUC-Campinas, curso de Ciência de Dados e IA.",
+    "description": "Plataforma web que conecta estabelecimentos com alimentos excedentes a consumidores (sacolas surpresa com até 70% de desconto) e a ONGs (doações), com back-end em FastAPI sobre MySQL 8 e front-end em HTML, CSS e JavaScript puros. Projeto Integrador 4 da PUC-Campinas, curso de Ciência de Dados e IA.",
     "analyzedAt": "2026-10-16T21:35:12.003Z",
     "gitCommitHash": "b90807314d2fe17f4fc8f632ac631bc289b2f264"
   },
@@ -1674,12 +1674,11 @@
       "type": "file",
       "name": "painel-dashboard.js",
       "filePath": "static/js/paginas/painel-dashboard.js",
-      "summary": "Script do dashboard do comerciante (painel/dashboard.html, tela 5.6): saudação e data, KPIs do dia (sacolas ativas, reservas pendentes, vendidas hoje e receita do mês), gráfico Chart.js das vendas dos últimos 7 dias e últimas reservas (GET /api/painel/resumo), além do card \"Previsão de sobras · IA\" (GET /api/painel/previsao) com barras por dia e tabela por categoria vindas do modelo de regressão linear.",
+      "summary": "Script do dashboard do comerciante (painel/dashboard.html, tela 5.6): saudação e data, KPIs do dia (sacolas ativas, reservas pendentes, vendidas hoje e receita do mês), gráfico Chart.js das vendas dos últimos 7 dias e últimas reservas, tudo vindo de GET /api/painel/resumo.",
       "tags": [
         "página",
         "painel-comerciante",
         "dashboard",
-        "ia",
         "chart-js"
       ],
       "complexity": "moderate",
@@ -1752,58 +1751,6 @@
         "lista"
       ],
       "complexity": "simple"
-    },
-    {
-      "id": "function:static/js/paginas/painel-dashboard.js:carregarPrevisao",
-      "type": "function",
-      "name": "carregarPrevisao",
-      "filePath": "static/js/paginas/painel-dashboard.js",
-      "lineRange": [
-        93,
-        118
-      ],
-      "summary": "Busca GET /painel/previsao (previsão de sobras feita pelo modelo de IA); se o histórico for insuficiente mostra só o aviso, senão desenha as barras por dia, a sugestão, o aviso, a descrição do modelo e abre o detalhe do dia com maior sobra prevista.",
-      "tags": [
-        "api-client",
-        "ia",
-        "previsão",
-        "dashboard"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:static/js/paginas/painel-dashboard.js:barraDoDia",
-      "type": "function",
-      "name": "barraDoDia",
-      "filePath": "static/js/paginas/painel-dashboard.js",
-      "lineRange": [
-        121,
-        133
-      ],
-      "summary": "HTML de uma barra clicável da previsão: altura proporcional às sacolas previstas no dia (relativa ao maior valor), destaque para o dia de maior sobra e aria-label descritivo.",
-      "tags": [
-        "visualização",
-        "ia",
-        "html"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:static/js/paginas/painel-dashboard.js:mostrarDetalhe",
-      "type": "function",
-      "name": "mostrarDetalhe",
-      "filePath": "static/js/paginas/painel-dashboard.js",
-      "lineRange": [
-        143,
-        175
-      ],
-      "summary": "Ao escolher um dia, marca a barra (aria-pressed) e mostra a tabela por categoria com oferta média, taxa de sobra, sacolas e kg previstos para aquele dia.",
-      "tags": [
-        "renderização",
-        "ia",
-        "tabela"
-      ],
-      "complexity": "moderate"
     },
     {
       "id": "file:static/js/paginas/painel-doacoes.js",
@@ -2701,7 +2648,7 @@
         32,
         36
       ],
-      "summary": "Formata uma data ISO como \"20/10\" (dia e mês com dois dígitos); usada nos rótulos dos gráficos e da previsão.",
+      "summary": "Formata uma data ISO como \"20/10\" (dia e mês com dois dígitos); usada nos rótulos dos gráficos.",
       "tags": [
         "data-hora",
         "formatação",
@@ -3760,7 +3707,7 @@
       "type": "file",
       "name": "comerciante.py",
       "filePath": "app/rotas/comerciante.py",
-      "summary": "Router /api/painel do 'Refood Parcerias', a área do comerciante: cadastro e edição da loja, dashboard do dia, CRUD de sacolas (rascunho, publicar, remover), gestão de pedidos com confirmação da retirada pelo código, relatórios do período e a previsão de sobras da IA. Todas as rotas exigem usuário ESTABELECIMENTO com loja cadastrada (dependência minha_loja).",
+      "summary": "Router /api/painel do 'Refood Parcerias', a área do comerciante: cadastro e edição da loja, dashboard do dia, CRUD de sacolas (rascunho, publicar, remover), gestão de pedidos com confirmação da retirada pelo código e relatórios do período. Todas as rotas exigem usuário ESTABELECIMENTO com loja cadastrada (dependência minha_loja).",
       "tags": [
         "api-handler",
         "painel-comerciante",
@@ -4060,23 +4007,6 @@
         "sql-agregação"
       ],
       "complexity": "complex"
-    },
-    {
-      "id": "function:app/rotas/comerciante.py:previsao_de_sobras",
-      "type": "function",
-      "name": "previsao_de_sobras",
-      "filePath": "app/rotas/comerciante.py",
-      "lineRange": [
-        424,
-        428
-      ],
-      "summary": "GET /api/painel/previsao (RF15, RF16): importa ia.previsao sob demanda (import tardio, para não carregar pandas e scikit-learn na partida da API) e devolve a previsão de sobras da loja.",
-      "tags": [
-        "api-handler",
-        "ia",
-        "lazy-import"
-      ],
-      "complexity": "simple"
     },
     {
       "id": "file:app/rotas/consumidor.py",
@@ -4876,15 +4806,14 @@
       "complexity": "simple"
     },
     {
-      "id": "file:ia/gerar_historico.py",
+      "id": "file:scripts/gerar_historico.py",
       "type": "file",
       "name": "gerar_historico.py",
-      "filePath": "ia/gerar_historico.py",
-      "summary": "Script que inventa 12 semanas de histórico realista e reproduzível (semente fixa 42) — 80 consumidores extras, sacolas, reservas, avaliações e doações — com padrões plantados de propósito (segunda sobra mais que sábado, padaria sobra mais que refeição, cada loja tem seu ritmo, a sobra cai com o tempo) para a IA de previsão ter o que aprender.",
+      "filePath": "scripts/gerar_historico.py",
+      "summary": "Script que inventa 12 semanas de histórico realista e reproduzível (semente fixa 42) — 80 consumidores extras, sacolas, reservas, avaliações e doações — com padrões reconhecíveis (segunda sobra mais que sábado, padaria sobra mais que refeição, cada loja tem seu ritmo, a sobra cai com o tempo) para os relatórios e o dashboard terem o que mostrar.",
       "tags": [
         "dados-sintéticos",
         "seed",
-        "ia",
         "script",
         "mysql",
         "tested"
@@ -4892,27 +4821,10 @@
       "complexity": "complex"
     },
     {
-      "id": "file:ia/previsao.py",
-      "type": "file",
-      "name": "previsao.py",
-      "filePath": "ia/previsao.py",
-      "summary": "Módulo de IA que prevê as sobras de sacolas de uma loja nos próximos 7 dias com regressão linear do scikit-learn: lê o histórico do MySQL num DataFrame pandas, codifica dia da semana, categoria e loja com OneHotEncoder, mede R² e erro médio em 20% dos dados e guarda o modelo em cache por 15 minutos (RF15, RF16, RN13, RN14).",
-      "tags": [
-        "ia",
-        "machine-learning",
-        "scikit-learn",
-        "pandas",
-        "previsão",
-        "tested"
-      ],
-      "complexity": "complex",
-      "languageNotes": "Pipeline + ColumnTransformer juntam pré-processamento e modelo num só objeto treinável; np.clip limita a fração prevista entre 0 e 1, porque uma regressão linear pode extrapolar para fora desse intervalo."
-    },
-    {
-      "id": "function:ia/gerar_historico.py:gerar",
+      "id": "function:scripts/gerar_historico.py:gerar",
       "type": "function",
       "name": "gerar",
-      "filePath": "ia/gerar_historico.py",
+      "filePath": "scripts/gerar_historico.py",
       "lineRange": [
         90,
         231
@@ -4921,101 +4833,16 @@
       "tags": [
         "dados-sintéticos",
         "simulação",
-        "seed",
-        "ia"
+        "seed"
       ],
       "complexity": "complex"
-    },
-    {
-      "id": "function:ia/previsao.py:carregar_historico",
-      "type": "function",
-      "name": "carregar_historico",
-      "filePath": "ia/previsao.py",
-      "lineRange": [
-        44,
-        60
-      ],
-      "summary": "Lê do MySQL uma linha por sacola já encerrada (dia da semana, categoria, loja, quantidade inicial e sobra) e monta um DataFrame com a coluna-alvo taxa_sobra = sobra / quantidade_inicial.",
-      "tags": [
-        "pandas",
-        "dados",
-        "ia"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:ia/previsao.py:treinar",
-      "type": "function",
-      "name": "treinar",
-      "filePath": "ia/previsao.py",
-      "lineRange": [
-        63,
-        84
-      ],
-      "summary": "Monta um Pipeline (OneHotEncoder nas colunas categóricas + LinearRegression), mede R² e erro médio absoluto num conjunto de teste de 20% e, depois de medir, treina de novo com todos os dados.",
-      "tags": [
-        "machine-learning",
-        "scikit-learn",
-        "treino"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:ia/previsao.py:_modelo",
-      "type": "function",
-      "name": "_modelo",
-      "filePath": "ia/previsao.py",
-      "lineRange": [
-        87,
-        96
-      ],
-      "summary": "Cache simples em memória: retreina o modelo no máximo a cada 15 minutos e devolve None quando há menos de 40 amostras no histórico.",
-      "tags": [
-        "cache",
-        "ia",
-        "helper"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:ia/previsao.py:prever_sobras",
-      "type": "function",
-      "name": "prever_sobras",
-      "filePath": "ia/previsao.py",
-      "lineRange": [
-        99,
-        165
-      ],
-      "summary": "Para cada um dos próximos dias, estima quantas unidades a loja costuma oferecer por categoria (média das últimas 4 semanas), aplica a taxa de sobra prevista e devolve sacolas e kg por dia, o dia de maior sobra, uma sugestão de ação e o aviso de que é estimativa (RN14).",
-      "tags": [
-        "machine-learning",
-        "previsão",
-        "regras-de-negócio"
-      ],
-      "complexity": "complex"
-    },
-    {
-      "id": "file:ia/relatorio.py",
-      "type": "file",
-      "name": "relatorio.py",
-      "filePath": "ia/relatorio.py",
-      "summary": "Script de linha de comando (`python -m ia.relatorio`) que treina o mesmo modelo usado pela API e gera em docs/ia/ dois gráficos matplotlib (sobra real x prevista por dia da semana e os pesos aprendidos) e o RESULTADO.md com R², erro médio e tendência, para o documento da disciplina.",
-      "tags": [
-        "ia",
-        "relatório",
-        "matplotlib",
-        "script",
-        "documentação"
-      ],
-      "complexity": "moderate",
-      "languageNotes": "matplotlib.use('Agg') é chamado antes de importar pyplot para gerar imagens sem abrir janela (backend sem interface gráfica)."
     },
     {
       "id": "file:scripts/preparar_banco.py",
       "type": "file",
       "name": "preparar_banco.py",
       "filePath": "scripts/preparar_banco.py",
-      "summary": "Script que apaga e recria o banco do Refood: executa sql/schema.sql e sql/dados_exemplo.sql pelo PyMySQL (ignorando DROP/CREATE/USE para funcionar também no banco de teste) e, por padrão, gera o histórico de 12 semanas da IA. Usado no desenvolvimento e pela fixture de sessão dos testes.",
+      "summary": "Script que apaga e recria o banco do Refood: executa sql/schema.sql e sql/dados_exemplo.sql pelo PyMySQL (ignorando DROP/CREATE/USE para funcionar também no banco de teste) e, por padrão, gera o histórico de 12 semanas. Usado no desenvolvimento e pela fixture de sessão dos testes.",
       "tags": [
         "script",
         "banco-de-dados",
@@ -5023,23 +4850,6 @@
         "migration",
         "seed",
         "tested"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "function:ia/relatorio.py:main",
-      "type": "function",
-      "name": "main",
-      "filePath": "ia/relatorio.py",
-      "lineRange": [
-        29,
-        112
-      ],
-      "summary": "Carrega o histórico, treina o modelo, gera os gráficos sobra_por_dia.png (real x previsto) e pesos_do_modelo.png (coeficientes centralizados por grupo) e escreve o RESULTADO.md com as métricas e a tabela por dia.",
-      "tags": [
-        "relatório",
-        "matplotlib",
-        "ia"
       ],
       "complexity": "moderate"
     },
@@ -5086,7 +4896,7 @@
         67,
         87
       ],
-      "summary": "Apaga e recria o banco (utf8mb4), roda schema.sql e dados_exemplo.sql e, se pedido, chama ia.gerar_historico.gerar para popular 12 semanas de histórico.",
+      "summary": "Apaga e recria o banco (utf8mb4), roda schema.sql e dados_exemplo.sql e, se pedido, chama scripts.gerar_historico.gerar para popular 12 semanas de histórico.",
       "tags": [
         "setup",
         "banco-de-dados",
@@ -5223,14 +5033,13 @@
       "complexity": "moderate"
     },
     {
-      "id": "file:tests/test_ia_e_util.py",
+      "id": "file:tests/test_util.py",
       "type": "file",
       "name": "test_ia_e_util.py",
-      "filePath": "tests/test_ia_e_util.py",
-      "summary": "Testes da IA de previsão de sobras (7 dias, aviso de estimativa, R² acima de 0,3 e o aprendizado de que segunda sobra mais que sábado) e das funções puras refeicoes, nivel e dividir_comandos.",
+      "filePath": "tests/test_util.py",
+      "summary": "Testes das funções puras: refeicoes (12,4 kg = 31 refeições, sem erro de ponto flutuante), nivel de impacto e dividir_comandos, o divisor de SQL que ignora ponto e vírgula dentro de texto e de comentário.",
       "tags": [
         "test",
-        "ia",
         "unit-test",
         "utility"
       ],
@@ -5267,23 +5076,6 @@
         "test",
         "doações",
         "estoque"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "function:tests/test_ia_e_util.py:test_modelo_aprendeu_que_segunda_sobra_mais_que_sabado",
-      "type": "function",
-      "name": "test_modelo_aprendeu_que_segunda_sobra_mais_que_sabado",
-      "filePath": "tests/test_ia_e_util.py",
-      "lineRange": [
-        16,
-        23
-      ],
-      "summary": "Verifica que a IA descobriu o padrão plantado no histórico simulado: a taxa de sobra prevista para Padaria na segunda-feira é maior que no sábado.",
-      "tags": [
-        "test",
-        "ia",
-        "validação-de-modelo"
       ],
       "complexity": "simple"
     },
@@ -5373,7 +5165,7 @@
       "type": "document",
       "name": "README.md",
       "filePath": "README.md",
-      "summary": "Documento de entrada do Refood: apresenta a plataforma e a equipe do Projeto Integrador, explica passo a passo como instalar dependências, configurar o .env, montar o banco e subir o servidor uvicorn, lista as contas de exemplo, como rodar testes e o relatório da IA, e descreve a organização das pastas app/, ia/, sql/, scripts/, static/, tests/ e docs/.",
+      "summary": "Documento de entrada do Refood: apresenta a plataforma e a equipe do Projeto Integrador, explica passo a passo como instalar dependências, configurar o .env, montar o banco e subir o servidor uvicorn, lista as contas de exemplo e como rodar os testes, e descreve a organização das pastas app/, sql/, scripts/, static/, tests/ e docs/.",
       "tags": [
         "documentação",
         "entry-point",
@@ -5403,7 +5195,7 @@
       "type": "document",
       "name": "requirements.txt",
       "filePath": "requirements.txt",
-      "summary": "Lista de dependências Python com versões fixadas, agrupadas em back-end (FastAPI, uvicorn, PyMySQL, cryptography, bcrypt, PyJWT, python-dotenv), IA (pandas, numpy, scikit-learn, matplotlib para os gráficos do relatório) e testes (pytest, httpx).",
+      "summary": "Lista de dependências Python com versões fixadas, agrupadas em back-end (FastAPI, uvicorn, PyMySQL, cryptography, bcrypt, PyJWT, python-dotenv) e testes (pytest, httpx).",
       "tags": [
         "dependências",
         "python",
@@ -5418,7 +5210,7 @@
       "type": "document",
       "name": "API.md",
       "filePath": "docs/API.md",
-      "summary": "Contrato da API REST entre o back-end FastAPI e o front-end: define as regras gerais (prefixo /api, datas ISO, token JWT no cabeçalho Authorization, formato dos erros e o que o front faz com cada código HTTP, status de sacolas, reservas e doações) e documenta cada rota com parâmetros e exemplos de JSON, divididas em Público, Conta, Consumidor, Comerciante (incluindo a previsão de sobras da IA e as doações) e ONG.",
+      "summary": "Contrato da API REST entre o back-end FastAPI e o front-end: define as regras gerais (prefixo /api, datas ISO, token JWT no cabeçalho Authorization, formato dos erros e o que o front faz com cada código HTTP, status de sacolas, reservas e doações) e documenta cada rota com parâmetros e exemplos de JSON, divididas em Público, Conta, Consumidor, Comerciante (incluindo as doações) e ONG.",
       "tags": [
         "documentação",
         "contrato-api",
@@ -5434,7 +5226,7 @@
       "type": "document",
       "name": "DECISOES.md",
       "filePath": "docs/DECISOES.md",
-      "summary": "Registro das 19 decisões tomadas para destravar o projeto (telas que faltavam no Figma, front-end em HTML/CSS/JS puro com Leaflet e Chart.js, mudanças no modelo de banco do Vitor) e das decisões técnicas transversais, como SQL à mão com PyMySQL, reserva com SELECT ... FOR UPDATE, JWT + bcrypt, IA com regressão linear e histórico simulado, sempre indicando onde mexer no código.",
+      "summary": "Registro das 19 decisões tomadas para destravar o projeto (telas que faltavam no Figma, front-end em HTML/CSS/JS puro com Leaflet e Chart.js, mudanças no modelo de banco do Vitor) e das decisões técnicas transversais, como SQL à mão com PyMySQL, reserva com SELECT ... FOR UPDATE, JWT + bcrypt e histórico simulado, sempre indicando onde mexer no código.",
       "tags": [
         "documentação",
         "decisões-de-arquitetura",
@@ -5464,7 +5256,7 @@
       "type": "document",
       "name": "ETAPAS-E-DIVISAO.md",
       "filePath": "docs/ETAPAS-E-DIVISAO.md",
-      "summary": "Plano do grupo para a 2ª entrega: calendário (apresentação em 29/09, PDF até 01/10, fim das sprints em 25/10), as sete frentes do projeto (protótipo, banco, back-end em nove etapas, front-end, IA, testes e documento) com dependências, esforço e prazos, regras de trabalho cruzado (contratos sql/schema.sql e docs/API.md, branches e PRs) e a tabela de divisão de responsabilidades.",
+      "summary": "Plano do grupo para a 2ª entrega: calendário (apresentação em 29/09, PDF até 01/10, fim das sprints em 25/10), as seis frentes do projeto (protótipo, banco, back-end em nove etapas, front-end, testes e documento) com dependências, esforço e prazos, regras de trabalho cruzado (contratos sql/schema.sql e docs/API.md, branches e PRs) e a tabela de divisão de responsabilidades.",
       "tags": [
         "documentação",
         "planejamento",
@@ -5479,7 +5271,7 @@
       "type": "document",
       "name": "REQUISITOS.md",
       "filePath": "docs/REQUISITOS.md",
-      "summary": "Matriz de rastreabilidade que liga cada requisito da Sprint 1 (funcionais RF01–RF16, regras de negócio RN01–RN15, restrições RS e principais não funcionais) à rota, função, tabela, teste ou tela que o implementa, servindo para provar ao professor que tudo saiu do papel e para achar o código de cada requisito.",
+      "summary": "Matriz de rastreabilidade que liga cada requisito da Sprint 1 (funcionais RF01–RF16, regras de negócio RN01–RN15, restrições RS e principais não funcionais) à rota, função, tabela, teste ou tela que o implementa, servindo para provar ao professor que tudo saiu do papel e para achar o código de cada requisito. Registra também o que ficou fora do escopo: a análise preditiva (RF15) e as regras ligadas a ela.",
       "tags": [
         "documentação",
         "rastreabilidade",
@@ -5494,7 +5286,7 @@
       "type": "document",
       "name": "ROTEIRO-DE-ESTUDO.md",
       "filePath": "docs/ROTEIRO-DE-ESTUDO.md",
-      "summary": "Roteiro didático em nove etapas para os alunos entenderem e reescreverem o Refood à mão, na ordem de dependência (banco, servidor e conexão, cadastro e login, catálogo, reservas, painel e doações, IA, base do front e telas), com os arquivos a ler, o que observar, perguntas de fixação e o critério de \"pronto quando\" de cada etapa.",
+      "summary": "Roteiro didático em oito etapas para os alunos entenderem e reescreverem o Refood à mão, na ordem de dependência (banco, servidor e conexão, cadastro e login, catálogo, reservas, painel e doações, base do front e telas), com os arquivos a ler, o que observar, perguntas de fixação e o critério de \"pronto quando\" de cada etapa.",
       "tags": [
         "documentação",
         "guia-de-estudo",
@@ -5763,12 +5555,11 @@
       "type": "file",
       "name": "dashboard.html",
       "filePath": "static/painel/dashboard.html",
-      "summary": "Página do Dashboard do comerciante no painel Refood Parcerias (tela 5.6 do Figma; tela 3.1 no celular): KPIs do dia (sacolas ativas, reservas pendentes, vendidas hoje, receita do mês), gráfico de vendas dos últimos 7 dias com Chart.js, lista das últimas reservas e botão flutuante para cadastrar sacola. Inclui o card novo \"Previsão de sobras · IA\", que não existe no Figma e mostra a previsão dos próximos 7 dias em barras feitas com CSS.",
+      "summary": "Página do Dashboard do comerciante no painel Refood Parcerias (tela 5.6 do Figma; tela 3.1 no celular): KPIs do dia (sacolas ativas, reservas pendentes, vendidas hoje, receita do mês), gráfico de vendas dos últimos 7 dias com Chart.js, lista das últimas reservas e botão flutuante para cadastrar sacola.",
       "tags": [
         "painel-comerciante",
         "dashboard",
         "pagina-html",
-        "previsao-ia",
         "graficos"
       ],
       "complexity": "moderate",
@@ -5851,37 +5642,6 @@
         "line-endings"
       ],
       "complexity": "simple"
-    },
-    {
-      "id": "document:docs/ia/RESULTADO.md",
-      "type": "document",
-      "name": "RESULTADO.md",
-      "filePath": "docs/ia/RESULTADO.md",
-      "summary": "Relatório gerado por `python -m ia.relatorio` com o desempenho do modelo de previsão de sobras (regressão linear do scikit-learn: 992 sacolas, R² 0,68, erro médio de 7,3 p.p., tendência de -4 p.p. a cada 30 dias) e a tabela de sobra real x prevista por dia da semana, com os gráficos sobra_por_dia.png e pesos_do_modelo.png.",
-      "tags": [
-        "documentação",
-        "ia",
-        "machine-learning",
-        "relatório",
-        "previsão-de-sobras"
-      ],
-      "complexity": "simple",
-      "languageNotes": "Arquivo Markdown gerado automaticamente: não deve ser editado à mão; rodar o script de novo sobre dados reais do banco atualiza os números (RNF28)."
-    },
-    {
-      "id": "file:ia/__init__.py",
-      "type": "file",
-      "name": "__init__.py",
-      "filePath": "ia/__init__.py",
-      "summary": "Marcador do pacote Python `ia`, que reúne o módulo de inteligência artificial de previsão de sobras a partir do histórico de sacolas; contém apenas a docstring.",
-      "tags": [
-        "entry-point",
-        "pacote-python",
-        "ia",
-        "previsão-de-sobras"
-      ],
-      "complexity": "simple",
-      "languageNotes": "Um `__init__.py` transforma a pasta em pacote, permitindo `python -m ia.relatorio` e `from ia.previsao import ...`."
     },
     {
       "id": "file:scripts/__init__.py",
@@ -5994,7 +5754,7 @@
         93,
         118
       ],
-      "summary": "Tabela central do catálogo: cada linha é uma SACOLA oferecida por um estabelecimento, com categoria, quantidade disponível e inicial (usada pela IA), preço original e preço Refood, peso estimado (kg salvos), validade, janela de retirada e status (RASCUNHO, DISPONIVEL, RESERVADO, INDISPONIVEL, VENCIDO). CHECKs garantem estoque não negativo (RN05), preço Refood menor ou igual ao original e fim da retirada depois do início.",
+      "summary": "Tabela central do catálogo: cada linha é uma SACOLA oferecida por um estabelecimento, com categoria, quantidade disponível e inicial (usada no aproveitamento), preço original e preço Refood, peso estimado (kg salvos), validade, janela de retirada e status (RASCUNHO, DISPONIVEL, RESERVADO, INDISPONIVEL, VENCIDO). CHECKs garantem estoque não negativo (RN05), preço Refood menor ou igual ao original e fim da retirada depois do início.",
       "tags": [
         "tabela",
         "sacolas",
@@ -6091,7 +5851,7 @@
         "demonstração"
       ],
       "complexity": "moderate",
-      "languageNotes": "Usa variáveis de sessão do MySQL (@senha, @hoje, @amanha) e TIMESTAMP(data, hora) para gerar horários relativos ao dia da execução; o histórico das semanas anteriores vem de ia/gerar_historico.py."
+      "languageNotes": "Usa variáveis de sessão do MySQL (@senha, @hoje, @amanha) e TIMESTAMP(data, hora) para gerar horários relativos ao dia da execução; o histórico das semanas anteriores vem de scripts/gerar_historico.py."
     },
     {
       "id": "file:static/css/refood.css",
@@ -8312,27 +8072,6 @@
       "weight": 1
     },
     {
-      "source": "file:static/js/paginas/painel-dashboard.js",
-      "target": "function:static/js/paginas/painel-dashboard.js:carregarPrevisao",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:static/js/paginas/painel-dashboard.js",
-      "target": "function:static/js/paginas/painel-dashboard.js:barraDoDia",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:static/js/paginas/painel-dashboard.js",
-      "target": "function:static/js/paginas/painel-dashboard.js:mostrarDetalhe",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
       "source": "file:static/js/paginas/ong-recebimentos.js",
       "target": "file:static/js/api.js",
       "type": "imports",
@@ -8984,13 +8723,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:static/js/paginas/painel-dashboard.js:carregarPrevisao",
-      "target": "function:static/js/api.js:api",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:static/js/paginas/painel-dashboard.js",
       "target": "function:static/js/api.js:exigirLogin",
       "type": "calls",
@@ -9019,28 +8751,7 @@
       "weight": 0.8
     },
     {
-      "source": "function:static/js/paginas/painel-dashboard.js:carregarPrevisao",
-      "target": "function:static/js/ui.js:esc",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:barraDoDia",
-      "target": "function:static/js/ui.js:esc",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:static/js/paginas/painel-dashboard.js",
-      "target": "function:static/js/ui.js:esc",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:mostrarDetalhe",
       "target": "function:static/js/ui.js:esc",
       "type": "calls",
       "direction": "forward",
@@ -9056,13 +8767,6 @@
     {
       "source": "function:static/js/paginas/painel-dashboard.js:situacao",
       "target": "function:static/js/ui.js:hora",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:mostrarDetalhe",
-      "target": "function:static/js/ui.js:kg",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
@@ -9096,21 +8800,7 @@
       "weight": 0.8
     },
     {
-      "source": "function:static/js/paginas/painel-dashboard.js:barraDoDia",
-      "target": "function:static/js/ui.js:numero",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
       "source": "file:static/js/paginas/painel-dashboard.js",
-      "target": "function:static/js/ui.js:numero",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:mostrarDetalhe",
       "target": "function:static/js/ui.js:numero",
       "type": "calls",
       "direction": "forward",
@@ -9125,20 +8815,6 @@
     },
     {
       "source": "function:static/js/paginas/painel-dashboard.js:desenharGrafico",
-      "target": "function:static/js/painel-comum.js:diaMes",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:barraDoDia",
-      "target": "function:static/js/painel-comum.js:diaMes",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:mostrarDetalhe",
       "target": "function:static/js/painel-comum.js:diaMes",
       "type": "calls",
       "direction": "forward",
@@ -9181,13 +8857,6 @@
     },
     {
       "source": "function:static/js/paginas/painel-dashboard.js:carregarResumo",
-      "target": "function:static/js/painel-comum.js:mostrarErro",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:static/js/paginas/painel-dashboard.js:carregarPrevisao",
       "target": "function:static/js/painel-comum.js:mostrarErro",
       "type": "calls",
       "direction": "forward",
@@ -12086,13 +11755,6 @@
     },
     {
       "source": "file:app/rotas/comerciante.py",
-      "target": "function:app/rotas/comerciante.py:previsao_de_sobras",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:app/rotas/comerciante.py",
       "target": "function:app/rotas/comerciante.py:minha_loja",
       "type": "exports",
       "direction": "forward",
@@ -12477,20 +12139,6 @@
       "weight": 0.8
     },
     {
-      "source": "function:app/rotas/comerciante.py:previsao_de_sobras",
-      "target": "function:ia/previsao.py:prever_sobras",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:app/rotas/comerciante.py",
-      "target": "file:ia/previsao.py",
-      "type": "depends_on",
-      "direction": "forward",
-      "weight": 0.6
-    },
-    {
       "source": "file:app/rotas/auth.py",
       "target": "file:tests/test_conta.py",
       "type": "tested_by",
@@ -12513,7 +12161,7 @@
     },
     {
       "source": "file:app/rotas/comerciante.py",
-      "target": "file:tests/test_ia_e_util.py",
+      "target": "file:tests/test_util.py",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
@@ -13619,143 +13267,45 @@
     },
     {
       "source": "file:app/util.py",
-      "target": "file:tests/test_ia_e_util.py",
+      "target": "file:tests/test_util.py",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
-      "target": "function:ia/gerar_historico.py:gerar",
+      "source": "file:scripts/gerar_historico.py",
+      "target": "function:scripts/gerar_historico.py:gerar",
       "type": "contains",
       "direction": "forward",
       "weight": 1
     },
     {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:carregar_historico",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:treinar",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:_modelo",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:prever_sobras",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:carregar_historico",
+      "source": "file:scripts/gerar_historico.py",
+      "target": "function:scripts/gerar_historico.py:gerar",
       "type": "exports",
       "direction": "forward",
       "weight": 0.8
     },
     {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:treinar",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "function:ia/previsao.py:prever_sobras",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:ia/gerar_historico.py",
-      "target": "function:ia/gerar_historico.py:gerar",
-      "type": "exports",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "file:app/__init__.py",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "file:app/config.py",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
     },
     {
-      "source": "file:ia/previsao.py",
-      "target": "file:app/database.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "function:ia/previsao.py:carregar_historico",
-      "target": "function:app/database.py:buscar_todos",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:ia/previsao.py:_modelo",
-      "target": "function:ia/previsao.py:carregar_historico",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:ia/previsao.py:_modelo",
-      "target": "function:ia/previsao.py:treinar",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:ia/previsao.py:prever_sobras",
-      "target": "function:ia/previsao.py:_modelo",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "file:tests/test_ia_e_util.py",
+      "source": "file:scripts/gerar_historico.py",
+      "target": "file:tests/test_util.py",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
-    },
-    {
-      "source": "file:ia/gerar_historico.py",
-      "target": "file:tests/test_ia_e_util.py",
-      "type": "tested_by",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:ia/relatorio.py",
-      "target": "function:ia/relatorio.py:main",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
     },
     {
       "source": "file:scripts/preparar_banco.py",
@@ -13793,20 +13343,6 @@
       "weight": 0.8
     },
     {
-      "source": "file:ia/relatorio.py",
-      "target": "file:app/database.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
-      "source": "file:ia/relatorio.py",
-      "target": "file:ia/previsao.py",
-      "type": "imports",
-      "direction": "forward",
-      "weight": 0.7
-    },
-    {
       "source": "file:scripts/preparar_banco.py",
       "target": "file:app/__init__.py",
       "type": "imports",
@@ -13819,27 +13355,6 @@
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
-    },
-    {
-      "source": "function:ia/relatorio.py:main",
-      "target": "function:app/database.py:conectar",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:ia/relatorio.py:main",
-      "target": "function:ia/previsao.py:carregar_historico",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
-    },
-    {
-      "source": "function:ia/relatorio.py:main",
-      "target": "function:ia/previsao.py:treinar",
-      "type": "calls",
-      "direction": "forward",
-      "weight": 0.8
     },
     {
       "source": "function:scripts/preparar_banco.py:rodar_arquivo",
@@ -13857,21 +13372,21 @@
     },
     {
       "source": "function:scripts/preparar_banco.py:preparar",
-      "target": "function:ia/gerar_historico.py:gerar",
+      "target": "function:scripts/gerar_historico.py:gerar",
       "type": "calls",
       "direction": "forward",
       "weight": 0.8
     },
     {
       "source": "file:scripts/preparar_banco.py",
-      "target": "file:ia/gerar_historico.py",
+      "target": "file:scripts/gerar_historico.py",
       "type": "depends_on",
       "direction": "forward",
       "weight": 0.6
     },
     {
       "source": "file:scripts/preparar_banco.py",
-      "target": "file:tests/test_ia_e_util.py",
+      "target": "file:tests/test_util.py",
       "type": "tested_by",
       "direction": "forward",
       "weight": 0.5
@@ -13968,13 +13483,6 @@
       "weight": 1
     },
     {
-      "source": "file:tests/test_ia_e_util.py",
-      "target": "function:tests/test_ia_e_util.py:test_modelo_aprendeu_que_segunda_sobra_mais_que_sabado",
-      "type": "contains",
-      "direction": "forward",
-      "weight": 1
-    },
-    {
       "source": "file:tests/test_doacoes.py",
       "target": "file:app/util.py",
       "type": "imports",
@@ -13982,14 +13490,14 @@
       "weight": 0.7
     },
     {
-      "source": "file:tests/test_ia_e_util.py",
+      "source": "file:tests/test_util.py",
       "target": "file:app/util.py",
       "type": "imports",
       "direction": "forward",
       "weight": 0.7
     },
     {
-      "source": "file:tests/test_ia_e_util.py",
+      "source": "file:tests/test_util.py",
       "target": "file:scripts/preparar_banco.py",
       "type": "imports",
       "direction": "forward",
@@ -14074,7 +13582,7 @@
     },
     {
       "source": "config:pytest.ini",
-      "target": "file:tests/test_ia_e_util.py",
+      "target": "file:tests/test_util.py",
       "type": "configures",
       "direction": "forward",
       "weight": 0.6
@@ -14117,20 +13625,6 @@
     {
       "source": "document:requirements.txt",
       "target": "file:app/config.py",
-      "type": "configures",
-      "direction": "forward",
-      "weight": 0.6
-    },
-    {
-      "source": "document:requirements.txt",
-      "target": "file:ia/previsao.py",
-      "type": "configures",
-      "direction": "forward",
-      "weight": 0.6
-    },
-    {
-      "source": "document:requirements.txt",
-      "target": "file:ia/relatorio.py",
       "type": "configures",
       "direction": "forward",
       "weight": 0.6
@@ -14228,21 +13722,7 @@
     },
     {
       "source": "document:README.md",
-      "target": "file:ia/previsao.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "file:ia/gerar_historico.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "file:ia/relatorio.py",
+      "target": "file:scripts/gerar_historico.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -14299,13 +13779,6 @@
     {
       "source": "document:README.md",
       "target": "document:docs/ROTEIRO-DE-ESTUDO.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:README.md",
-      "target": "document:docs/ia/RESULTADO.md",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -14431,13 +13904,6 @@
     },
     {
       "source": "document:docs/DECISOES.md",
-      "target": "file:ia/previsao.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/DECISOES.md",
       "target": "file:tests/test_reservas.py",
       "type": "documents",
       "direction": "forward",
@@ -14459,7 +13925,7 @@
     },
     {
       "source": "document:docs/DECISOES.md",
-      "target": "file:ia/gerar_historico.py",
+      "target": "file:scripts/gerar_historico.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -14523,13 +13989,6 @@
     {
       "source": "document:docs/DECISOES.md",
       "target": "document:docs/ETAPAS-E-DIVISAO.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/DECISOES.md",
-      "target": "document:docs/ia/RESULTADO.md",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -14662,13 +14121,6 @@
     },
     {
       "source": "document:docs/REQUISITOS.md",
-      "target": "file:ia/previsao.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/REQUISITOS.md",
       "target": "file:static/painel/dashboard.html",
       "type": "documents",
       "direction": "forward",
@@ -14718,13 +14170,6 @@
     },
     {
       "source": "document:docs/REQUISITOS.md",
-      "target": "file:ia/relatorio.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/REQUISITOS.md",
       "target": "function:app/rotas/consumidor.py:reservar",
       "type": "documents",
       "direction": "forward",
@@ -14754,13 +14199,6 @@
     {
       "source": "document:docs/REQUISITOS.md",
       "target": "class:app/esquemas.py:Sacola",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/REQUISITOS.md",
-      "target": "function:ia/previsao.py:carregar_historico",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -14949,21 +14387,7 @@
     },
     {
       "source": "document:docs/ROTEIRO-DE-ESTUDO.md",
-      "target": "file:ia/gerar_historico.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/ROTEIRO-DE-ESTUDO.md",
-      "target": "file:ia/previsao.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/ROTEIRO-DE-ESTUDO.md",
-      "target": "file:ia/relatorio.py",
+      "target": "file:scripts/gerar_historico.py",
       "type": "documents",
       "direction": "forward",
       "weight": 0.5
@@ -15125,13 +14549,6 @@
     {
       "source": "document:docs/ROTEIRO-DE-ESTUDO.md",
       "target": "document:docs/ETAPAS-E-DIVISAO.md",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/ROTEIRO-DE-ESTUDO.md",
-      "target": "document:docs/ia/RESULTADO.md",
       "type": "related",
       "direction": "forward",
       "weight": 0.5
@@ -15851,20 +15268,6 @@
       "weight": 0.6
     },
     {
-      "source": "document:docs/ia/RESULTADO.md",
-      "target": "file:ia/__init__.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/ia/RESULTADO.md",
-      "target": "table:sql/schema.sql:alimentos",
-      "type": "related",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
       "source": "file:app/rotas/publico.py",
       "target": "file:tests/test_sacolas.py",
       "type": "tested_by",
@@ -15935,7 +15338,7 @@
       "weight": 0.6
     },
     {
-      "source": "file:tests/test_ia_e_util.py",
+      "source": "file:tests/test_util.py",
       "target": "file:tests/conftest.py",
       "type": "depends_on",
       "direction": "forward",
@@ -16008,27 +15411,6 @@
       "source": "document:docs/ROTEIRO-DE-ESTUDO.md",
       "target": "file:sql/dados_exemplo.sql",
       "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/ia/RESULTADO.md",
-      "target": "file:ia/gerar_historico.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "document:docs/ia/RESULTADO.md",
-      "target": "file:ia/relatorio.py",
-      "type": "documents",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:ia/relatorio.py",
-      "target": "document:docs/ia/RESULTADO.md",
-      "type": "writes_to",
       "direction": "forward",
       "weight": 0.5
     },
@@ -16369,86 +15751,72 @@
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:alimentos",
       "type": "reads_from",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:ofertas_doacao",
       "type": "reads_from",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:reservas",
       "type": "reads_from",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:usuarios",
       "type": "reads_from",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:alimentos",
       "type": "writes_to",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:avaliacoes",
       "type": "writes_to",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:doacoes",
       "type": "writes_to",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:ofertas_doacao",
       "type": "writes_to",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:reservas",
       "type": "writes_to",
       "direction": "forward",
       "weight": 0.5
     },
     {
-      "source": "file:ia/gerar_historico.py",
+      "source": "file:scripts/gerar_historico.py",
       "target": "table:sql/schema.sql:usuarios",
       "type": "writes_to",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "table:sql/schema.sql:alimentos",
-      "type": "reads_from",
-      "direction": "forward",
-      "weight": 0.5
-    },
-    {
-      "source": "file:ia/previsao.py",
-      "target": "table:sql/schema.sql:categorias",
-      "type": "reads_from",
       "direction": "forward",
       "weight": 0.5
     },
@@ -16585,29 +15953,19 @@
         "table:sql/schema.sql:avaliacoes",
         "table:sql/schema.sql:ofertas_doacao",
         "table:sql/schema.sql:doacoes",
-        "file:sql/dados_exemplo.sql"
-      ]
-    },
-    {
-      "id": "layer:inteligencia-artificial",
-      "name": "Inteligência Artificial (Previsão de Sobras)",
-      "description": "O módulo ia/ que prevê as sobras de sacolas de cada loja nos próximos 7 dias com regressão linear (pandas + scikit-learn), gera um histórico sintético de 12 semanas para treinar o modelo e produz o relatório de desempenho em docs/ia/.",
-      "nodeIds": [
-        "file:ia/gerar_historico.py",
-        "file:ia/previsao.py",
-        "file:ia/relatorio.py",
-        "file:ia/__init__.py"
+        "file:sql/dados_exemplo.sql",
+        "file:scripts/gerar_historico.py"
       ]
     },
     {
       "id": "layer:testes",
       "name": "Testes Automatizados (pytest)",
-      "description": "Testes de integração e unidade em tests/ que sobem um banco de teste próprio (conftest.py) e conferem cadastro e permissões, catálogo de sacolas, ciclo de reserva, fluxo de doação ponta a ponta e a IA, junto com a configuração do pytest.ini.",
+      "description": "Testes de integração e unidade em tests/ que sobem um banco de teste próprio (conftest.py) e conferem cadastro e permissões, catálogo de sacolas, ciclo de reserva, fluxo de doação ponta a ponta e as funções de apoio, junto com a configuração do pytest.ini.",
       "nodeIds": [
         "file:tests/conftest.py",
         "file:tests/test_conta.py",
         "file:tests/test_doacoes.py",
-        "file:tests/test_ia_e_util.py",
+        "file:tests/test_util.py",
         "file:tests/test_reservas.py",
         "config:pytest.ini",
         "file:tests/test_sacolas.py"
@@ -16616,7 +15974,7 @@
     {
       "id": "layer:documentacao",
       "name": "Documentação do Projeto",
-      "description": "O README de entrada e a pasta docs/: contrato da API, decisões de arquitetura, requisitos rastreados até o código, enunciado e divisão de tarefas da 2ª entrega do Projeto Integrador, roteiro de estudo para os alunos e o relatório de resultados da IA.",
+      "description": "O README de entrada e a pasta docs/: contrato da API, decisões de arquitetura, requisitos rastreados até o código, enunciado e divisão de tarefas da 2ª entrega do Projeto Integrador e o roteiro de estudo para os alunos.",
       "nodeIds": [
         "document:README.md",
         "document:docs/API.md",
@@ -16624,8 +15982,7 @@
         "document:docs/ENUNCIADO-2a-ENTREGA.md",
         "document:docs/ETAPAS-E-DIVISAO.md",
         "document:docs/REQUISITOS.md",
-        "document:docs/ROTEIRO-DE-ESTUDO.md",
-        "document:docs/ia/RESULTADO.md"
+        "document:docs/ROTEIRO-DE-ESTUDO.md"
       ]
     }
   ],
@@ -16633,7 +15990,7 @@
     {
       "order": 1,
       "title": "Visão geral do Refood",
-      "description": "O README.md apresenta o Refood, plataforma do Projeto Integrador da PUC-Campinas que conecta estabelecimentos com alimentos excedentes a consumidores (sacolas surpresa com desconto) e a ONGs (doações), e ensina a configurar o .env, montar o banco com `python -m scripts.preparar_banco` e subir a API com `uvicorn app.main:app`. O requirements.txt mostra a pilha inteira em três grupos: back-end (FastAPI, uvicorn, PyMySQL, bcrypt, PyJWT, python-dotenv), IA (pandas, numpy, scikit-learn, matplotlib) e testes (pytest, httpx). Use as contas de exemplo (camila@ consumidora, padaria@ comerciante e ong@ ONG, todas com a senha refood123) para conferir cada etapa na prática. O tour segue a ordem de dependência: os passos 2–3 são a base de quem cuida do banco, 3–8 do back-end, 9–11 e 13 do front-end e 12 da IA.",
+      "description": "O README.md apresenta o Refood, plataforma do Projeto Integrador da PUC-Campinas que conecta estabelecimentos com alimentos excedentes a consumidores (sacolas surpresa com desconto) e a ONGs (doações), e ensina a configurar o .env, montar o banco com `python -m scripts.preparar_banco` e subir a API com `uvicorn app.main:app`. O requirements.txt mostra a pilha inteira em dois grupos: back-end (FastAPI, uvicorn, PyMySQL, bcrypt, PyJWT, python-dotenv) e testes (pytest, httpx). Use as contas de exemplo (camila@ consumidora, padaria@ comerciante e ong@ ONG, todas com a senha refood123) para conferir cada etapa na prática. O tour segue a ordem de dependência: os passos 2–3 são a base de quem cuida do banco, 3–8 do back-end e 9–12 do front-end.",
       "nodeIds": [
         "document:README.md",
         "document:requirements.txt"
@@ -16700,7 +16057,7 @@
     {
       "order": 7,
       "title": "Painel, doações e ONG",
-      "description": "O lado do comerciante vive no app/rotas/comerciante.py (/api/painel): cadastro da loja, dashboard do dia, CRUD de sacolas (rascunho, publicar, remover), confirmação da retirada pelo código do cliente, relatórios e a rota de previsão da IA — todas exigindo um usuário ESTABELECIMENTO com loja cadastrada (dependência minha_loja). As doações formam um segundo fluxo, apoiado nas tabelas ofertas_doacao (o excedente que a loja anuncia, em kg) e doacoes (o pedido da ONG, com o ciclo PENDENTE → CONFIRMADA/RECUSADA → RECEBIDA/CANCELADA). O app/rotas/doacoes.py é o lado da loja (publicar, encerrar e responder pedidos) e o app/rotas/ong.py é o lado da ONG, com mapa de ofertas por distância, pedido com trava do estoque em kg, histórico e resumo mensal — os mesmos padrões do passo 6, agora aplicados a quilos em vez de unidades.",
+      "description": "O lado do comerciante vive no app/rotas/comerciante.py (/api/painel): cadastro da loja, dashboard do dia, CRUD de sacolas (rascunho, publicar, remover), confirmação da retirada pelo código do cliente, e relatórios — todas exigindo um usuário ESTABELECIMENTO com loja cadastrada (dependência minha_loja). As doações formam um segundo fluxo, apoiado nas tabelas ofertas_doacao (o excedente que a loja anuncia, em kg) e doacoes (o pedido da ONG, com o ciclo PENDENTE → CONFIRMADA/RECUSADA → RECEBIDA/CANCELADA). O app/rotas/doacoes.py é o lado da loja (publicar, encerrar e responder pedidos) e o app/rotas/ong.py é o lado da ONG, com mapa de ofertas por distância, pedido com trava do estoque em kg, histórico e resumo mensal — os mesmos padrões do passo 6, agora aplicados a quilos em vez de unidades.",
       "nodeIds": [
         "file:app/rotas/comerciante.py",
         "file:app/rotas/doacoes.py",
@@ -16759,20 +16116,8 @@
     },
     {
       "order": 12,
-      "title": "IA de previsão de sobras",
-      "description": "O módulo ia/ prevê quantas sacolas de cada loja vão sobrar nos próximos 7 dias. O ia/gerar_historico.py inventa 12 semanas de histórico reproduzível (semente fixa 42) com padrões plantados de propósito — segunda sobra mais que sábado, padaria sobra mais que refeição, a sobra cai com o tempo — para o modelo ter o que aprender. O ia/previsao.py lê esse histórico do MySQL num DataFrame pandas, codifica dia da semana, categoria e loja com OneHotEncoder, treina uma regressão linear do scikit-learn, mede R² e erro médio em 20% dos dados e guarda o modelo em cache por 15 minutos. O ia/relatorio.py treina o mesmo modelo e gera o docs/ia/RESULTADO.md (992 sacolas, R² de 0,68, erro médio de 7,3 p.p.), usado no documento da disciplina.",
-      "nodeIds": [
-        "file:ia/gerar_historico.py",
-        "file:ia/previsao.py",
-        "file:ia/relatorio.py",
-        "document:docs/ia/RESULTADO.md"
-      ],
-      "languageLesson": "Machine learning — one-hot encoding: uma regressão linear só entende números, mas \"segunda-feira\" ou \"padaria\" são categorias. O one-hot encoding cria uma coluna 0/1 para cada valor possível (seg=1, ter=0, …, dom=0), evitando que o modelo ache que \"domingo = 7\" vale mais que \"segunda = 1\"; cada coluna ganha o seu próprio peso no treino, e é assim que o modelo aprende que segunda sobra mais que sábado. Separar 20% dos dados para teste mede o desempenho em exemplos que o modelo nunca viu, e o R² diz quanto da variação real a previsão consegue explicar."
-    },
-    {
-      "order": 13,
       "title": "Dashboard do comerciante",
-      "description": "O dashboard fecha o ciclo entre banco, rotas, IA e front-end. O static/painel/dashboard.html (tela 5.6) monta os KPIs do dia, o gráfico de vendas dos últimos 7 dias com Chart.js e o card novo \"Previsão de sobras · IA\", e o static/js/paginas/painel-dashboard.js os preenche com GET /api/painel/resumo e GET /api/painel/previsao — a rota do comerciante.py (passo 7) que usa o ia/previsao.py do passo 12. O static/js/painel-comum.js reúne o que todas as páginas do painel compartilham: menu com bairro e cidade da loja, esqueletos de carregamento, estados de erro com \"Tentar de novo\", botões desabilitados durante as requisições, modal de confirmação e os gráficos de barras do Chart.js.",
+      "description": "O dashboard fecha o ciclo entre banco, rotas e front-end. O static/painel/dashboard.html (tela 5.6) monta os KPIs do dia, o gráfico de vendas dos últimos 7 dias com Chart.js e as últimas reservas, e o static/js/paginas/painel-dashboard.js os preenche com GET /api/painel/resumo, a rota do comerciante.py (passo 7). O static/js/painel-comum.js reúne o que todas as páginas do painel compartilham: menu com bairro e cidade da loja, esqueletos de carregamento, estados de erro com \"Tentar de novo\", botões desabilitados durante as requisições, modal de confirmação e os gráficos de barras do Chart.js.",
       "nodeIds": [
         "file:static/painel/dashboard.html",
         "file:static/js/paginas/painel-dashboard.js",
@@ -16781,9 +16126,9 @@
       "languageLesson": "JavaScript — Promise para diálogos: um modal de confirmação baseado em Promise devolve uma promessa que só se resolve quando a pessoa clica em \"Confirmar\" (true) ou \"Cancelar\" (false). Assim o código da página fica linear, no formato `if (await confirmar(...)) { ... }`, em vez de espalhar a lógica por vários callbacks de clique."
     },
     {
-      "order": 14,
+      "order": 13,
       "title": "Documentação de apoio",
-      "description": "Para fechar, a pasta docs/ é o mapa da reescrita em equipe. O docs/ROTEIRO-DE-ESTUDO.md divide o projeto em nove etapas na mesma ordem de dependência deste tour (banco, servidor e conexão, cadastro e login, catálogo, reservas, painel e doações, IA, base do front e telas), com os arquivos a ler, perguntas de fixação e o critério de \"pronto quando\"; o docs/API.md é o contrato entre back-end e front-end, com cada rota, parâmetros, exemplos de JSON e o que o front faz com cada código HTTP. O docs/REQUISITOS.md liga cada requisito (RF, RN, RS) à rota, tabela, teste ou tela que o implementa, o docs/DECISOES.md explica o porquê de escolhas como SQL à mão e reserva com SELECT ... FOR UPDATE, e o docs/ETAPAS-E-DIVISAO.md traz a divisão de responsabilidades e as regras de trabalho cruzado, com sql/schema.sql e docs/API.md como contratos entre as frentes.",
+      "description": "Para fechar, a pasta docs/ é o mapa da reescrita em equipe. O docs/ROTEIRO-DE-ESTUDO.md divide o projeto em oito etapas na mesma ordem de dependência deste tour (banco, servidor e conexão, cadastro e login, catálogo, reservas, painel e doações, base do front e telas), com os arquivos a ler, perguntas de fixação e o critério de \"pronto quando\"; o docs/API.md é o contrato entre back-end e front-end, com cada rota, parâmetros, exemplos de JSON e o que o front faz com cada código HTTP. O docs/REQUISITOS.md liga cada requisito (RF, RN, RS) à rota, tabela, teste ou tela que o implementa, o docs/DECISOES.md explica o porquê de escolhas como SQL à mão e reserva com SELECT ... FOR UPDATE, e o docs/ETAPAS-E-DIVISAO.md traz a divisão de responsabilidades e as regras de trabalho cruzado, com sql/schema.sql e docs/API.md como contratos entre as frentes.",
       "nodeIds": [
         "document:docs/ROTEIRO-DE-ESTUDO.md",
         "document:docs/API.md",

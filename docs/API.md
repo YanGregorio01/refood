@@ -316,20 +316,6 @@ Rascunho → no ar; no ar → fora do catálogo (as reservas já feitas continua
 `variacao_receita` (%) compara com os `dias` anteriores; `null` se não há base.
 `aproveitamento` (%) = sacolas vendidas ÷ oferecidas.
 
-### `GET /api/painel/previsao` — IA (card "Previsão de sobras")
-```json
-{
-  "suficiente": true,
-  "aviso": "Estimativa feita por um modelo estatístico com o histórico da plataforma. Use como referência, não como garantia.",
-  "modelo": {"tipo": "Regressão linear (scikit-learn)", "amostras": 1016, "r2": 0.62, "erro_medio_pontos": 7.4},
-  "dias": [{"data": "2026-10-17", "dia_semana": "sábado", "sacolas": 0.9, "kg": 1.1,
-            "por_categoria": [{"categoria": "Padaria e confeitaria", "oferta_media": 9.2, "taxa_sobra": 8, "sacolas": 0.7, "kg": 1.0}]}],
-  "maior_sobra": {"data": "2026-10-20", "dia_semana": "terça-feira", "sacolas": 5.4},
-  "sugestao": "Na terça-feira (20/10) devem sobrar cerca de 5 sacolas, principalmente de padaria e confeitaria. ..."
-}
-```
-Se `suficiente` for `false`, mostrar só o `aviso`. Os 7 dias começam amanhã.
-
 ### Doações do comerciante (sem tela no Figma; ver docs/DECISOES.md)
 
 | Rota | O que faz |

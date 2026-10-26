@@ -1768,28 +1768,8 @@
       "totalLines": 155,
       "hasStructuralAnalysis": false
     },
-    "docs/ia/RESULTADO.md": {
-      "filePath": "docs/ia/RESULTADO.md",
-      "contentHash": "b2991bdcaa5292dbb5d27aabd335398feaaa7deb5218e9fa53652aab271603cd",
-      "functions": [],
-      "classes": [],
-      "imports": [],
-      "exports": [],
-      "totalLines": 30,
-      "hasStructuralAnalysis": false
-    },
-    "ia/__init__.py": {
-      "filePath": "ia/__init__.py",
-      "contentHash": "3dc56dcd463e469dec6c5b66d5ec269dc22efd4c56456b34a094e6094ff26016",
-      "functions": [],
-      "classes": [],
-      "imports": [],
-      "exports": [],
-      "totalLines": 2,
-      "hasStructuralAnalysis": true
-    },
-    "ia/gerar_historico.py": {
-      "filePath": "ia/gerar_historico.py",
+    "scripts/gerar_historico.py": {
+      "filePath": "scripts/gerar_historico.py",
       "contentHash": "1161911daae7ecdf90225574bd9218ec7d376621aaa5db2f95c9f19e7196ddd4",
       "functions": [
         {
@@ -1854,186 +1834,6 @@
         "gerar"
       ],
       "totalLines": 236,
-      "hasStructuralAnalysis": true
-    },
-    "ia/previsao.py": {
-      "filePath": "ia/previsao.py",
-      "contentHash": "50a26f5eff7774ec485df139c25c35eaf508d6af95c3047536bfff283de03322",
-      "functions": [
-        {
-          "name": "carregar_historico",
-          "params": [
-            "conn"
-          ],
-          "returnType": "pd.DataFrame",
-          "exported": true,
-          "lineCount": 17
-        },
-        {
-          "name": "treinar",
-          "params": [
-            "df"
-          ],
-          "exported": true,
-          "lineCount": 22
-        },
-        {
-          "name": "_modelo",
-          "params": [
-            "conn"
-          ],
-          "exported": true,
-          "lineCount": 10
-        },
-        {
-          "name": "prever_sobras",
-          "params": [
-            "conn",
-            "id_estabelecimento",
-            "dias"
-          ],
-          "returnType": "dict",
-          "exported": true,
-          "lineCount": 67
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "time",
-          "specifiers": [
-            "relogio"
-          ]
-        },
-        {
-          "source": "datetime",
-          "specifiers": [
-            "date",
-            "timedelta"
-          ]
-        },
-        {
-          "source": "numpy",
-          "specifiers": [
-            "np"
-          ]
-        },
-        {
-          "source": "pandas",
-          "specifiers": [
-            "pd"
-          ]
-        },
-        {
-          "source": "sklearn.compose",
-          "specifiers": [
-            "ColumnTransformer"
-          ]
-        },
-        {
-          "source": "sklearn.linear_model",
-          "specifiers": [
-            "LinearRegression"
-          ]
-        },
-        {
-          "source": "sklearn.metrics",
-          "specifiers": [
-            "mean_absolute_error",
-            "r2_score"
-          ]
-        },
-        {
-          "source": "sklearn.model_selection",
-          "specifiers": [
-            "train_test_split"
-          ]
-        },
-        {
-          "source": "sklearn.pipeline",
-          "specifiers": [
-            "Pipeline"
-          ]
-        },
-        {
-          "source": "sklearn.preprocessing",
-          "specifiers": [
-            "OneHotEncoder"
-          ]
-        },
-        {
-          "source": "app.database",
-          "specifiers": [
-            "buscar_todos"
-          ]
-        }
-      ],
-      "exports": [
-        "carregar_historico",
-        "treinar",
-        "_modelo",
-        "prever_sobras"
-      ],
-      "totalLines": 166,
-      "hasStructuralAnalysis": true
-    },
-    "ia/relatorio.py": {
-      "filePath": "ia/relatorio.py",
-      "contentHash": "1508d6223df28960db78e46ec92d4e92ad09ddd0175e140e6128557fe57e0801",
-      "functions": [
-        {
-          "name": "main",
-          "params": [],
-          "exported": true,
-          "lineCount": 84
-        }
-      ],
-      "classes": [],
-      "imports": [
-        {
-          "source": "pathlib",
-          "specifiers": [
-            "Path"
-          ]
-        },
-        {
-          "source": "matplotlib",
-          "specifiers": [
-            "matplotlib"
-          ]
-        },
-        {
-          "source": "matplotlib.pyplot",
-          "specifiers": [
-            "plt"
-          ]
-        },
-        {
-          "source": "numpy",
-          "specifiers": [
-            "np"
-          ]
-        },
-        {
-          "source": "app.database",
-          "specifiers": [
-            "conectar"
-          ]
-        },
-        {
-          "source": "ia.previsao",
-          "specifiers": [
-            "COLUNAS",
-            "DIAS",
-            "carregar_historico",
-            "treinar"
-          ]
-        }
-      ],
-      "exports": [
-        "main"
-      ],
-      "totalLines": 117,
       "hasStructuralAnalysis": true
     },
     "pytest.ini": {
@@ -5599,8 +5399,8 @@
       "totalLines": 76,
       "hasStructuralAnalysis": true
     },
-    "tests/test_ia_e_util.py": {
-      "filePath": "tests/test_ia_e_util.py",
+    "tests/test_util.py": {
+      "filePath": "tests/test_util.py",
       "contentHash": "18cb5314b3969cd420ac54e91c51e2090f91328c956a6f942534a9d5d2903bff",
       "functions": [
         {

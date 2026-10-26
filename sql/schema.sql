@@ -97,7 +97,7 @@ CREATE TABLE alimentos (
     nome                VARCHAR(150) NOT NULL,
     descricao           VARCHAR(500),                  -- "Conteúdo estimado"
     quantidade          INT NOT NULL,                  -- quantas sacolas ainda estão disponíveis
-    quantidade_inicial  INT NOT NULL,                  -- NOVO: quantas foram oferecidas (a IA usa)
+    quantidade_inicial  INT NOT NULL,                  -- NOVO: quantas foram oferecidas (o aproveitamento usa)
     preco_original      DECIMAL(8, 2) NOT NULL,        -- NOVO
     preco               DECIMAL(8, 2) NOT NULL,        -- NOVO: "Preço Refood"
     peso_estimado_kg    DECIMAL(5, 2) NOT NULL DEFAULT 1.00,  -- NOVO: alimenta o "kg salvos"

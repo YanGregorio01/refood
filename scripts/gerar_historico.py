@@ -1,17 +1,16 @@
 """Gera 12 semanas de histórico de uso do Refood.
 
-Um sistema novo não tem passado, mas os relatórios e a IA precisam de
-dados para mostrar alguma coisa. Este script inventa o histórico de forma
-controlada (sempre o mesmo, por causa da semente fixa) e com padrões que a
-IA consegue descobrir sozinha:
+Um sistema novo não tem passado, mas os relatórios e o dashboard precisam
+de dados para mostrar alguma coisa. Este script inventa o histórico de forma
+controlada (sempre o mesmo, por causa da semente fixa) e com padrões
+reconhecíveis nos gráficos:
 
 - segunda e terça sobram mais sacolas; sexta e sábado sobram menos;
 - padaria e doces sobram mais; refeições e mercearia, menos;
 - cada loja tem seu jeito (umas vendem melhor que outras);
 - a plataforma cresce: semana a semana sobra um pouco menos.
 
-Se a previsão da IA acertar esses padrões, o modelo está aprendendo.
-Uso: python -m ia.gerar_historico (normalmente chamado pelo preparar_banco).
+Uso: python -m scripts.gerar_historico (normalmente chamado pelo preparar_banco).
 """
 
 import random

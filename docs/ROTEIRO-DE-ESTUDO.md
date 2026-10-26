@@ -100,23 +100,7 @@ Python; o dicionário `ACOES`, que diz de qual status para qual status cada aç�
 **Pronto quando:** pelo `/docs`, logado como `padaria@refood.test`, você cria
 uma sacola, um consumidor reserva e você confirma a retirada pelo código.
 
-## Etapa 7: a IA (quem pegar a IA)
-
-**Leia:** `ia/gerar_historico.py` (os padrões no topo), `ia/previsao.py`, `ia/relatorio.py`, `docs/ia/RESULTADO.md`.
-
-O que observar: a variável que o modelo prevê (fração que sobra); o
-`OneHotEncoder` transformando dia da semana e categoria em colunas de 0 e 1;
-`train_test_split` separando 20% para medir o erro; o R².
-
-**Perguntas:**
-- Por que medir o erro em dados que o modelo não viu no treino?
-- O gráfico `docs/ia/pesos_do_modelo.png` mostra segunda com +15 pontos. O que isso significa para o dono da padaria?
-- Por que o resultado vem com um `aviso` dizendo que é estimativa (RN14)?
-
-**Pronto quando:** você muda um número em `SOBRA_DIA_SEMANA`, recria o banco,
-roda `python -m ia.relatorio` e o gráfico muda do jeito que você esperava.
-
-## Etapa 8: a base do front (Vitor, João, Pedro)
+## Etapa 7: a base do front (João, Pedro)
 
 **Leia:** `static/css/refood.css` (os tokens no topo vêm do Figma),
 `static/js/api.js`, `static/js/ui.js`, e a página modelo `static/index.html` +
@@ -129,7 +113,7 @@ XSS); módulos com `import`/`export`.
 **Pronto quando:** você faz uma página nova, em branco, que lista as categorias
 com `api("/categorias")`.
 
-## Etapa 9: as telas (Vitor, João, Pedro)
+## Etapa 8: as telas (João, Pedro)
 
 Cada tela do Figma virou um par HTML + JS. Sugestão de ordem, da mais simples
 para a mais completa:
@@ -153,4 +137,3 @@ Cada um deve conseguir explicar em 30 segundos:
 - **Banco:** por que essas tabelas e esses relacionamentos.
 - **Back-end:** o caminho de uma reserva, do clique até o `COMMIT`.
 - **Front:** como a página pega os dados (`fetch`) e como o login vai junto.
-- **IA:** o que o modelo prevê, com quais dados e qual o erro dele.

@@ -1,10 +1,9 @@
 // Dashboard do comerciante (tela 5.6 do Figma; no celular, tela 3.1).
 // Números do dia, gráfico de vendas da semana e últimas reservas vêm de
-// GET /api/painel/resumo. O card "Previsão de sobras · IA" (novo, fora do
-// Figma) vem de GET /api/painel/previsao.
+// GET /api/painel/resumo.
 import { api, exigirLogin } from "/js/api.js";
 import {
-  STATUS_RESERVA, badge, dia, esc, hojePorExtenso, hora, kg, moeda, montarPainel, numero, vazio,
+  STATUS_RESERVA, badge, dia, esc, hojePorExtenso, hora, moeda, montarPainel, numero, vazio,
 } from "/js/ui.js";
 import {
   diaMes, esqueletos, graficoDeBarras, inicial, localDaLoja, momento, mostrarErro,
@@ -86,99 +85,4 @@ function mostrarUltimasReservas(reservas) {
     </div>`).join("");
 }
 
-// ================================================================ previsão de sobras (IA)
-const areaPrevisao = document.getElementById("previsao");
-let previsao = null; // última resposta da API, usada ao clicar em um dia
-
-async function carregarPrevisao() {
-  areaPrevisao.innerHTML = '<div class="esqueleto" style="height:150px"></div>';
-  try {
-    previsao = await api("/painel/previsao");
-  } catch (erro) {
-    mostrarErro(areaPrevisao, erro, carregarPrevisao);
-    return;
-  }
-
-  // Pouco histórico: o modelo não arrisca um palpite, só mostra o aviso.
-  if (!previsao.suficiente || !previsao.dias.length) {
-    areaPrevisao.innerHTML = `<p class="alerta alerta-info">${esc(previsao.aviso)}</p>`;
-    return;
-  }
-
-  areaPrevisao.innerHTML = `
-    <div class="previsao-barras" role="group" aria-label="Sacolas que devem sobrar em cada dia">
-      ${previsao.dias.map(barraDoDia).join("")}
-    </div>
-    <p class="letra-miuda"><span class="legenda-laranja" aria-hidden="true"></span>Dia com a maior sobra prevista. Clique em um dia para ver o detalhe por categoria.</p>
-    <p class="alerta alerta-info">${esc(previsao.sugestao)}</p>
-    <div class="previsao-detalhe" id="previsao-detalhe" aria-live="polite"></div>
-    <p class="letra-miuda">${esc(previsao.aviso)}<br>${textoDoModelo(previsao.modelo)}</p>`;
-
-  mostrarDetalhe(previsao.maior_sobra?.data || previsao.dias[0].data);
-}
-
-/** Uma barra clicável por dia. A altura é proporcional às sacolas previstas. */
-function barraDoDia(d) {
-  const maiorValor = Math.max(1, ...previsao.dias.map((x) => x.sacolas)); // escala de no mínimo 1 sacola
-  const altura = Math.round((d.sacolas / maiorValor) * 100);
-  const ehMaior = d.data === previsao.maior_sobra?.data;
-  return `
-    <button type="button" class="dia-prev${ehMaior ? " maior" : ""}" data-dia="${esc(d.data)}" aria-pressed="false"
-      aria-label="${esc(d.dia_semana)}, ${diaMes(d.data)}: cerca de ${numero(d.sacolas, 1)} sacolas${ehMaior ? " (maior sobra)" : ""}">
-      <span class="valor">${numero(d.sacolas, 1)}</span>
-      <span class="trilho"><span class="barra" style="height:${altura}%"></span></span>
-      <span class="nome">${esc(d.dia_semana.slice(0, 3))}</span>
-      <span>${diaMes(d.data)}</span>
-    </button>`;
-}
-
-/** "Modelo: regressão linear (scikit-learn) · R² 0,62 · erro médio 7,4 pontos · 1.016 sacolas analisadas" */
-function textoDoModelo(m) {
-  if (!m) return "";
-  return `Modelo: ${esc(m.tipo.toLowerCase())} · R² ${numero(m.r2, 2)} · erro médio ${numero(m.erro_medio_pontos, 1)} pontos`
-    + ` · ${numero(m.amostras)} sacolas analisadas`;
-}
-
-/** Tabela por categoria do dia escolhido. */
-function mostrarDetalhe(dataDoDia) {
-  const d = previsao.dias.find((x) => x.data === dataDoDia);
-  if (!d) return;
-  areaPrevisao.querySelectorAll(".dia-prev").forEach((b) => {
-    b.setAttribute("aria-pressed", String(b.dataset.dia === dataDoDia));
-  });
-
-  const nomeDoDia = d.dia_semana.charAt(0).toUpperCase() + d.dia_semana.slice(1);
-  const linhas = d.por_categoria.map((c) => `
-    <tr>
-      <td>${esc(c.categoria)}</td>
-      <td class="n">${numero(c.oferta_media, 1)}</td>
-      <td class="n">${numero(c.taxa_sobra)}%</td>
-      <td class="n">${numero(c.sacolas, 1)}</td>
-      <td class="n">${kg(c.kg)}</td>
-    </tr>`).join("");
-
-  document.getElementById("previsao-detalhe").innerHTML = `
-    <h4>${esc(nomeDoDia)}, ${diaMes(d.data)}: cerca de ${numero(d.sacolas, 1)} sacolas (${kg(d.kg)})</h4>
-    ${d.por_categoria.length ? `
-      <div class="rolagem">
-        <table class="tabela">
-          <thead><tr>
-            <th scope="col">Categoria</th>
-            <th scope="col" class="n">Oferta média</th>
-            <th scope="col" class="n">Costuma sobrar</th>
-            <th scope="col" class="n">Sacolas previstas</th>
-            <th scope="col" class="n">Kg previstos</th>
-          </tr></thead>
-          <tbody>${linhas}</tbody>
-        </table>
-      </div>` : '<p class="sutil">Nenhuma categoria com histórico para este dia.</p>'}`;
-}
-
-// Um único "ouvinte" de clique para todas as barras (elas são recriadas a cada carga).
-areaPrevisao.addEventListener("click", (e) => {
-  const botao = e.target.closest(".dia-prev");
-  if (botao) mostrarDetalhe(botao.dataset.dia);
-});
-
 carregarResumo();
-carregarPrevisao();

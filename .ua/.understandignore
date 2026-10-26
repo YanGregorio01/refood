@@ -94,5 +94,3 @@ docs/figma/
 *.svg
 *.pdf
 *.docx
-# texto de instruções para outro assistente, não documentação do sistema
-docs/PROMPT-MENTOR-BACKEND.md

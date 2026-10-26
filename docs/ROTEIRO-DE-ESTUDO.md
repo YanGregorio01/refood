@@ -5,8 +5,10 @@ a ponto de conseguir escrever de novo, sem copiar. Este roteiro segue a ordem
 em que uma coisa depende da outra, igual ao plano de `docs/ETAPAS-E-DIVISAO.md`.
 
 **Como estudar cada etapa:**
-1. Abra o grafo do Understand Anything (`/understand-dashboard` no Claude Code)
-   e clique nos arquivos da etapa para ver o resumo e com quem cada um conversa.
+1. Abra o grafo do Understand Anything e clique nos arquivos da etapa para ver
+   o resumo e com quem cada um conversa. Com o Node.js 18 ou mais novo, rode na
+   pasta do projeto:
+   `npx https://github.com/Egonex-AI/Understand-Anything/releases/latest/download/understand-anything-viewer.tgz .`
 2. Leia os arquivos indicados, de cima para baixo.
 3. Feche os arquivos e responda às perguntas da etapa.
 4. Refaça numa pasta sua (ou num branch) e confira com o critério "pronto quando".

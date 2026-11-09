@@ -1,0 +1,26 @@
+{
+  "name": "refood-animacao",
+  "version": "1.0.0",
+  "description": "Animação que segue o POST /api/reservas do Refood por todas as camadas",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "scripts": {
+    "trechos": "node ferramentas/extrair-trechos.mjs",
+    "narrar": "node ferramentas/narrar.mjs",
+    "dev": "remotion studio",
+    "render": "remotion render Reserva out/reserva.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "@remotion/google-fonts": "4.0.539",
+    "@remotion/media": "4.0.539",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}

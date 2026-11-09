@@ -36,3 +36,7 @@ video/voz-rafael/
 video/voz-andre-jobs.txt
 video/voz-andre/
 video/voz-julian-jobs.txt
+
+# animacao (Remotion)
+animacao/node_modules/
+animacao/out/

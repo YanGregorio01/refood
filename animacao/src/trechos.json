@@ -1,0 +1,565 @@
+{
+  "checkout_submit": {
+    "arquivo": "static/js/paginas/checkout.js",
+    "inicio": 105,
+    "fim": 122,
+    "linhas": [
+      "form.addEventListener(\"submit\", async (evento) => {",
+      "  evento.preventDefault();",
+      "  if (!sacola || botao.disabled) return;",
+      "",
+      "  botao.disabled = true;",
+      "  botao.textContent = \"Confirmando…\";",
+      "  aviso.innerHTML = \"\";",
+      "  try {",
+      "    const reserva = await api(\"/reservas\", {",
+      "      metodo: \"POST\",",
+      "      corpo: {",
+      "        id_alimento: sacola.id_alimento,",
+      "        quantidade: Number(seletor.value),",
+      "        forma_pagamento: form.elements.forma_pagamento.value,",
+      "      },",
+      "    });",
+      "    // replace(): assim o \"voltar\" do navegador não abre de novo um checkout já confirmado",
+      "    location.replace(`/reserva.html?id=${reserva.id_reserva}&nova=1`);"
+    ],
+    "numeros": [
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122
+    ]
+  },
+  "checkout_erro": {
+    "arquivo": "static/js/paginas/checkout.js",
+    "inicio": 123,
+    "fim": 136,
+    "linhas": [
+      "  } catch (erro) {",
+      "    botao.textContent = \"Confirmar reserva\";",
+      "    if (erro.status === 409) {",
+      "      // Esgotou ou restam menos sacolas: busca a sacola de novo para atualizar a tela",
+      "      await carregar();",
+      "      if (!botao.disabled) {",
+      "        aviso.innerHTML = `",
+      "          <div class=\"alerta alerta-erro\" role=\"alert\"><p>${esc(erro.message)}</p>${LINK_CATALOGO}</div>`;",
+      "      }",
+      "    } else {",
+      "      aviso.innerHTML = `<div class=\"alerta alerta-erro\" role=\"alert\"><p>${esc(erro.message)}</p></div>`;",
+      "      botao.disabled = false;",
+      "    }",
+      "  }"
+    ],
+    "numeros": [
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136
+    ]
+  },
+  "api_base": {
+    "arquivo": "static/js/api.js",
+    "inicio": 13,
+    "fim": 14,
+    "linhas": [
+      "const BASE = location.port === \"5500\" ? \"http://127.0.0.1:8000/api\" : \"/api\";",
+      "const CHAVE_TOKEN = \"refood.token\";"
+    ],
+    "numeros": [
+      13,
+      14
+    ]
+  },
+  "api_sessao": {
+    "arquivo": "static/js/api.js",
+    "inicio": 34,
+    "fim": 37,
+    "linhas": [
+      "export function sessao() {",
+      "  const token = lerArmazenado(CHAVE_TOKEN);",
+      "  const conta = lerArmazenado(CHAVE_CONTA);",
+      "  if (!token || !conta) return null;"
+    ],
+    "numeros": [
+      34,
+      35,
+      36,
+      37
+    ]
+  },
+  "api_monta": {
+    "arquivo": "static/js/api.js",
+    "inicio": 75,
+    "fim": 91,
+    "linhas": [
+      "  const url = new URL(BASE + caminho, location.origin);",
+      "  for (const [chave, valor] of Object.entries(params || {})) {",
+      "    if (valor !== undefined && valor !== null && valor !== \"\") url.searchParams.set(chave, valor);",
+      "  }",
+      "",
+      "  const cabecalhos = { Accept: \"application/json\" };",
+      "  if (corpo !== undefined) cabecalhos[\"Content-Type\"] = \"application/json\";",
+      "  const atual = sessao();",
+      "  if (atual) cabecalhos.Authorization = `Bearer ${atual.token}`;",
+      "",
+      "  let resposta;",
+      "  try {",
+      "    resposta = await fetch(url, {",
+      "      method: metodo,",
+      "      headers: cabecalhos,",
+      "      body: corpo === undefined ? undefined : JSON.stringify(corpo),",
+      "    });"
+    ],
+    "numeros": [
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91
+    ]
+  },
+  "api_volta": {
+    "arquivo": "static/js/api.js",
+    "inicio": 96,
+    "fim": 105,
+    "linhas": [
+      "  const dados = await resposta.json().catch(() => ({}));",
+      "  if (resposta.ok) return dados;",
+      "",
+      "  const detalhe = typeof dados.detail === \"string\" ? dados.detail : \"Algo deu errado. Tente de novo.\";",
+      "  if (resposta.status === 401 && atual) {",
+      "    irParaLogin();",
+      "  } else if (resposta.status === 428) {",
+      "    location.href = \"/completar-cadastro.html\";",
+      "  }",
+      "  throw new ErroApi(resposta.status, detalhe, dados.campos);"
+    ],
+    "numeros": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105
+    ]
+  },
+  "checkout_destino": {
+    "arquivo": "static/js/paginas/checkout.js",
+    "inicio": 121,
+    "fim": 122,
+    "linhas": [
+      "    // replace(): assim o \"voltar\" do navegador não abre de novo um checkout já confirmado",
+      "    location.replace(`/reserva.html?id=${reserva.id_reserva}&nova=1`);"
+    ],
+    "numeros": [
+      121,
+      122
+    ]
+  },
+  "main_rotas": {
+    "arquivo": "app/main.py",
+    "inicio": 116,
+    "fim": 117,
+    "linhas": [
+      "for modulo in (publico, auth, consumidor, comerciante, doacoes, ong):",
+      "    app.include_router(modulo.router)"
+    ],
+    "numeros": [
+      116,
+      117
+    ]
+  },
+  "main_422": {
+    "arquivo": "app/main.py",
+    "inicio": 88,
+    "fim": 99,
+    "linhas": [
+      "@app.exception_handler(RequestValidationError)",
+      "async def erro_de_validacao(request: Request, exc: RequestValidationError):",
+      "    \"\"\"Devolve {\"detail\": \"...\", \"campos\": {\"preco\": \"...\"}} para o front mostrar.\"\"\"",
+      "    campos = {}",
+      "    for erro in exc.errors():",
+      "        local = [str(p) for p in erro[\"loc\"] if p not in (\"body\", \"query\", \"path\")]",
+      "        campos[\".\".join(local) or \"geral\"] = _mensagem(erro)",
+      "    if len(campos) == 1:",
+      "        detalhe = next(iter(campos.values()))",
+      "    else:",
+      "        detalhe = \"Confira os campos destacados.\"",
+      "    return JSONResponse(status_code=422, content={\"detail\": detalhe, \"campos\": campos})"
+    ],
+    "numeros": [
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ]
+  },
+  "cons_router": {
+    "arquivo": "app/rotas/consumidor.py",
+    "inicio": 14,
+    "fim": 15,
+    "linhas": [
+      "router = APIRouter(prefix=\"/api\", tags=[\"Consumidor\"])",
+      "consumidor = exigir(\"COMUM\")"
+    ],
+    "numeros": [
+      14,
+      15
+    ]
+  },
+  "cons_rota": {
+    "arquivo": "app/rotas/consumidor.py",
+    "inicio": 117,
+    "fim": 118,
+    "linhas": [
+      "@router.post(\"/reservas\", status_code=status.HTTP_201_CREATED)",
+      "def reservar(dados: NovaReserva, usuario=Depends(consumidor), conn=Depends(get_db)):"
+    ],
+    "numeros": [
+      117,
+      118
+    ]
+  },
+  "cons_trans": {
+    "arquivo": "app/rotas/consumidor.py",
+    "inicio": 125,
+    "fim": 139,
+    "linhas": [
+      "    conn.begin()",
+      "    sacola = buscar_um(conn, \"\"\"",
+      "        SELECT id_alimento, quantidade, preco, status, fim_retirada,",
+      "               (fim_retirada > NOW() AND validade > NOW()) AS no_prazo",
+      "        FROM alimentos WHERE id_alimento = %s FOR UPDATE",
+      "    \"\"\", (dados.id_alimento,))",
+      "    if sacola is None or sacola[\"status\"] == \"RASCUNHO\":",
+      "        conn.rollback()",
+      "        raise HTTPException(404, \"Sacola não encontrada.\")",
+      "    if sacola[\"status\"] != \"DISPONIVEL\" or not sacola[\"no_prazo\"] or sacola[\"quantidade\"] == 0:",
+      "        conn.rollback()",
+      "        raise HTTPException(409, \"Esta sacola não está mais disponível.\")",
+      "    if dados.quantidade > sacola[\"quantidade\"]:",
+      "        conn.rollback()",
+      "        raise HTTPException(409, f\"Só restam {sacola['quantidade']} sacola(s) desta oferta.\")"
+    ],
+    "numeros": [
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139
+    ]
+  },
+  "cons_grava": {
+    "arquivo": "app/rotas/consumidor.py",
+    "inicio": 141,
+    "fim": 151,
+    "linhas": [
+      "    restante = sacola[\"quantidade\"] - dados.quantidade",
+      "    executar(conn, \"UPDATE alimentos SET quantidade = %s, status = %s WHERE id_alimento = %s\",",
+      "             (restante, \"RESERVADO\" if restante == 0 else \"DISPONIVEL\", dados.id_alimento))",
+      "    id_reserva = inserir(conn, \"\"\"",
+      "        INSERT INTO reservas (id_usuario, id_alimento, quantidade, valor_pago, forma_pagamento,",
+      "                              codigo_retirada, data_limite_retirada)",
+      "        VALUES (%s, %s, %s, %s, %s, %s, %s)",
+      "    \"\"\", (usuario[\"id_usuario\"], dados.id_alimento, dados.quantidade, sacola[\"preco\"] * dados.quantidade,",
+      "          dados.forma_pagamento, novo_codigo_retirada(conn), sacola[\"fim_retirada\"]))",
+      "    conn.commit()",
+      "    return _reserva_do_usuario(conn, id_reserva, usuario[\"id_usuario\"])"
+    ],
+    "numeros": [
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151
+    ]
+  },
+  "cons_return": {
+    "arquivo": "app/rotas/consumidor.py",
+    "inicio": 151,
+    "fim": 151,
+    "linhas": [
+      "    return _reserva_do_usuario(conn, id_reserva, usuario[\"id_usuario\"])"
+    ],
+    "numeros": [
+      151
+    ]
+  },
+  "db_conectar": {
+    "arquivo": "app/database.py",
+    "inicio": 13,
+    "fim": 24,
+    "linhas": [
+      "def conectar():",
+      "    \"\"\"Abre uma conexão nova. As linhas voltam como dicionários: {\"nome\": ...}.\"\"\"",
+      "    return pymysql.connect(",
+      "",
+      "        cursorclass=DictCursor,",
+      "        autocommit=False,  # nada é gravado até alguém chamar conn.commit()",
+      "    )"
+    ],
+    "numeros": [
+      13,
+      14,
+      15,
+      null,
+      22,
+      23,
+      24
+    ]
+  },
+  "db_get": {
+    "arquivo": "app/database.py",
+    "inicio": 27,
+    "fim": 41,
+    "linhas": [
+      "def get_db():",
+      "    \"\"\"Dependência do FastAPI: uma conexão por requisição.",
+      "",
+      "    conn = conectar()",
+      "    try:",
+      "        yield conn",
+      "    except Exception:",
+      "        conn.rollback()",
+      "        raise",
+      "    finally:",
+      "        conn.close()"
+    ],
+    "numeros": [
+      27,
+      28,
+      null,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41
+    ]
+  },
+  "db_buscar_um": {
+    "arquivo": "app/database.py",
+    "inicio": 44,
+    "fim": 48,
+    "linhas": [
+      "def buscar_um(conn, sql, params=None):",
+      "    \"\"\"Roda um SELECT e devolve a primeira linha (ou None).\"\"\"",
+      "    with conn.cursor() as cur:",
+      "        cur.execute(sql, params)",
+      "        return cur.fetchone()"
+    ],
+    "numeros": [
+      44,
+      45,
+      46,
+      47,
+      48
+    ]
+  },
+  "seg_usuario": {
+    "arquivo": "app/seguranca.py",
+    "inicio": 56,
+    "fim": 78,
+    "linhas": [
+      "def usuario_atual(",
+      "    credenciais: HTTPAuthorizationCredentials = Depends(_bearer),",
+      "    conn=Depends(get_db),",
+      "",
+      "    if credenciais is None:",
+      "        raise _nao_autorizado(\"Faça login para continuar.\")",
+      "",
+      "        dados = jwt.decode(credenciais.credentials, config.JWT_SECRET, algorithms=[ALGORITMO])",
+      "",
+      "    usuario = buscar_um(",
+      "        conn,",
+      "        \"SELECT id_usuario, nome, email, telefone, tipo_usuario, data_cadastro \"",
+      "        \"FROM usuarios WHERE id_usuario = %s AND status = TRUE\",",
+      "        (int(dados[\"sub\"]),),",
+      "    )"
+    ],
+    "numeros": [
+      56,
+      57,
+      58,
+      null,
+      61,
+      62,
+      null,
+      64,
+      null,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75
+    ]
+  },
+  "seg_verificar": {
+    "arquivo": "app/seguranca.py",
+    "inicio": 87,
+    "fim": 90,
+    "linhas": [
+      "    def verificar(usuario: dict = Depends(usuario_atual)) -> dict:",
+      "        if usuario[\"tipo_usuario\"] not in tipos:",
+      "            quem = \" e \".join(NOMES_TIPO[t] for t in tipos)",
+      "            raise HTTPException(status.HTTP_403_FORBIDDEN, f\"Esta área é só para {quem}.\")"
+    ],
+    "numeros": [
+      87,
+      88,
+      89,
+      90
+    ]
+  },
+  "cons_consumidor": {
+    "arquivo": "app/rotas/consumidor.py",
+    "inicio": 15,
+    "fim": 15,
+    "linhas": [
+      "consumidor = exigir(\"COMUM\")"
+    ],
+    "numeros": [
+      15
+    ]
+  },
+  "seg_exigir": {
+    "arquivo": "app/seguranca.py",
+    "inicio": 81,
+    "fim": 93,
+    "linhas": [
+      "def exigir(*tipos):",
+      "    \"\"\"Cria uma dependência que só deixa passar os tipos de usuário indicados (RS02).",
+      "",
+      "    Uso: usuario = Depends(exigir(\"ESTABELECIMENTO\"))",
+      "    \"\"\"",
+      "",
+      "    def verificar(usuario: dict = Depends(usuario_atual)) -> dict:",
+      "        if usuario[\"tipo_usuario\"] not in tipos:",
+      "            quem = \" e \".join(NOMES_TIPO[t] for t in tipos)",
+      "            raise HTTPException(status.HTTP_403_FORBIDDEN, f\"Esta área é só para {quem}.\")",
+      "        return usuario",
+      "",
+      "    return verificar"
+    ],
+    "numeros": [
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93
+    ]
+  },
+  "esq_reserva": {
+    "arquivo": "app/esquemas.py",
+    "inicio": 127,
+    "fim": 130,
+    "linhas": [
+      "class NovaReserva(BaseModel):",
+      "    id_alimento: int",
+      "    quantidade: int = Field(default=1, ge=1, le=5)",
+      "    forma_pagamento: Literal[\"CARTAO\", \"PIX\"] = \"PIX\""
+    ],
+    "numeros": [
+      127,
+      128,
+      129,
+      130
+    ]
+  },
+  "util_codigo": {
+    "arquivo": "app/util.py",
+    "inicio": 84,
+    "fim": 89,
+    "linhas": [
+      "def novo_codigo_retirada(conn):",
+      "    \"\"\"Código curto e imprevisível para mostrar na retirada, como RF-48213.\"\"\"",
+      "    while True:",
+      "        codigo = f\"RF-{secrets.randbelow(90000) + 10000}\"",
+      "        if not buscar_um(conn, \"SELECT 1 AS existe FROM reservas WHERE codigo_retirada = %s\", (codigo,)):",
+      "            return codigo"
+    ],
+    "numeros": [
+      84,
+      85,
+      86,
+      87,
+      88,
+      89
+    ]
+  }
+}
